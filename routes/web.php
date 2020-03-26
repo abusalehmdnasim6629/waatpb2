@@ -50,29 +50,19 @@ Route::get('/view-all-event', 'ContentController@view_event')->middleware('admin
 
 
 //Gallary
-<<<<<<< HEAD
 Route::get('/add-image', 'AdminController@add_image')->middleware('admin');
 Route::post('/save-image', 'AdminController@save_image')->middleware('admin');
 Route::get('/all-image', 'AdminController@all_image')->middleware('admin');
-=======
-Route::get('/add-image','AdminController@add_image');
-Route::post('/save-image','AdminController@save_image');
-Route::get('/all-image','AdminController@all_image');
 Route::get('/view-all','ContentController@view_all');
 
->>>>>>> bb2f8730c45509abc3b71592bae55be3883f996c
 
 //history
 Route::get('/full-history', 'ContentController@full_history')->middleware('admin');
 
 //profile
-<<<<<<< HEAD
-Route::get('/profile', 'ContentController@profile');
-=======
 Route::get('/profile','ContentController@profile');
 Route::post('/update-member','ContentController@update_profile');
 
->>>>>>> bb2f8730c45509abc3b71592bae55be3883f996c
 
 
 
