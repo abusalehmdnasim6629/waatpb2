@@ -107,9 +107,9 @@
 						<div class="row">
 							<div class="col-xl-6">
 								<div class="hero-content">
-									<h2>{{$header->header_title}}</h2>
+									<h2>{{$header->header_title ?? ''}}</h2>
 									<p class="mb-20">
-										{{$header->header_description}}
+										{{$header->header_description ?? ''}}
 									</p>
 									<div class="hro-btn">
 										<a href="#about" class="theme-btn smooth-menu">Learn More</a>

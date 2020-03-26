@@ -11,79 +11,95 @@
 |
 */
 
-// Route::get('/', function () {
+// Route::get('/wc', function () {
 //     return view('welcome');
 // });
 
-Route::get('/','ContentController@content');
+Route::get('/', 'ContentController@content');
 
-Route::get('/member-registration','MemberController@add_member');
-Route::post('/save-member','MemberController@save_member');
+Route::get('/member-registration', 'MemberController@add_member');
+Route::post('/save-member', 'MemberController@save_member');
 
 //admin
-Route::get('/admin','AdminController@admin');
-Route::get('/all-member','AdminController@all_member');
+Route::get('/admin-login', 'AdminController@adminLoginPage');
+Route::post('/admin-login', 'AdminController@adminLogin')->name('admin.login');
+Route::get('/admin', 'AdminController@admin')->name('admin.home')->middleware('admin');
+Route::get('/all-member', 'AdminController@all_member')->middleware('admin');
 
 //job
-Route::get('/add-job','AdminController@add_job');
-Route::post('/save-job','AdminController@save_job');
-Route::get('/all-job','AdminController@all_job');
+Route::get('/add-job', 'AdminController@add_job')->middleware('admin');
+Route::post('/save-job', 'AdminController@save_job')->middleware('admin');
+Route::get('/all-job', 'AdminController@all_job')->middleware('admin');
 
 //history
-Route::get('/all-history','AdminController@all_history');
+Route::get('/all-history', 'AdminController@all_history')->middleware('admin');
 
 //about
-Route::get('/all-about','AdminController@all_about');
+Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
 
 //header
-Route::get('/all-header','AdminController@all_header');
+Route::get('/all-header', 'AdminController@all_header')->middleware('admin');
 
 //event
-Route::get('/add-event','AdminController@add_event');
-Route::post('/save-event','AdminController@save_event');
-Route::get('/all-event','AdminController@all_event');
-Route::get('/join','ContentController@join_event');
-Route::get('/view-all-event','ContentController@view_event');
+Route::get('/add-event', 'AdminController@add_event')->middleware('admin');
+Route::post('/save-event', 'AdminController@save_event')->middleware('admin');
+Route::get('/all-event', 'AdminController@all_event')->middleware('admin');
+Route::get('/join', 'ContentController@join_event')->middleware('admin');
+Route::get('/view-all-event', 'ContentController@view_event')->middleware('admin');
 
 
 
 //Gallary
-Route::get('/add-image','AdminController@add_image');
-Route::post('/save-image','AdminController@save_image');
-Route::get('/all-image','AdminController@all_image');
+Route::get('/add-image', 'AdminController@add_image')->middleware('admin');
+Route::post('/save-image', 'AdminController@save_image')->middleware('admin');
+Route::get('/all-image', 'AdminController@all_image')->middleware('admin');
 
 //history
-Route::get('/full-history','ContentController@full_history');
+Route::get('/full-history', 'ContentController@full_history')->middleware('admin');
 
 //profile
-Route::get('/profile','ContentController@profile');
+Route::get('/profile', 'ContentController@profile');
 
 
 
 //login
-Route::post('/login-check','MemberController@login_check');
-Route::get('/career','MemberController@career');
-Route::get('/logout','MemberController@logout');
-Route::get('/forgot-password','MemberController@forgot_password');
+Route::post('/login-check', 'MemberController@login_check');
+Route::get('/career', 'MemberController@career');
+Route::get('/logout', 'MemberController@logout');
+Route::get('/forgot-password', 'MemberController@forgot_password');
 
 
 //fronend
-Route::get('/front','frontendController@front_view');
-Route::get('/profile','frontendController@profile_view');
+Route::get('/front', 'frontendController@front_view');
+Route::get('/profile', 'frontendController@profile_view');
 
-Route::get('/edit-profile/{member_id}','MemberController@edit_profile');
-Route::post('/edit-member/{member_id}','MemberController@update_profile');
+Route::get('/edit-profile/{member_id}', 'MemberController@edit_profile');
+Route::post('/edit-member/{member_id}', 'MemberController@update_profile');
 
 
 //forgot password
 
-Route::post('/send-code','MemberController@send_code');
-Route::get('/code','MemberController@code');
-Route::post('/submit-code','MemberController@submit_code');
-Route::get('/new-password','MemberController@n_pass');
-Route::post('/reset-password','MemberController@reset_password');
+Route::post('/send-code', 'MemberController@send_code');
+Route::get('/code', 'MemberController@code');
+Route::post('/submit-code', 'MemberController@submit_code');
+Route::get('/new-password', 'MemberController@n_pass');
+Route::post('/reset-password', 'MemberController@reset_password');
 
+/**
+ * 1. password increaption
+ * 2. admin auth
+ * 3. footer contact form
+ * 4. gallary
+ * 5. event time dynamic
+ * 6. Landing page
+ *      - welcome image need to be dynamic
+ *      - Services need to be dynamic
+ * 7. Show all people who join to a event
+ */
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
 
-
+Route::get('/home', 'HomeController@index')->name('home');
