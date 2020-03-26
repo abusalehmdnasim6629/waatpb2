@@ -65,7 +65,7 @@
 								<li class="nav-item"><a class="nav-link" href="{{URL::to('/full-history')}}">History</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{URL::to('/view-all-event')}}">Event</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{URL::to('/career')}}">Career</a></li>
-								<li class="nav-item"><a class="nav-link" href="#port-area" data-scrollspy="port-area">Gallery</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{URL::to('/view-all')}}" >Gallery</a></li>
 								<?php 
 								$lg = Session::get('lcheck');
 								if($lg!=null){								

@@ -51,12 +51,16 @@ Route::get('/view-all-event','ContentController@view_event');
 Route::get('/add-image','AdminController@add_image');
 Route::post('/save-image','AdminController@save_image');
 Route::get('/all-image','AdminController@all_image');
+Route::get('/view-all','ContentController@view_all');
+
 
 //history
 Route::get('/full-history','ContentController@full_history');
 
 //profile
 Route::get('/profile','ContentController@profile');
+Route::post('/update-member','ContentController@update_profile');
+
 
 
 

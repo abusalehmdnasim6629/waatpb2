@@ -292,7 +292,7 @@
 			</div>
 			
 			<div class="event-all text-center mt-30">
-				<a href="#" class="theme-btn">View All</a>
+				<a href="{{URL::to('/view-all')}}" class="theme-btn">View All</a>
 			</div>
 		</div>
 

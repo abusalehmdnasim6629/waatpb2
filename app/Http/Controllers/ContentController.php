@@ -82,7 +82,45 @@ class ContentController extends Controller
          return view('/profile');
        
    }
+   public function update_profile(Request $request){
+        $mid = Session::get('lcheck');   
+        $update = array();
+        $update_skill = array();
 
+
+        $update['member_name'] = $request->name;
+        $update['email_address'] = $request->email;
+        $update['nid'] = $request->nid;
+        $update['designation'] = $request->designation;
+        $update['present_address'] = $request->p_a;
+      
+        $update['present_organization'] = $request->p_o;
+        $update['blood_group'] = $request->b_g;
+        $update['password'] = $request->pass;
+        $update_skill['member_skill'] = $request->member_skill;
+        $update_skill['member_hobby'] = $request->member_hobby;
+
+
+        DB::table('tbl_member')
+        ->where('member_id',$mid)
+        ->update($update);
+
+        DB::table('tbl_member_skill')
+        ->where('member_id',$mid)
+        ->update($update_skill);
+
+
+
+        return Redirect::to('/profile');
+        
+
+
+   }
+   public function view_all(){
+
+
+    return view('gallary');
+  }
 
 
 
