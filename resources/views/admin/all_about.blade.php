@@ -28,6 +28,8 @@
 						<th>About id</th>
 						<th>About title</th>
 						<th>About description</th>
+						<th>Image</th>
+
 					</tr>
 				</thead>
 
@@ -37,7 +39,7 @@
 						<td>{{ $ct->about_id}}</td>
 						<td class="center">{{ $ct->about_title}}</td>
 						<td class="center">{{ $ct->about_description}}</td>
-
+						<td><img src="{{URL::to($ct->image)}}" alt="about image" style="height:70px; width:70px">
 
 						<td class="center">
 							<div class="btn btn-group">

@@ -11,7 +11,7 @@
 				</li>
 				<li>
 					<i class="icon-edit"></i>
-					<a href="#">Add Event</a>
+					<a href="#">Add about</a>
 				</li>
 			</ul>
 			
@@ -28,39 +28,39 @@
                 </p>
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Event</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add About</h2>
 						
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" action="{{url('/save-event')}}" method="post" enctype="multipart/form-data">
+						<form class="form-horizontal" action="{{url('/save-about')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
 						  <fieldset>
 
 							<div class="control-group">
-							  <label class="control-label" for="date01">Event title</label>
+							  <label class="control-label" for="date01">About title</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge" name="e_title" required="" >
+								<input type="text" class="input-xlarge" name="a_title" required="" >
 							  </div>
 							</div>
-
+                            <div class="control-group">
+                                <label class="control-label">About Description</label>
+                                <div class="controls">
+                                <textarea class="cleditor" name="a_des" required=" "  rows="3"></textarea>
+                                </div>
+                            </div>
 
                             <div class="control-group">
-							  <label class="control-label" for="fileInput">Event image</label>
+							  <label class="control-label" for="fileInput">About image</label>
 							  <div class="controls">
-								<input class="input-file uniform_on" name="e_image" id="fileInput" type="file">
+								<input class="input-file uniform_on" name="a_image" id="fileInput" type="file">
 							  </div>
                             </div>  
                             
-                            <div class="control-group">
-							  <label class="control-label" for="date01">Event date</label>
-							  <div class="controls">
-								<input type="date" class="input-xlarge" name="e_date" required="" >
-							  </div>
-							</div>
+                          
 
     	                    <br>
 							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Add event</button>
+							  <button type="submit" class="btn btn-primary">Add about</button>
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>

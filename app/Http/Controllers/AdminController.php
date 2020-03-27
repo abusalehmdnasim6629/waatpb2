@@ -207,4 +207,47 @@ class AdminController extends Controller
 
         return view('admin.all_image')->with('result', $result);
     }
+
+    public function add_about(){
+
+        return view('admin.add_about');
+    }
+
+    public function save_about(Request $request)
+    {
+
+
+        $about = array();
+        $about['about_title'] = $request->a_title;
+        $about['about_description'] = $request->a_des;
+        if ($request->hasfile('a_image')) {
+
+            $image = $request->file('a_image');
+          
+            $image_name = Str::random(10);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = 'image/';
+            $image_url = $upload_path . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $about['image'] = $image_url;
+                DB::table('tbl_about')->insert($about);
+                Alert::success('Successful', 'Add about successfully');
+                return Redirect::to('/add-about');
+            }else{
+                Alert::warning('Fail', 'Add about unsuccessfully');
+                return Redirect::to('/add-about');
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 }

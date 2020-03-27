@@ -25,7 +25,6 @@
     <link href="{{asset('assets/css/swiper.min.css')}}" rel="stylesheet">
     <link href="{{asset('style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
-    
 	
 	
 	<!-- ========== End Stylesheet ========== -->
@@ -161,8 +160,9 @@
 	</main>	
     <div style="padding:20px;">
     <?php 
-     $gallary =  DB::table('tbl_gallary')
-              ->get();
+	 $gallary =  DB::table('tbl_gallary')
+	          ->paginate(8);
+              
     
     
     ?>
@@ -177,6 +177,19 @@
 					<?php  } ?>
     
     </div>
+<div class="d-flex justify-content-center p-3">
+ <nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">
+        {{$gallary->links()}}
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+   
+  </ul>
+</nav>
+</div>
 	<div class="clearfix"></div>
 	
 	<!-- Start Footer

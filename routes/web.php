@@ -36,6 +36,10 @@ Route::get('/all-history', 'AdminController@all_history')->middleware('admin');
 
 //about
 Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
+Route::get('/add-about', 'AdminController@add_about')->middleware('admin');
+Route::post('/save-about', 'AdminController@save_about')->middleware('admin');
+
+
 
 //header
 Route::get('/all-header', 'AdminController@all_header')->middleware('admin');
