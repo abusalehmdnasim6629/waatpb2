@@ -39,6 +39,12 @@ Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
 Route::get('/add-about', 'AdminController@add_about')->middleware('admin');
 Route::post('/save-about', 'AdminController@save_about')->middleware('admin');
 
+//service
+Route::get('/add-service', 'AdminController@add_service')->middleware('admin');
+Route::get('/all-service', 'AdminController@all_service')->middleware('admin');
+Route::post('/save-service', 'AdminController@save_service')->middleware('admin');
+
+
 
 
 //header

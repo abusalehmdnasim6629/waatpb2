@@ -31,10 +31,37 @@ class ContentController extends Controller
                        ->get();
             $gallary =  DB::table('tbl_gallary')
                         ->limit(12)
-                        ->get();          
+                        ->get();  
+            
+            $welfare = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'welfare'.'%')       
+                      ->first();
+            
+            $training = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'training'.'%')       
+                      ->first();
+            $job = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'job'.'%')       
+                      ->first();  
+            
+            $research = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'research'.'%')       
+                      ->first();
+            $blood = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'blood'.'%')       
+                      ->first();
+            $database = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'database'.'%')       
+                      ->first();          
+
+                               
+                      
+
+
+
            
               
-           return view('welcome')->with('about',$about)->with('history',$history)->with('header',$header)->with('event',$event)->with('gallary',$gallary);   
+           return view('welcome')->with('about',$about)->with('history',$history)->with('header',$header)->with('event',$event)->with('gallary',$gallary)->with('welfare',$welfare)->with('job',$job)->with('research',$research)->with('blood',$blood)->with('training',$training)->with('database',$database);   
 
 
     }

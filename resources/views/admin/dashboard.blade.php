@@ -310,6 +310,27 @@
 
 								</ul>
 							</li>
+							<li>
+								<a href="#">
+									<i class="metismenu-icon fa fa-gavel"></i>
+									Services
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-service')}}">
+											<i class="metismenu-icon"></i>
+											All service
+										</a>
+									</li>
+									<li>
+										<a href="{{URL::to('/add-service')}}">
+											<i class="metismenu-icon"></i>
+											Add service
+										</a>
+									</li>
+								</ul>
+							</li>
 						</ul>
 					</div>
 				</div>
