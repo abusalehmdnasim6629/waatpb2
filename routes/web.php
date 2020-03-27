@@ -49,13 +49,18 @@ Route::post('/save-service', 'AdminController@save_service')->middleware('admin'
 
 //header
 Route::get('/all-header', 'AdminController@all_header')->name('header.all')->middleware('admin');
-Route::get('/header/{id}', 'AdminController@headerEdit')->name('header.edit')->middleware('admin');
-Route::post('/header/{id}', 'AdminController@headerUpdate')->name('header.update')->middleware('admin');
+Route::get('/header/edit/{id}', 'AdminController@headerEdit')->name('header.edit')->middleware('admin');
+Route::post('/header/update/{id}', 'AdminController@headerUpdate')->name('header.update')->middleware('admin');
 
 //event
 Route::get('/add-event', 'AdminController@add_event')->middleware('admin');
 Route::post('/save-event', 'AdminController@save_event')->middleware('admin');
-Route::get('/all-event', 'AdminController@all_event')->middleware('admin');
+Route::get('/all-event', 'AdminController@all_event')->name('all.event')->middleware('admin');
+Route::get('/event/edit/{id}', 'AdminController@editEvent')->name('event.edit')->middleware('admin');
+Route::post('/event/update/{id}', 'AdminController@updateEvent')->name('event.update')->middleware('admin');
+Route::get('/event/delete/{id}', 'AdminController@deleteEvent')->name('event.delete')->middleware('admin');
+
+
 Route::get('/join', 'ContentController@join_event')->middleware('admin');
 Route::get('/view-all-event', 'ContentController@view_event');
 

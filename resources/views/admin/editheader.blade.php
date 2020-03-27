@@ -27,13 +27,13 @@
 					@csrf
 					<div class="form-group">
 						<h3>Header title</h3>
-						<textarea name="header_title" class="form-control" cols="10" rows="2">
+						<textarea name="header_title" class="form-control" cols="10" rows="2" required>
 							{{$header->header_title}}
 						</textarea>
 					</div>
 					<div class="form-group">
 						<h3>Header description</h3>
-						<textarea name="header_description" class="form-control" cols="10" rows="5">
+						<textarea name="header_description" class="form-control" cols="10" rows="5" required>
 							{{$header->header_description}}
 						</textarea>
 					</div>

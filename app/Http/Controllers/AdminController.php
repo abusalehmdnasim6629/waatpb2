@@ -191,6 +191,64 @@ class AdminController extends Controller
         return view('admin.all_event')->with('result', $result);
     }
 
+    public function editEvent($id)
+    {
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->first();
+        return view('admin.editevent', compact('event'));
+    }
+
+    public function updateEvent(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'event_title' => 'required',
+            'event_date' => 'required',
+        ]);
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->first();
+
+        if ($request->hasFile('event_image')) {
+            $image = $request->file('event_image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = 'image/';
+            $image_url = $upload_path . $image_full_name;
+            $image->move($upload_path, $image_full_name);
+            $data['event_image'] = $image_url;
+            unlink($_SERVER['DOCUMENT_ROOT'] . '/' . $event->event_image);
+        }
+
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->update($data);
+
+        if ($event) {
+            Alert::success('successful', 'Event updated successfully!');
+            return redirect()->route('all.event');
+        } else {
+            Alert::success('fali', 'Event updated falied!');
+            return redirect()->back();
+        }
+    }
+
+    public function deleteEvent($id)
+    {
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->delete();
+        if ($event) {
+            Alert::success('Successful', 'Event deleted successfully!');
+            return redirect()->back();
+        } else {
+            Alert::success('fali', 'Event deleted falied!');
+            return redirect()->back();
+        }
+    }
+
     public function add_image()
     {
 
