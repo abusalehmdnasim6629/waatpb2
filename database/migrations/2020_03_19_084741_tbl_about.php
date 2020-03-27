@@ -17,6 +17,7 @@ class TblAbout extends Migration
             $table->increments('about_id');
             $table->string('about_title');
             $table->string('about_description');
+            $table->string('image');
             $table->timestamps();
         });
     }

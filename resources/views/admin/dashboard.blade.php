@@ -244,7 +244,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{{URL::to('/add-about')}}">
 											<i class="metismenu-icon"></i>
 											Add about
 										</a>
