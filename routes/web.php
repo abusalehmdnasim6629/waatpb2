@@ -48,7 +48,9 @@ Route::post('/save-service', 'AdminController@save_service')->middleware('admin'
 
 
 //header
-Route::get('/all-header', 'AdminController@all_header')->middleware('admin');
+Route::get('/all-header', 'AdminController@all_header')->name('header.all')->middleware('admin');
+Route::get('/header/{id}', 'AdminController@headerEdit')->name('header.edit')->middleware('admin');
+Route::post('/header/{id}', 'AdminController@headerUpdate')->name('header.update')->middleware('admin');
 
 //event
 Route::get('/add-event', 'AdminController@add_event')->middleware('admin');
@@ -110,7 +112,18 @@ Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact
  *      - welcome image need to be dynamic - 1
  *      - Services need to be dynamic - 1
  * 7. Show all people who join to a event
+ * 
  */
+
+// All event 
+// All jobs
+// All about
+// All history 
+// All member
+// All image
+// Member who join event
+// All header
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

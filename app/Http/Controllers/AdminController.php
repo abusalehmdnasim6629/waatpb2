@@ -118,6 +118,36 @@ class AdminController extends Controller
 
         return view('admin.all_header')->with('result', $result);
     }
+
+    public function headerEdit($id)
+    {
+        $header = DB::table('tbl_header')
+            ->select('tbl_header.*')
+            ->where('header_id', $id)
+            ->first();
+
+        return view('admin.editheader', compact('header'));
+    }
+
+    public function headerUpdate(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'header_title' => 'required',
+            'header_description' => 'required',
+        ]);
+        $header = DB::table('tbl_header')
+            ->where('header_id', $id)
+            ->update($data);
+
+        if ($header) {
+            Alert::success('Successful', 'Header updated successfully!');
+            return redirect()->route('header.all');
+        } else {
+            Alert::success('fail', 'Header updated failed!');
+            return redirect()->back();
+        }
+    }
+
     public function add_event()
     {
 
@@ -208,7 +238,8 @@ class AdminController extends Controller
         return view('admin.all_image')->with('result', $result);
     }
 
-    public function add_about(){
+    public function add_about()
+    {
 
         return view('admin.add_about');
     }
@@ -223,7 +254,7 @@ class AdminController extends Controller
         if ($request->hasfile('a_image')) {
 
             $image = $request->file('a_image');
-          
+
             $image_name = Str::random(10);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
@@ -236,7 +267,7 @@ class AdminController extends Controller
                 DB::table('tbl_about')->insert($about);
                 Alert::success('Successful', 'Add about successfully');
                 return Redirect::to('/add-about');
-            }else{
+            } else {
                 Alert::warning('Fail', 'Add about unsuccessfully');
                 return Redirect::to('/add-about');
             }
@@ -244,41 +275,37 @@ class AdminController extends Controller
     }
 
 
-   public function add_service(){
-      
-       return view('admin.add_service');
+    public function add_service()
+    {
 
-   }
+        return view('admin.add_service');
+    }
 
-   public function save_service(Request $request){
+    public function save_service(Request $request)
+    {
 
         $service = array();
         $service['service_title'] = $request->s_title;
 
         $s = DB::table('tbl_service')
-          ->insert($service);
-         if($s){
-         Alert::success('Successful', 'Add service successfully');
-         return Redirect::to('/add-service'); 
-         }else{
-          
-         Alert::warning('Fail', 'Add service unsuccessfully');
-         return Redirect::to('/add-service'); 
-         }
+            ->insert($service);
+        if ($s) {
+            Alert::success('Successful', 'Add service successfully');
+            return Redirect::to('/add-service');
+        } else {
 
-   }
+            Alert::warning('Fail', 'Add service unsuccessfully');
+            return Redirect::to('/add-service');
+        }
+    }
 
-   public function all_service(){
-        
+    public function all_service()
+    {
+
         $result = DB::table('tbl_service')
             ->select('tbl_service.*')
             ->get();
 
-          return view('admin.all_service')->with('result', $result);
-            
-       
-   }
-
-
-
+        return view('admin.all_service')->with('result', $result);
+    }
 }
