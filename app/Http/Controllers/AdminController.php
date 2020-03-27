@@ -277,6 +277,17 @@ class AdminController extends Controller
         }
     }
 
+
+    public function showPeople($event_id)
+    {
+        $membersId = DB::table('tbl_join_event')
+            ->where('event_id', $event_id)
+            ->pluck('member_id');
+
+        $people = DB::table('tbl_member')->whereIn('member_id', $membersId)->get();
+        return view('admin.event_people', compact('people'));
+    }
+
     public function add_image()
     {
 

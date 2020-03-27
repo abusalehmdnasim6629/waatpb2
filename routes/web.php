@@ -61,6 +61,7 @@ Route::get('/all-event', 'AdminController@all_event')->name('all.event')->middle
 Route::get('/event/edit/{id}', 'AdminController@editEvent')->name('event.edit')->middleware('admin');
 Route::post('/event/update/{id}', 'AdminController@updateEvent')->name('event.update')->middleware('admin');
 Route::get('/event/delete/{id}', 'AdminController@deleteEvent')->name('event.delete')->middleware('admin');
+Route::get('/event/show-people/{event_id}', 'AdminController@showPeople')->name('event.people')->middleware('admin');
 
 
 Route::get('/join', 'ContentController@join_event')->middleware('admin');
