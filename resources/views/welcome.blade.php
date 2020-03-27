@@ -374,7 +374,7 @@
 					<div class="footer-widget-box contact-us">
 						<h4 class="foo-widget-title">Contact us</h4>
 						<div class="contact-inputs">
-							<form  method="post" action="{{route('contact.mail')}}">
+							<form method="post" action="{{route('contact.mail')}}">
 								@csrf
 								<div class="row">
 									<div class="col-md-12">
@@ -396,7 +396,7 @@
 											<textarea class="form-control labelup" id="comments" name="comments"
 												rows="5" placeholder="Type Message"></textarea>
 										</div>
-										<button type="submit" name="submit" class="theme-btn" >
+										<button type="submit" name="submit" class="theme-btn">
 											contact
 										</button>
 										<!-- Alert Message -->
@@ -406,7 +406,7 @@
 									</div>
 								</div>
 							</form>
-						
+
 						</div>
 					</div>
 				</div>

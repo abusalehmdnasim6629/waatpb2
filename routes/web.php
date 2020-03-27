@@ -63,15 +63,15 @@ Route::get('/view-all-event', 'ContentController@view_event');
 Route::get('/add-image', 'AdminController@add_image')->middleware('admin');
 Route::post('/save-image', 'AdminController@save_image')->middleware('admin');
 Route::get('/all-image', 'AdminController@all_image')->middleware('admin');
-Route::get('/view-all','ContentController@view_all');
+Route::get('/view-all', 'ContentController@view_all');
 
 
 //history
 Route::get('/full-history', 'ContentController@full_history')->middleware('admin');
 
 //profile
-Route::get('/profile','ContentController@profile');
-Route::post('/update-member','ContentController@update_profile');
+Route::get('/profile', 'ContentController@profile');
+Route::post('/update-member', 'ContentController@update_profile');
 
 
 
@@ -101,14 +101,14 @@ Route::post('/reset-password', 'MemberController@reset_password');
 Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact.mail');
 
 /**
- * 1. password increaption
+ * 1. password increaption - 1
  * 2. admin auth - 1
- * 3. footer contact form
- * 4. gallary
+ * 3. footer contact form - 1
+ * 4. gallary show all - 1
  * 5. event time dynamic - 1
  * 6. Landing page
  *      - welcome image need to be dynamic - 1
- *      - Services need to be dynamic
+ *      - Services need to be dynamic - 1
  * 7. Show all people who join to a event
  */
 Auth::routes();
