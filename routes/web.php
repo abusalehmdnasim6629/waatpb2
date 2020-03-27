@@ -30,6 +30,12 @@ Route::get('/all-member', 'AdminController@all_member')->middleware('admin');
 Route::get('/add-job', 'AdminController@add_job')->middleware('admin');
 Route::post('/save-job', 'AdminController@save_job')->middleware('admin');
 Route::get('/all-job', 'AdminController@all_job')->middleware('admin');
+Route::get('/edit-job/{job_id}', 'AdminController@edit_job')->middleware('admin');
+Route::post('/update-job/{job_id}', 'AdminController@update_job')->middleware('admin');
+Route::get('/delete-job/{job_id}', 'AdminController@delete_job')->middleware('admin');
+
+
+
 
 //history
 Route::get('/all-history', 'AdminController@all_history')->name('history.all')->middleware('admin');
@@ -64,9 +70,9 @@ Route::post('/header/update/{id}', 'AdminController@headerUpdate')->name('header
 Route::get('/add-event', 'AdminController@add_event')->middleware('admin');
 Route::post('/save-event', 'AdminController@save_event')->middleware('admin');
 Route::get('/all-event', 'AdminController@all_event')->name('all.event')->middleware('admin');
-Route::get('/event/edit/{id}', 'AdminController@editEvent')->name('event.edit')->middleware('admin');
-Route::post('/event/update/{id}', 'AdminController@updateEvent')->name('event.update')->middleware('admin');
-Route::get('/event/delete/{id}', 'AdminController@deleteEvent')->name('event.delete')->middleware('admin');
+// Route::get('/event/edit/{id}', 'AdminController@editEvent')->name('event.edit')->middleware('admin');
+// Route::post('/event/update/{id}', 'AdminController@updateEvent')->name('event.update')->middleware('admin');
+// Route::get('/event/delete/{id}', 'AdminController@deleteEvent')->name('event.delete')->middleware('admin');
 Route::get('/event/show-people/{event_id}', 'AdminController@showPeople')->name('event.people')->middleware('admin');
 
 

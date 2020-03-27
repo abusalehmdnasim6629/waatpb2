@@ -45,7 +45,7 @@
                             <div class="control-group">
                                 <label class="control-label">About Description</label>
                                 <div class="controls">
-                                <textarea class="cleditor" name="a_des" required=" " value="{{$result->about_description}}"  rows="3"></textarea>
+                                <textarea class="cleditor" name="a_des" required=" "  rows="3">{{$result->about_description}}</textarea>
                                 </div>
                             </div>
 

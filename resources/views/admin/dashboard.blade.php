@@ -181,7 +181,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{{URL::to('/add-job')}}">
 											<i class="metismenu-icon"></i>
 											Add job
 										</a>
