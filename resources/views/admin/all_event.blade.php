@@ -5,9 +5,9 @@
 	<li>
 		<i class="icon-home"></i>
 		<a href="index.html">Home</a>
-		<i class="icon-angle-right"></i>
+		<i class="fa fa-angle-right"></i>
 	</li>
-	<li><a href="#">Tables</a></li>
+	<li><a href="#">All Event</a></li>
 </ul>
 
 <div class="row-fluid sortable">

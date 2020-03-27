@@ -36,19 +36,19 @@
 				@foreach($result as $ct)
 				<tbody>
 					<tr>
-						<td>{{ $ct->history_id}}</td>
+						<td>{{$ct->history_id}}</td>
 						<td class="center">{{ $ct->first_paragraph}}</td>
 						<td class="center">{{ $ct->middle_paragraph}}</td>
 						<td class="center">{{ $ct->last_paragraph}}</td>
 
 						<td class="center">
 							<div class="btn btn-group">
-								<a class="btn btn-info btn-sm" href="{{URL::to('/edit-history/'.$ct->history_id)}}">
+								<a class="btn btn-info btn-sm" href="{{route('history.edit', $ct->history_id)}}">
 									<i class="fa fa-edit white edit"></i>
 								</a>
-								<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-history/'.$ct->history_id)}}">
-									<i class="fa fa-trash white trash"></i>
-								</a>
+								{{-- <a class="btn btn-danger btn-sm" href="{{URL::to('/delete-history/'.$ct->history_id)}}">
+								<i class="fa fa-trash white trash"></i>
+								</a> --}}
 							</div>
 						</td>
 					</tr>

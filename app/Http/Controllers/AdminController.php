@@ -100,6 +100,34 @@ class AdminController extends Controller
         return view('admin.all_history')->with('result', $result);
     }
 
+    public function historyEdit($id)
+    {
+        $history = DB::table('tbl_history')
+            ->where('history_id', $id)
+            ->first();
+        return view('admin.edithistory', compact('history'));
+    }
+
+    public function historyUpdate(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'first_paragraph' => 'nullable',
+            'middle_paragraph' => 'nullable',
+            'last_paragraph' => 'nullable',
+        ]);
+        $history = DB::table('tbl_history')
+            ->where('history_id', $id)
+            ->update($data);
+
+        if ($history) {
+            Alert::success('successful', 'History updated successfully!');
+            return redirect()->route('history.all');
+        } else {
+            Alert::success('fail', 'History updated failed!');
+            return redirect()->back();
+        }
+    }
+
     public function all_about()
     {
 

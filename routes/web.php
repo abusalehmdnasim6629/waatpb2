@@ -32,7 +32,9 @@ Route::post('/save-job', 'AdminController@save_job')->middleware('admin');
 Route::get('/all-job', 'AdminController@all_job')->middleware('admin');
 
 //history
-Route::get('/all-history', 'AdminController@all_history')->middleware('admin');
+Route::get('/all-history', 'AdminController@all_history')->name('history.all')->middleware('admin');
+Route::get('/history/edit/{id}', 'AdminController@historyEdit')->name('history.edit')->middleware('admin');
+Route::post('/history/update/{id}', 'AdminController@historyUpdate')->name('history.update')->middleware('admin');
 
 //about
 Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
