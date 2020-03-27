@@ -244,9 +244,40 @@ class AdminController extends Controller
     }
 
 
+   public function add_service(){
+      
+       return view('admin.add_service');
 
+   }
 
+   public function save_service(Request $request){
 
+        $service = array();
+        $service['service_title'] = $request->s_title;
+
+        $s = DB::table('tbl_service')
+          ->insert($service);
+         if($s){
+         Alert::success('Successful', 'Add service successfully');
+         return Redirect::to('/add-service'); 
+         }else{
+          
+         Alert::warning('Fail', 'Add service unsuccessfully');
+         return Redirect::to('/add-service'); 
+         }
+
+   }
+
+   public function all_service(){
+        
+        $result = DB::table('tbl_service')
+            ->select('tbl_service.*')
+            ->get();
+
+          return view('admin.all_service')->with('result', $result);
+            
+       
+   }
 
 
 

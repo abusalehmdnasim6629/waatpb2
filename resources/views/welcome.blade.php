@@ -181,27 +181,27 @@
 				<div class="service-wrapper grid-3">
 					<div class="single-service pink">
 						<i class="fas fa-archive"></i>
-						<h3>Welfare</h3>
+						<h3>{{$welfare->service_title}}</h3>
 					</div>
 					<div class="single-service orange">
 						<i class="fas fa-clipboard-list"></i>
-						<h3>Training</h3>
+						<h3>{{$training->service_title}}</h3>
 					</div>
 					<div class="single-service pink grn">
 						<i class="fas fa-briefcase"></i>
-						<h3>Job(Career)</h3>
+						<h3>{{$job->service_title}}</h3>
 					</div>
 					<div class="single-service orange">
 						<i class="fas fa-flask"></i>
-						<h3>Research and Development</h3>
+						<h3>{{$research->service_title}}</h3>
 					</div>
 					<div class="single-service orange">
 						<i class="fas fa-burn"></i>
-						<h3>Blood Donation</h3>
+						<h3>{{$blood->service_title}}</h3>
 					</div>
 					<div class="single-service pearl">
 						<i class="fas fa-database"></i>
-						<h3>Database</h3>
+						<h3>{{$database->service_title}}</h3>
 					</div>
 				</div>
 			</div>

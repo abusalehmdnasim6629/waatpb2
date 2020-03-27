@@ -21,6 +21,52 @@ session_start();
 
 class ContentController extends Controller
 {
+<<<<<<< HEAD
+    public function content(){
+
+            $about =  DB::table('tbl_about')
+              ->first();
+            $history =  DB::table('tbl_history')
+              ->first();
+            $header =  DB::table('tbl_header')
+              ->first();
+            $event =   DB::table('tbl_event')
+                       ->limit(3)
+                       ->get();
+            $gallary =  DB::table('tbl_gallary')
+                        ->limit(12)
+                        ->get();  
+            
+            $welfare = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'welfare'.'%')       
+                      ->first();
+            
+            $training = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'training'.'%')       
+                      ->first();
+            $job = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'job'.'%')       
+                      ->first();  
+            
+            $research = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'research'.'%')       
+                      ->first();
+            $blood = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'blood'.'%')       
+                      ->first();
+            $database = DB::table('tbl_service')
+                      ->where('service_title','like','%'.'database'.'%')       
+                      ->first();          
+
+                               
+                      
+
+
+
+           
+              
+           return view('welcome')->with('about',$about)->with('history',$history)->with('header',$header)->with('event',$event)->with('gallary',$gallary)->with('welfare',$welfare)->with('job',$job)->with('research',$research)->with('blood',$blood)->with('training',$training)->with('database',$database);   
+=======
   public function content()
   {
 
@@ -42,6 +88,7 @@ class ContentController extends Controller
   }
   public function join_event()
   {
+>>>>>>> 7e74ea696036720008797692f6e6c9e72590c246
 
     $login_check =  Session::get('lcheck');
     $e_id =  Session::get('e_id');
