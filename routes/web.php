@@ -64,7 +64,7 @@ Route::get('/event/delete/{id}', 'AdminController@deleteEvent')->name('event.del
 Route::get('/event/show-people/{event_id}', 'AdminController@showPeople')->name('event.people')->middleware('admin');
 
 
-Route::get('/join', 'ContentController@join_event')->middleware('admin');
+Route::get('/join', 'ContentController@join_event');
 Route::get('/view-all-event', 'ContentController@view_event');
 
 

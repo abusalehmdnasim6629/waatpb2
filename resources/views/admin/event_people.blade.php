@@ -51,9 +51,7 @@
 						<td class="center">{{ $ct->department}}</td>
 						<td class="center">{{ $ct->present_address}}</td>
 					</tr>
-
 				</tbody>
-
 				@endforeach
 
 			</table>
