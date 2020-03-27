@@ -55,7 +55,7 @@ Route::get('/add-event', 'AdminController@add_event')->middleware('admin');
 Route::post('/save-event', 'AdminController@save_event')->middleware('admin');
 Route::get('/all-event', 'AdminController@all_event')->middleware('admin');
 Route::get('/join', 'ContentController@join_event')->middleware('admin');
-Route::get('/view-all-event', 'ContentController@view_event')->middleware('admin');
+Route::get('/view-all-event', 'ContentController@view_event');
 
 
 
@@ -110,10 +110,6 @@ Route::post('/reset-password', 'MemberController@reset_password');
  *      - Services need to be dynamic
  * 7. Show all people who join to a event
  */
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

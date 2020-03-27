@@ -14,10 +14,12 @@ use Session;
 
 
 use RealRashid\SweetAlert\Facades\Alert;
+
 session_start();
 
 class ContentController extends Controller
 {
+<<<<<<< HEAD
     public function content(){
 
             $about =  DB::table('tbl_about')
@@ -62,93 +64,109 @@ class ContentController extends Controller
            
               
            return view('welcome')->with('about',$about)->with('history',$history)->with('header',$header)->with('event',$event)->with('gallary',$gallary)->with('welfare',$welfare)->with('job',$job)->with('research',$research)->with('blood',$blood)->with('training',$training)->with('database',$database);   
+=======
+  public function content()
+  {
+
+    $about =  DB::table('tbl_about')
+      ->first();
+    $history =  DB::table('tbl_history')
+      ->first();
+    $header =  DB::table('tbl_header')
+      ->first();
+    $event =   DB::table('tbl_event')->where('event_date', '>', \Carbon\Carbon::now())
+      ->limit(3)
+      ->get();
+    $gallary =  DB::table('tbl_gallary')
+      ->limit(12)
+      ->get();
 
 
-    }
-    public function join_event(){
-         
-     $login_check =  Session::get('lcheck');
-     $e_id =  Session::get('e_id');
-    
+    return view('welcome')->with('about', $about)->with('history', $history)->with('header', $header)->with('event', $event)->with('gallary', $gallary);
+  }
+  public function join_event()
+  {
+>>>>>>> 7e74ea696036720008797692f6e6c9e72590c246
 
-       if($login_check !=null){
-         
-          $join = array();
-          $join['member_id'] = $login_check;
-          $join['event_id'] = $e_id;
+    $login_check =  Session::get('lcheck');
+    $e_id =  Session::get('e_id');
 
-        $res =  DB::table('tbl_join_event')
-           ->insert($join);
-         
-         if($res){
-          Alert::success('success', 'Join successfully');
-          return Redirect::to('/');
-         } 
-        
-    }else{
+
+    if ($login_check != null) {
+
+      $join = array();
+      $join['member_id'] = $login_check;
+      $join['event_id'] = $e_id;
+
+      $res =  DB::table('tbl_join_event')
+        ->insert($join);
+
+      if ($res) {
+        Alert::success('success', 'Join successfully');
+        return Redirect::to('/');
+      }
+    } else {
 
       Alert::warning('Fail', 'You have to login first');
-          return Redirect::to('/');
+      return Redirect::to('/');
     }
   }
 
-  public function full_history(){
+  public function full_history()
+  {
 
 
     return view('history');
   }
 
-  public function view_event(){
+  public function view_event()
+  {
 
-        return view('view_all_event');
+    return view('view_all_event');
   }
 
-   public function profile(){
-
-       
-         return view('/profile');
-       
-   }
-   public function update_profile(Request $request){
-        $mid = Session::get('lcheck');   
-        $update = array();
-        $update_skill = array();
+  public function profile()
+  {
 
 
-        $update['member_name'] = $request->name;
-        $update['email_address'] = $request->email;
-        $update['nid'] = $request->nid;
-        $update['designation'] = $request->designation;
-        $update['present_address'] = $request->p_a;
-      
-        $update['present_organization'] = $request->p_o;
-        $update['blood_group'] = $request->b_g;
-        $update['password'] = $request->pass;
-        $update_skill['member_skill'] = $request->member_skill;
-        $update_skill['member_hobby'] = $request->member_hobby;
+    return view('/profile');
+  }
+  public function update_profile(Request $request)
+  {
+    $mid = Session::get('lcheck');
+    $update = array();
+    $update_skill = array();
 
 
-        DB::table('tbl_member')
-        ->where('member_id',$mid)
-        ->update($update);
+    $update['member_name'] = $request->name;
+    $update['email_address'] = $request->email;
+    $update['nid'] = $request->nid;
+    $update['designation'] = $request->designation;
+    $update['present_address'] = $request->p_a;
 
-        DB::table('tbl_member_skill')
-        ->where('member_id',$mid)
-        ->update($update_skill);
+    $update['present_organization'] = $request->p_o;
+    $update['blood_group'] = $request->b_g;
+    $update['password'] = $request->pass;
+    $update_skill['member_skill'] = $request->member_skill;
+    $update_skill['member_hobby'] = $request->member_hobby;
+
+
+    DB::table('tbl_member')
+      ->where('member_id', $mid)
+      ->update($update);
+
+    DB::table('tbl_member_skill')
+      ->where('member_id', $mid)
+      ->update($update_skill);
 
 
 
-        return Redirect::to('/profile');
-        
-
-
-   }
-   public function view_all(){
+    return Redirect::to('/profile');
+  }
+  public function view_all()
+  {
 
 
     return view('gallary');
   }
-
-
-
 }
