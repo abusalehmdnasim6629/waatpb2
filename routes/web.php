@@ -92,15 +92,16 @@ Route::get('/code', 'MemberController@code');
 Route::post('/submit-code', 'MemberController@submit_code');
 Route::get('/new-password', 'MemberController@n_pass');
 Route::post('/reset-password', 'MemberController@reset_password');
+Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact.mail');
 
 /**
  * 1. password increaption
- * 2. admin auth
+ * 2. admin auth - 1
  * 3. footer contact form
  * 4. gallary
- * 5. event time dynamic
+ * 5. event time dynamic - 1
  * 6. Landing page
- *      - welcome image need to be dynamic
+ *      - welcome image need to be dynamic - 1
  *      - Services need to be dynamic
  * 7. Show all people who join to a event
  */

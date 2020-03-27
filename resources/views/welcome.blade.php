@@ -145,7 +145,7 @@
 			<div class="container">
 				<div class="about-wrapper grid-2">
 					<div class="about-left">
-						<img src="{{$about->image}}" alt="thumb">
+						{{-- <img src="{{$about->image}}" alt="thumb"> --}}
 					</div>
 					<div class="about-right">
 
@@ -374,7 +374,8 @@
 					<div class="footer-widget-box contact-us">
 						<h4 class="foo-widget-title">Contact us</h4>
 						<div class="contact-inputs">
-							<form class="contact-form" method="post" action="">
+							<form  method="post" action="{{route('contact.mail')}}">
+								@csrf
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
@@ -395,7 +396,7 @@
 											<textarea class="form-control labelup" id="comments" name="comments"
 												rows="5" placeholder="Type Message"></textarea>
 										</div>
-										<button type="submit" name="submit" class="theme-btn" id="submit">
+										<button type="submit" name="submit" class="theme-btn" >
 											contact
 										</button>
 										<!-- Alert Message -->
@@ -405,6 +406,7 @@
 									</div>
 								</div>
 							</form>
+						
 						</div>
 					</div>
 				</div>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactFrom;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 
 use Session;
@@ -121,5 +123,14 @@ class ContentController extends Controller
 
 
     return view('gallary');
+  }
+
+
+  public function sendContactMail(Request $request)
+  {
+    Mail::to('contact@rappleslimited.com')->send(new ContactFrom($request));
+
+    $successMail = "Your query has been send!";
+    return redirect()->back()->with($successMail);
   }
 }
