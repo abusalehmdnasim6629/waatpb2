@@ -109,6 +109,29 @@ class AdminController extends Controller
 
         return view('admin.all_about')->with('result', $result);
     }
+   
+    public function delete_about($about_id){
+        DB::table('tbl_about')
+        ->where('about_id',$about_id)
+        ->delete();
+
+        Alert::success('Successful', 'About deleted successfully');
+        return Redirect::to('/all-about');
+         
+    }
+
+    public function edit_about($about_id){
+
+        $result =  DB::table('tbl_about')
+         ->where('about_id',$about_id)
+         ->first();
+ 
+       return view('admin.edit_about')->with('result',$result);  
+ 
+ 
+     }
+
+
     public function all_header()
     {
 
@@ -159,6 +182,57 @@ class AdminController extends Controller
             ->get();
 
         return view('admin.all_event')->with('result', $result);
+    }
+
+    public function delete_event($event_id){
+          
+        DB::table('tbl_event')
+        ->where('event_id',$event_id)
+        ->delete();
+
+        Alert::success('Successful', 'Event delete successfully');
+        return Redirect::to('/all-event');
+
+
+    }
+
+    public function edit_event($event_id){
+
+       $result =  DB::table('tbl_event')
+        ->where('event_id',$event_id)
+        ->first();
+
+      return view('admin.edit_event')->with('result',$result);  
+
+
+    }
+
+    public function update_event(Request $request,$event_id){
+        $event = array();
+        $event['event_title'] = $request->e_title;
+        $event['event_date'] = $request->e_date;
+        if ($request->hasfile('e_image')) {
+
+            $image = $request->file('e_image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = 'image/';
+            $image_url = $upload_path . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $event['event_image'] = $image_url;
+                DB::table('tbl_event')
+                ->where('event_id',$event_id)
+                ->update($event);
+        
+                Alert::success('Successful', 'Update event successfully');
+                return Redirect::to('/all-event');
+            }
+        }
+        
     }
 
     public function add_image()
@@ -280,5 +354,36 @@ class AdminController extends Controller
    }
 
 
+   public function update_about(Request $request,$about_id)
+    {
+
+
+        $about = array();
+        $about['about_title'] = $request->a_title;
+        $about['about_description'] = $request->a_des;
+        if ($request->hasfile('a_image')) {
+
+            $image = $request->file('a_image');
+          
+            $image_name = Str::random(10);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = 'image/';
+            $image_url = $upload_path . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $about['image'] = $image_url;
+                DB::table('tbl_about')
+                    ->where('about_id',$about_id)
+                    ->update($about);
+                Alert::success('Successful', 'Update about successfully');
+                return Redirect::to('/all-about');
+            }else{
+                Alert::warning('Fail','Update about unsuccessfully');
+                return Redirect::to('/all-about');
+            }
+        }
+    }
 
 }

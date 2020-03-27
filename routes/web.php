@@ -38,6 +38,12 @@ Route::get('/all-history', 'AdminController@all_history')->middleware('admin');
 Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
 Route::get('/add-about', 'AdminController@add_about')->middleware('admin');
 Route::post('/save-about', 'AdminController@save_about')->middleware('admin');
+Route::get('/delete-about/{about_id}','AdminController@delete_about')->middleware('admin');
+Route::get('/edit-about/{about_id}','AdminController@edit_about')->middleware('admin');
+Route::post('/update-about/{about_id}','AdminController@update_about')->middleware('admin');
+
+
+
 
 //service
 Route::get('/add-service', 'AdminController@add_service')->middleware('admin');
@@ -56,6 +62,11 @@ Route::post('/save-event', 'AdminController@save_event')->middleware('admin');
 Route::get('/all-event', 'AdminController@all_event')->middleware('admin');
 Route::get('/join', 'ContentController@join_event')->middleware('admin');
 Route::get('/view-all-event', 'ContentController@view_event');
+Route::get('/delete-event/{event_id}','AdminController@delete_event');
+Route::get('/edit-event/{event_id}','AdminController@edit_event');
+Route::post('/update-event/{event_id}','AdminController@update_event');
+
+
 
 
 

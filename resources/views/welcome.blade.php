@@ -145,7 +145,7 @@
 			<div class="container">
 				<div class="about-wrapper grid-2">
 					<div class="about-left">
-						{{-- <img src="{{$about->image}}" alt="thumb"> --}}
+						 <img src="{{$about->image}}" alt="thumb"> 
 					</div>
 					<div class="about-right">
 
