@@ -32,7 +32,9 @@ Route::post('/save-job', 'AdminController@save_job')->middleware('admin');
 Route::get('/all-job', 'AdminController@all_job')->middleware('admin');
 
 //history
-Route::get('/all-history', 'AdminController@all_history')->middleware('admin');
+Route::get('/all-history', 'AdminController@all_history')->name('history.all')->middleware('admin');
+Route::get('/history/edit/{id}', 'AdminController@historyEdit')->name('history.edit')->middleware('admin');
+Route::post('/history/update/{id}', 'AdminController@historyUpdate')->name('history.update')->middleware('admin');
 
 //about
 Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
@@ -54,13 +56,21 @@ Route::post('/save-service', 'AdminController@save_service')->middleware('admin'
 
 
 //header
-Route::get('/all-header', 'AdminController@all_header')->middleware('admin');
+Route::get('/all-header', 'AdminController@all_header')->name('header.all')->middleware('admin');
+Route::get('/header/edit/{id}', 'AdminController@headerEdit')->name('header.edit')->middleware('admin');
+Route::post('/header/update/{id}', 'AdminController@headerUpdate')->name('header.update')->middleware('admin');
 
 //event
 Route::get('/add-event', 'AdminController@add_event')->middleware('admin');
 Route::post('/save-event', 'AdminController@save_event')->middleware('admin');
-Route::get('/all-event', 'AdminController@all_event')->middleware('admin');
-Route::get('/join', 'ContentController@join_event')->middleware('admin');
+Route::get('/all-event', 'AdminController@all_event')->name('all.event')->middleware('admin');
+Route::get('/event/edit/{id}', 'AdminController@editEvent')->name('event.edit')->middleware('admin');
+Route::post('/event/update/{id}', 'AdminController@updateEvent')->name('event.update')->middleware('admin');
+Route::get('/event/delete/{id}', 'AdminController@deleteEvent')->name('event.delete')->middleware('admin');
+Route::get('/event/show-people/{event_id}', 'AdminController@showPeople')->name('event.people')->middleware('admin');
+
+
+Route::get('/join', 'ContentController@join_event');
 Route::get('/view-all-event', 'ContentController@view_event');
 Route::get('/delete-event/{event_id}','AdminController@delete_event');
 Route::get('/edit-event/{event_id}','AdminController@edit_event');
@@ -121,7 +131,18 @@ Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact
  *      - welcome image need to be dynamic - 1
  *      - Services need to be dynamic - 1
  * 7. Show all people who join to a event
+ * 
  */
+
+// All event 
+// All jobs
+// All about
+// All history 
+// All member
+// All image
+// Member who join event
+// All header
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

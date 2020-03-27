@@ -100,6 +100,34 @@ class AdminController extends Controller
         return view('admin.all_history')->with('result', $result);
     }
 
+    public function historyEdit($id)
+    {
+        $history = DB::table('tbl_history')
+            ->where('history_id', $id)
+            ->first();
+        return view('admin.edithistory', compact('history'));
+    }
+
+    public function historyUpdate(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'first_paragraph' => 'nullable',
+            'middle_paragraph' => 'nullable',
+            'last_paragraph' => 'nullable',
+        ]);
+        $history = DB::table('tbl_history')
+            ->where('history_id', $id)
+            ->update($data);
+
+        if ($history) {
+            Alert::success('successful', 'History updated successfully!');
+            return redirect()->route('history.all');
+        } else {
+            Alert::success('fail', 'History updated failed!');
+            return redirect()->back();
+        }
+    }
+
     public function all_about()
     {
 
@@ -141,6 +169,36 @@ class AdminController extends Controller
 
         return view('admin.all_header')->with('result', $result);
     }
+
+    public function headerEdit($id)
+    {
+        $header = DB::table('tbl_header')
+            ->select('tbl_header.*')
+            ->where('header_id', $id)
+            ->first();
+
+        return view('admin.editheader', compact('header'));
+    }
+
+    public function headerUpdate(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'header_title' => 'required',
+            'header_description' => 'required',
+        ]);
+        $header = DB::table('tbl_header')
+            ->where('header_id', $id)
+            ->update($data);
+
+        if ($header) {
+            Alert::success('Successful', 'Header updated successfully!');
+            return redirect()->route('header.all');
+        } else {
+            Alert::success('fail', 'Header updated failed!');
+            return redirect()->back();
+        }
+    }
+
     public function add_event()
     {
 
@@ -184,6 +242,7 @@ class AdminController extends Controller
         return view('admin.all_event')->with('result', $result);
     }
 
+<<<<<<< HEAD
     public function delete_event($event_id){
           
         DB::table('tbl_event')
@@ -214,12 +273,35 @@ class AdminController extends Controller
         if ($request->hasfile('e_image')) {
 
             $image = $request->file('e_image');
+=======
+    public function editEvent($id)
+    {
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->first();
+        return view('admin.editevent', compact('event'));
+    }
+
+    public function updateEvent(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'event_title' => 'required',
+            'event_date' => 'required',
+        ]);
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->first();
+
+        if ($request->hasFile('event_image')) {
+            $image = $request->file('event_image');
+>>>>>>> f6577f45eb5ec65fd1aa673df51da241b4d03c96
 
             $image_name = Str::random(20);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
             $upload_path = 'image/';
             $image_url = $upload_path . $image_full_name;
+<<<<<<< HEAD
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -233,6 +315,49 @@ class AdminController extends Controller
             }
         }
         
+=======
+            $image->move($upload_path, $image_full_name);
+            $data['event_image'] = $image_url;
+            unlink($_SERVER['DOCUMENT_ROOT'] . '/' . $event->event_image);
+        }
+
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->update($data);
+
+        if ($event) {
+            Alert::success('successful', 'Event updated successfully!');
+            return redirect()->route('all.event');
+        } else {
+            Alert::success('fali', 'Event updated falied!');
+            return redirect()->back();
+        }
+    }
+
+    public function deleteEvent($id)
+    {
+        $event = DB::table('tbl_event')
+            ->where('event_id', $id)
+            ->delete();
+        if ($event) {
+            Alert::success('Successful', 'Event deleted successfully!');
+            return redirect()->back();
+        } else {
+            Alert::success('fali', 'Event deleted falied!');
+            return redirect()->back();
+        }
+    }
+
+
+    public function showPeople($event_id)
+    {
+        $membersId = DB::table('tbl_join_event')
+            ->where('event_id', $event_id)
+            ->pluck('member_id');
+
+        $people = DB::table('tbl_member')->whereIn('member_id', $membersId)->get();
+        return view('admin.event_people', compact('people'));
+>>>>>>> f6577f45eb5ec65fd1aa673df51da241b4d03c96
     }
 
     public function add_image()
@@ -282,7 +407,8 @@ class AdminController extends Controller
         return view('admin.all_image')->with('result', $result);
     }
 
-    public function add_about(){
+    public function add_about()
+    {
 
         return view('admin.add_about');
     }
@@ -297,7 +423,7 @@ class AdminController extends Controller
         if ($request->hasfile('a_image')) {
 
             $image = $request->file('a_image');
-          
+
             $image_name = Str::random(10);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
@@ -310,7 +436,7 @@ class AdminController extends Controller
                 DB::table('tbl_about')->insert($about);
                 Alert::success('Successful', 'Add about successfully');
                 return Redirect::to('/add-about');
-            }else{
+            } else {
                 Alert::warning('Fail', 'Add about unsuccessfully');
                 return Redirect::to('/add-about');
             }
@@ -318,42 +444,34 @@ class AdminController extends Controller
     }
 
 
-   public function add_service(){
-      
-       return view('admin.add_service');
+    public function add_service()
+    {
 
-   }
+        return view('admin.add_service');
+    }
 
-   public function save_service(Request $request){
+    public function save_service(Request $request)
+    {
 
         $service = array();
         $service['service_title'] = $request->s_title;
 
         $s = DB::table('tbl_service')
-          ->insert($service);
-         if($s){
-         Alert::success('Successful', 'Add service successfully');
-         return Redirect::to('/add-service'); 
-         }else{
-          
-         Alert::warning('Fail', 'Add service unsuccessfully');
-         return Redirect::to('/add-service'); 
-         }
+            ->insert($service);
+        if ($s) {
+            Alert::success('Successful', 'Add service successfully');
+            return Redirect::to('/add-service');
+        } else {
 
-   }
+            Alert::warning('Fail', 'Add service unsuccessfully');
+            return Redirect::to('/add-service');
+        }
+    }
 
-   public function all_service(){
-        
-        $result = DB::table('tbl_service')
-            ->select('tbl_service.*')
-            ->get();
+    public function all_service()
+    {
 
-          return view('admin.all_service')->with('result', $result);
-            
-       
-   }
-
-
+<<<<<<< HEAD
    public function update_about(Request $request,$about_id)
     {
 
@@ -385,5 +503,12 @@ class AdminController extends Controller
             }
         }
     }
+=======
+        $result = DB::table('tbl_service')
+            ->select('tbl_service.*')
+            ->get();
+>>>>>>> f6577f45eb5ec65fd1aa673df51da241b4d03c96
 
+        return view('admin.all_service')->with('result', $result);
+    }
 }

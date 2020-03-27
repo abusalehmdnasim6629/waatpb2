@@ -145,7 +145,11 @@
 			<div class="container">
 				<div class="about-wrapper grid-2">
 					<div class="about-left">
+<<<<<<< HEAD
 						 <img src="{{$about->image}}" alt="thumb"> 
+=======
+						<img src="{{$about->image}}" alt="thumb">
+>>>>>>> f6577f45eb5ec65fd1aa673df51da241b4d03c96
 					</div>
 					<div class="about-right">
 
