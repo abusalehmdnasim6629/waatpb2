@@ -26,6 +26,8 @@ class TblMember extends Migration
             $table->string('present_address');
             $table->string('password');
             $table->string('image');
+            $table->string('member_skill');
+            $table->string('member_hobby');
             $table->timestamps();
         });
     }

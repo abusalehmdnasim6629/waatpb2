@@ -28,6 +28,7 @@
 					<tr>
 						<th>Service id</th>
 						<th>Service title</th>
+						<th>Action</th>
 					
 
 					</tr>

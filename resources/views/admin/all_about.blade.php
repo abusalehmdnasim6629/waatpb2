@@ -29,6 +29,8 @@
 						<th>About title</th>
 						<th>About description</th>
 						<th>Image</th>
+						<th>Action</th>
+
 
 					</tr>
 				</thead>

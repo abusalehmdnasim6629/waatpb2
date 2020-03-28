@@ -101,7 +101,7 @@ Route::get('/full-history', 'ContentController@full_history')->middleware('admin
 
 //profile
 Route::get('/profile', 'ContentController@profile');
-Route::post('/update-member', 'ContentController@update_profile');
+Route::post('/update-member','ContentController@update_profile');
 
 
 

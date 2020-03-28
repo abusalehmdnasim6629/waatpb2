@@ -29,6 +29,7 @@
 						<th>First paragraph</th>
 						<th>Middle paragraph</th>
 						<th>Last paragraph</th>
+						<th>Action</th>
 
 					</tr>
 				</thead>

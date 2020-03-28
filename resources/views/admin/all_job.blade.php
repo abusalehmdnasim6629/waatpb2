@@ -35,6 +35,7 @@
 						<th>package</th>
 						<th>Deadline</th>
 						<th>Additional note</th>
+						<th>Action</th>
 
 					</tr>
 				</thead>

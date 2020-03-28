@@ -162,10 +162,11 @@
     <?php 
       $mid = Session::get('lcheck');
 	  $pro=  DB::table('tbl_member')
-			->join('tbl_member_skill','tbl_member.member_id','=','tbl_member_skill.member_id')
-			->select('tbl_member.*','tbl_member_skill.member_skill','tbl_member_skill.member_hobby')
-			->where('tbl_member.member_id',$mid)
+			->select('tbl_member.*')
+			->where('member_id',$mid)
 			->first();
+
+			
 		
     
     ?>
@@ -249,7 +250,7 @@
                     <form role="form" action="{{url('/update-member')}}" method="post" enctype="multipart/form-data">
 					{{csrf_field()}}
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Name</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" name="name" value="{{$pro->member_name}}">
                             </div>
@@ -273,10 +274,22 @@
                                 <input class="form-control" type="text" name="designation" value="{{$pro->designation}}">
                             </div>
                         </div>
+						<div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Department</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" name="department" value="{{$pro->department}}">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Present Address</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text"name="p_a" value="{{$pro->present_address}}" placeholder="">
+                            </div>
+                        </div>
+						<div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Contact number</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" name="contact_number" value="{{$pro->contact_number}}" placeholder="">
                             </div>
                         </div>
                         
@@ -298,14 +311,18 @@
 						<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Hobby</label>
                             <div class="col-lg-9">
-							<textarea class="cleditor" name="member_hobby" required="" value="{{$pro->member_hobby}}" rows="3"></textarea>
+							<textarea class="cleditor" name="member_hobby" required="" rows="3">
+							{{$pro->member_hobby}}
+							</textarea>
                             </div>
                         </div>
 						
 						<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Skill</label>
                             <div class="col-lg-9">
-							<textarea class="cleditor" name="member_skill" required="" value="{{$pro->member_skill}}" rows="3"></textarea>
+							<textarea class="cleditor" name="member_skill" required="" rows="3">
+							{{$pro->member_skill}}
+							</textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -317,7 +334,14 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Password</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="password" name="pass" value="{{$pro->password}}">
+                                <input class="form-control" type="password" name="pass" value="{{ $pro->password}}">
+                            </div>
+                        </div>
+
+						<div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Image</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="file" name="image" required="">
                             </div>
                         </div>
                        

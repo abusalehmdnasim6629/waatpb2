@@ -47,6 +47,9 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
+        $data['member_skill'] = " ";
+        $data['member_hobby'] = " ";
+
 
         $check = DB::table('tbl_member')
             ->where('email_address', $request->email)
@@ -56,7 +59,7 @@ class MemberController extends Controller
 
             if ($request->pass == $request->c_pass) {
 
-
+          
                 if ($request->hasfile('image')) {
 
                     $image = $request->file('image');
@@ -155,7 +158,7 @@ class MemberController extends Controller
         $data['member_name'] = $request->name;
         $data['email_address'] = $request->email;
         $data['nid'] = $request->nid;
-        $data['password'] = $request->pass;
+        $data['password'] = bcrypt($request->pass);
         $data['department'] = $request->department;
         $data['present_address'] = $request->p_address;
         $data['designation'] = $request->designation;
@@ -163,6 +166,10 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact_number;
         $data['present_organization'] = $request->org;
         $data['blood_group'] = $request->b_group;
+        $data['member_skill'] = $request->member_skill;
+        $data['member_hobby'] = $request->member_hobby;
+
+
 
 
 
