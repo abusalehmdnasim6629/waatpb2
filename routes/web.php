@@ -142,12 +142,12 @@ Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact
 
 // All event 
 // All jobs
-// All about
-// All history 
+// All about - done
+// All history - done
 // All member
-// All image
-// Member who join event
-// All header
+// All image 
+// Member who join event -done
+// All header - done
 
 Auth::routes();
 
