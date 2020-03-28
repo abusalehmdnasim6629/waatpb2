@@ -88,20 +88,21 @@ class AdminController extends Controller
         $result = DB::table('tbl_job')
             ->select('tbl_job.*')
             ->get();
-        
+
         return view('admin.all_job')->with('result', $result);
     }
-   
-    public function edit_job($job_id){
 
-         $result =  DB::table('tbl_job')
-          ->where('job_id',$job_id)
-          ->first();
+    public function edit_job($job_id)
+    {
 
-          return view('admin.edit_job')->with('result', $result);
+        $result =  DB::table('tbl_job')
+            ->where('job_id', $job_id)
+            ->first();
+
+        return view('admin.edit_job')->with('result', $result);
     }
 
-    public function update_job(Request $request,$job_id)
+    public function update_job(Request $request, $job_id)
     {
 
         $job = array();
@@ -117,21 +118,21 @@ class AdminController extends Controller
 
 
         DB::table('tbl_job')
-        ->where('job_id',$job_id)
-        ->update($job);
+            ->where('job_id', $job_id)
+            ->update($job);
         Alert::success('Successful', 'Job successfully updated');
         return Redirect::to('/all-job');
     }
 
-    public function delete_job($job_id){
-         
+    public function delete_job($job_id)
+    {
+
         DB::table('tbl_job')
-        ->where('job_id',$job_id)
-        ->delete();
+            ->where('job_id', $job_id)
+            ->delete();
 
         Alert::success('Successful', 'Job deleted successfully');
         return Redirect::to('/all-job');
-
     }
     public function all_history()
     {
@@ -143,6 +144,35 @@ class AdminController extends Controller
         return view('admin.all_history')->with('result', $result);
     }
 
+    public function historyEdit($id)
+    {
+        $history = DB::table('tbl_history')
+            ->where('history_id', $id)
+            ->first();
+        return view('admin.edithistory', compact('history'));
+    }
+
+    public function historyUpdate(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'first_paragraph' => 'nullable',
+            'middle_paragraph' => 'nullable',
+            'last_paragraph' => 'nullable',
+        ]);
+        $history = DB::table('tbl_history')
+            ->where('history_id', $id)
+            ->update($data);
+
+        if ($history) {
+            Alert::success('successful', 'History updated successfully!');
+            return redirect()->route('history.all');
+        } else {
+            Alert::success('fail', 'History updated failed!');
+            return redirect()->back();
+        }
+    }
+
+
     public function all_about()
     {
 
@@ -152,27 +182,26 @@ class AdminController extends Controller
 
         return view('admin.all_about')->with('result', $result);
     }
-   
-    public function delete_about($about_id){
+
+    public function delete_about($about_id)
+    {
         DB::table('tbl_about')
-        ->where('about_id',$about_id)
-        ->delete();
+            ->where('about_id', $about_id)
+            ->delete();
 
         Alert::success('Successful', 'About deleted successfully');
         return Redirect::to('/all-about');
-         
     }
 
-    public function edit_about($about_id){
+    public function edit_about($about_id)
+    {
 
         $result =  DB::table('tbl_about')
-         ->where('about_id',$about_id)
-         ->first();
- 
-       return view('admin.edit_about')->with('result',$result);  
- 
- 
-     }
+            ->where('about_id', $about_id)
+            ->first();
+
+        return view('admin.edit_about')->with('result', $result);
+    }
 
 
     public function all_header()
@@ -189,6 +218,8 @@ class AdminController extends Controller
 
         return view('admin.add_event');
     }
+
+    
 
     public function save_event(Request $request)
     {
@@ -227,30 +258,70 @@ class AdminController extends Controller
         return view('admin.all_event')->with('result', $result);
     }
 
-    public function delete_event($event_id){
-          
+    public function showPeople($event_id)
+    {
+        $membersId = DB::table('tbl_join_event')
+            ->where('event_id', $event_id)
+            ->pluck('member_id');
+
+        $people = DB::table('tbl_member')->whereIn('member_id', $membersId)->get();
+        return view('admin.event_people', compact('people'));
+    }
+
+    public function delete_event($event_id)
+    {
+
         DB::table('tbl_event')
-        ->where('event_id',$event_id)
-        ->delete();
+            ->where('event_id', $event_id)
+            ->delete();
 
         Alert::success('Successful', 'Event delete successfully');
         return Redirect::to('/all-event');
-
-
     }
 
-    public function edit_event($event_id){
+    public function edit_event($event_id)
+    {
 
-       $result =  DB::table('tbl_event')
-        ->where('event_id',$event_id)
-        ->first();
+        $result =  DB::table('tbl_event')
+            ->where('event_id', $event_id)
+            ->first();
 
-      return view('admin.edit_event')->with('result',$result);  
-
-
+        return view('admin.edit_event')->with('result', $result);
     }
 
-    public function update_event(Request $request,$event_id){
+
+    public function headerEdit($id)
+    {
+        $header = DB::table('tbl_header')
+            ->select('tbl_header.*')
+            ->where('header_id', $id)
+            ->first();
+
+        return view('admin.editheader', compact('header'));
+    }
+
+    public function headerUpdate(Request $request,  $id)
+    {
+        $data = $request->validate([
+            'header_title' => 'required',
+            'header_description' => 'required',
+        ]);
+        $header = DB::table('tbl_header')
+            ->where('header_id', $id)
+            ->update($data);
+
+        if ($header) {
+            Alert::success('Successful', 'Header updated successfully!');
+            return redirect()->route('header.all');
+        } else {
+            Alert::success('fail', 'Header updated failed!');
+            return redirect()->back();
+        }
+    }
+
+
+    public function update_event(Request $request, $event_id)
+    {
         $event = array();
         $event['event_title'] = $request->e_title;
         $event['event_date'] = $request->e_date;
@@ -268,14 +339,13 @@ class AdminController extends Controller
             if ($success) {
                 $event['event_image'] = $image_url;
                 DB::table('tbl_event')
-                ->where('event_id',$event_id)
-                ->update($event);
-        
+                    ->where('event_id', $event_id)
+                    ->update($event);
+
                 Alert::success('Successful', 'Update event successfully');
                 return Redirect::to('/all-event');
             }
         }
-        
     }
 
     public function add_image()
@@ -325,7 +395,8 @@ class AdminController extends Controller
         return view('admin.all_image')->with('result', $result);
     }
 
-    public function add_about(){
+    public function add_about()
+    {
 
         return view('admin.add_about');
     }
@@ -340,7 +411,7 @@ class AdminController extends Controller
         if ($request->hasfile('a_image')) {
 
             $image = $request->file('a_image');
-          
+
             $image_name = Str::random(10);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
@@ -353,7 +424,7 @@ class AdminController extends Controller
                 DB::table('tbl_about')->insert($about);
                 Alert::success('Successful', 'Add about successfully');
                 return Redirect::to('/add-about');
-            }else{
+            } else {
                 Alert::warning('Fail', 'Add about unsuccessfully');
                 return Redirect::to('/add-about');
             }
@@ -361,43 +432,42 @@ class AdminController extends Controller
     }
 
 
-   public function add_service(){
-      
-       return view('admin.add_service');
+    public function add_service()
+    {
 
-   }
+        return view('admin.add_service');
+    }
 
-   public function save_service(Request $request){
+    public function save_service(Request $request)
+    {
 
         $service = array();
         $service['service_title'] = $request->s_title;
 
         $s = DB::table('tbl_service')
-          ->insert($service);
-         if($s){
-         Alert::success('Successful', 'Add service successfully');
-         return Redirect::to('/add-service'); 
-         }else{
-          
-         Alert::warning('Fail', 'Add service unsuccessfully');
-         return Redirect::to('/add-service'); 
-         }
+            ->insert($service);
+        if ($s) {
+            Alert::success('Successful', 'Add service successfully');
+            return Redirect::to('/add-service');
+        } else {
 
-   }
+            Alert::warning('Fail', 'Add service unsuccessfully');
+            return Redirect::to('/add-service');
+        }
+    }
 
-   public function all_service(){
-        
+    public function all_service()
+    {
+
         $result = DB::table('tbl_service')
             ->select('tbl_service.*')
             ->get();
 
-          return view('admin.all_service')->with('result', $result);
-            
-       
-   }
+        return view('admin.all_service')->with('result', $result);
+    }
 
 
-   public function update_about(Request $request,$about_id)
+    public function update_about(Request $request, $about_id)
     {
 
 
@@ -407,7 +477,7 @@ class AdminController extends Controller
         if ($request->hasfile('a_image')) {
 
             $image = $request->file('a_image');
-          
+
             $image_name = Str::random(10);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
@@ -418,12 +488,12 @@ class AdminController extends Controller
             if ($success) {
                 $about['image'] = $image_url;
                 DB::table('tbl_about')
-                    ->where('about_id',$about_id)
+                    ->where('about_id', $about_id)
                     ->update($about);
                 Alert::success('Successful', 'Update about successfully');
                 return Redirect::to('/all-about');
-            }else{
-                Alert::warning('Fail','Update about unsuccessfully');
+            } else {
+                Alert::warning('Fail', 'Update about unsuccessfully');
                 return Redirect::to('/all-about');
             }
         }

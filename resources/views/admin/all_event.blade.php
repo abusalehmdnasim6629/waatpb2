@@ -32,12 +32,8 @@
 						<th>Event title</th>
 						<th>Event image</th>
 						<th>Event date</th>
-						<th>Action</th>
-
-
-
-						
-
+						<th class="text-center">Total Join</th>
+						<th class="text-center">Action</th>
 					</tr>
 				</thead>
 
@@ -48,8 +44,12 @@
 						<td class="center">{{ $ct->event_title}}</td>
 						<td><img src="{{URL::to($ct->event_image)}}" alt="about image" style="height:70px; width:70px">
 						<td class="center">{{ $ct->event_date}}</td>
-						
-						<td class="center">
+						<td class="text-center">
+							<span>{{ DB::table('tbl_join_event')->where('event_id', $ct->event_id)->count()}}</span>
+							<br>
+							<a href="{{route('event.people', $ct->event_id)}}">View</a>
+						</td>
+						<td class="text-center">
 							<div class="btn btn-group">
 								<a class="btn btn-info btn-sm" href="{{URL::to('/edit-event/'.$ct->event_id)}}">
 									<i class="fa fa-edit white edit"></i>
