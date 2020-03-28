@@ -512,5 +512,94 @@ class AdminController extends Controller
    }
 
 
+   public function delete_service($service_id)
+   {
 
+       DB::table('tbl_service')
+           ->where('service_id', $service_id)
+           ->delete();
+
+       Alert::success('Successful', 'Service deleted successfully');
+       return Redirect::to('/all-service');
+   }
+
+   public function edit_service($service_id)
+    {
+
+        $result =  DB::table('tbl_service')
+            ->where('service_id', $service_id)
+            ->first();
+
+        return view('admin.edit_service')->with('result', $result);
+    }
+
+    public function update_service(Request $request,$service_id){
+
+        $service = array();
+        $service['service_title'] = $request->s_title;
+
+        DB::table('tbl_service')
+        ->where('service_id',$service_id)
+        ->update($service);
+
+       Alert::success('Successful', 'Service updated successfully');
+       return Redirect::to('/all-service');
+
+
+
+    }
+
+    public function delete_image($image_id)
+    {
+ 
+        DB::table('tbl_gallary')
+            ->where('image_id', $image_id)
+            ->delete();
+ 
+        Alert::success('Successful', 'Image deleted successfully');
+        return Redirect::to('/all-image');
+    }
+    
+    public function edit_image($image_id)
+    {
+
+        $result =  DB::table('tbl_gallary')
+            ->where('image_id', $image_id)
+            ->first();
+
+        return view('admin.edit_image')->with('result', $result);
+    }
+
+    public function update_image(Request $request,$image_id)
+    {
+
+
+        $event = array();
+        $event['image_title'] = $request->i_title;
+
+        if ($request->hasfile('image')) {
+
+            $image = $request->file('image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = 'image/';
+            $image_url = $upload_path . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $event['image'] = $image_url;
+                DB::table('tbl_gallary')
+                ->where('image_id',$image_id)
+                ->update($event);
+                Alert::success('Successful', 'Image updated successfully');
+                return Redirect::to('/all-image');
+            } else {
+
+                Alert::warning('Fail', 'Image updated unsuccessfull');
+                return Redirect::to('/all-image');
+            }
+        }
+    }
 }

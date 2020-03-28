@@ -1,6 +1,9 @@
 @extends('admin.dashboard')
 @section('admin_content')
 
+@include('sweetalert::alert')
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 <ul class="breadcrumb">
 	<li>
 		<i class="icon-home"></i>

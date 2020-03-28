@@ -60,6 +60,12 @@ Route::post('/update-about/{about_id}','AdminController@update_about')->middlewa
 Route::get('/add-service', 'AdminController@add_service')->middleware('admin');
 Route::get('/all-service', 'AdminController@all_service')->middleware('admin');
 Route::post('/save-service', 'AdminController@save_service')->middleware('admin');
+Route::get('/delete-service/{service_id}','AdminController@delete_service')->middleware('admin');
+Route::get('/edit-service/{service_id}','AdminController@edit_service')->middleware('admin');
+Route::post('/update-service/{service_id}','AdminController@update_service')->middleware('admin');
+
+
+
 
 
 
@@ -94,6 +100,12 @@ Route::get('/add-image', 'AdminController@add_image')->middleware('admin');
 Route::post('/save-image', 'AdminController@save_image')->middleware('admin');
 Route::get('/all-image', 'AdminController@all_image')->middleware('admin');
 Route::get('/view-all', 'ContentController@view_all');
+Route::get('/delete-image/{image_id}','AdminController@delete_image')->middleware('admin');
+Route::get('/edit-image/{image_id}','AdminController@edit_image')->middleware('admin');
+Route::post('/update-image/{image_id}','AdminController@update_image');
+
+
+
 
 
 //history
