@@ -429,4 +429,18 @@ class AdminController extends Controller
         }
     }
 
+    public function delete_member($member_id){
+
+        DB::table('tbl_member')
+        ->where('member_id',$member_id)
+        ->delete();
+
+        Alert::success('Successful', 'Member deleted successfully');
+        return Redirect::to('/all-member');
+
+
+   }
+
+
+
 }

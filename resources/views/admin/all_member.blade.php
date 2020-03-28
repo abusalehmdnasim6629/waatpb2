@@ -1,6 +1,9 @@
 @extends('admin.dashboard')
 @section('admin_content')
 
+@include('sweetalert::alert')
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
            <ul class="breadcrumb">
 				<li>
 					<i class="icon-home"></i>
@@ -54,10 +57,10 @@
 								
 
 									<a class="btn btn-info" href="{{URL::to('/edit-member/'.$ct->member_id)}}">
-										<i class="halflings-icon white edit"></i>  
+										<i class="fa fa-edit white edit"></i>  
 									</a>
 									<a class="btn btn-danger" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
-										<i class="halflings-icon white trash"></i> 
+										<i class="fa fa-trash white trash"></i> 
 									</a>
 								</td>
 							</tr>

@@ -24,6 +24,9 @@ Route::post('/save-member', 'MemberController@save_member');
 Route::get('/admin-login', 'AdminController@adminLoginPage');
 Route::post('/admin-login', 'AdminController@adminLogin')->name('admin.login');
 Route::get('/admin', 'AdminController@admin')->name('admin.home')->middleware('admin');
+
+//member
+Route::get('/delete-member/{member_id}', 'AdminController@delete_member')->middleware('admin');
 Route::get('/all-member', 'AdminController@all_member')->middleware('admin');
 
 //job
