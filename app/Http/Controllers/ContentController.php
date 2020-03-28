@@ -156,4 +156,31 @@ class ContentController extends Controller
     Alert::success('success', 'Your query has been send!');
     return redirect()->back();
   }
+
+  public function join_event()
+  {
+
+    $login_check =  Session::get('lcheck');
+    $e_id =  Session::get('e_id');
+
+
+    if ($login_check != null) {
+
+      $join = array();
+      $join['member_id'] = $login_check;
+      $join['event_id'] = $e_id;
+
+      $res =  DB::table('tbl_join_event')
+        ->insert($join);
+
+      if ($res) {
+        Alert::success('success', 'Join successfully');
+        return Redirect::to('/');
+      }
+    } else {
+
+      Alert::warning('Fail', 'You have to login first');
+      return Redirect::to('/');
+    }
+  }
 }
