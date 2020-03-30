@@ -4,7 +4,7 @@
 <head>	
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title> pack -  One Page Business And Agency template </title>
+	<title>WAATPB</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -169,8 +169,8 @@
         <h5 style="margin-left:30%;padding:20px;">Reset Password</h5>
         <form action="{{url('/reset-password')}}" method="post" enctype="multipart/form-data" style="margin-left:30%;padding:20px;">
 		{{ csrf_field() }}
-        <input type="password" name="pass" placeholder="Enter new password" style="text-align:center;"> <br>
-        <input type="password" name="re-pass" placeholder="Confirm password" style="text-align:center;"> <br>
+        <input type="password" name="pass" placeholder="Enter new password" style="text-align:center;"> <br> <br>
+        <input type="password" name="re-pass" placeholder="Confirm password" style="text-align:center;"> <br> <br>
         
         <input type="submit" value="Reset">
         </form>

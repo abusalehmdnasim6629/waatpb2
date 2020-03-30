@@ -4,7 +4,7 @@
 <head>	
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title> website -  One Page Business And Agency template </title>
+	<title>WAATPB</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -212,6 +212,7 @@
                         <div class="form-group">
                             <label class="control-label" for="email">Upload image</label>
                             <input type="file"  name="image" required="">
+							<span>[Image should be 200x200]</span>
                             
                         </div>
                     </div>

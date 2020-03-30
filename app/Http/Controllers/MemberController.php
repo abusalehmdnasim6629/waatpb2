@@ -255,6 +255,10 @@ class MemberController extends Controller
             Session::put('cd', $code);
             Mail::to($email)->send(new SendMail($rsub, $rmsg));
             return Redirect::to('/code');
+        }else{
+            Alert::warning('Fail', 'Email is not registered');
+            return Redirect::to('/forgot-password');
+
         }
     }
     public function n_pass()
@@ -268,6 +272,9 @@ class MemberController extends Controller
         if ($code == $request->code) {
 
             return Redirect::to('/new-password');
+        }else{
+            Alert::warning('Fail', 'Code is not matched');
+            return Redirect::to('/code');
         }
     }
     public function reset_password(Request $request)
