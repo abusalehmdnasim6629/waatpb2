@@ -4,7 +4,7 @@
 <head>	
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title> pack -  One Page Business And Agency template </title>
+	<title>WAATPB</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -165,12 +165,21 @@
 			 Session::put('code',$code);
 	 
 	 ?>
+	 @if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+	 @endif
       <div>
         <h5 style="margin-left:30%;padding:20px;">Reset Password</h5>
         <form action="{{url('/reset-password')}}" method="post" enctype="multipart/form-data" style="margin-left:30%;padding:20px;">
 		{{ csrf_field() }}
-        <input type="password" name="pass" placeholder="Enter new password" style="text-align:center;"> <br>
-        <input type="password" name="re-pass" placeholder="Confirm password" style="text-align:center;"> <br>
+        <input type="password" name="pass" placeholder="Enter new password" style="text-align:center;" required=""> 
+        <span>[Password must in 6 character]</span><br> <br>
         
         <input type="submit" value="Reset">
         </form>
@@ -323,6 +332,7 @@
 					</div>
 
 					<input class="theme-btn" type="submit" value="login">
+					<a href="{{URL::to('/forgot-password')}}">Forgot password?</a>
 					<a href="#home" class="popup-close"><i class="ti-close"></i></a>
 					</fieldset>
 				    

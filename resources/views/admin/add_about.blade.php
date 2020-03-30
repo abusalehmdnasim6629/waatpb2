@@ -31,6 +31,15 @@
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add About</h2>
 						
 					</div>
+					@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
 					<div class="box-content">
 						<form class="form-horizontal" action="{{url('/save-about')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -53,6 +62,7 @@
 							  <label class="control-label" for="fileInput">About image</label>
 							  <div class="controls">
 								<input class="input-file uniform_on" name="a_image" id="fileInput" type="file">
+								<span>[ Image should be  800x530 ]</span>
 							  </div>
                             </div>  
                             

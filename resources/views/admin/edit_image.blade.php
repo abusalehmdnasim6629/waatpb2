@@ -31,6 +31,15 @@
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Image</h2>
 						
 					</div>
+					@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
 					<div class="box-content">
 						<form class="form-horizontal" action="{{url('/update-image',$result->image_id)}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -48,6 +57,7 @@
 							  <label class="control-label" for="fileInput">Image</label>
 							  <div class="controls">
 								<input class="input-file uniform_on" name="image" id="fileInput" value="{{$result->image}}" type="file" required="">
+								<span>[ Image should be 200x200 ]</span>
 							  </div>
                             </div>  
                             

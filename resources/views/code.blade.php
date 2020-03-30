@@ -4,7 +4,7 @@
 <head>	
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title> pack -  One Page Business And Agency template </title>
+	<title>WAATPB</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -40,7 +40,8 @@
 </head>
 
 <body>		
-
+@include('sweetalert::alert')
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 	<!-- Start PreLoader
     ============================================= -->
 	<div class="se-pre-con"></div>
@@ -324,6 +325,7 @@
 					</div>
 
 					<input class="theme-btn" type="submit" value="login">
+					<a href="{{URL::to('/forgot-password')}}">Forgot password?</a>
 					<a href="#home" class="popup-close"><i class="ti-close"></i></a>
 					</fieldset>
 				    

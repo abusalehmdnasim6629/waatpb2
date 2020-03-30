@@ -4,7 +4,7 @@
 <head>	
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title> website -  One Page Business And Agency template </title>
+	<title>WAATPB</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -108,7 +108,15 @@
     <!--  End breadcrumb -->
 	
 
-
+	@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+	@endif
 	<div class="container" style="margin-top: 70px;margin-bottom: 70px;">
     <form action="{{url('/save-member')}}" method="post" enctype="multipart/form-data">
     {{csrf_field()}}
@@ -190,20 +198,21 @@
                         <div class="form-group">
                             <label class="control-label" for="email">Password</label>
                             <input type="password" class="form-control txt" name="pass" id="txtPassword" required="">
-                            <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password" ></span>
+                            <span>[Password must in 6 character]</span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group">
                             <label class="control-label" for="email">Retype Password</label>
                             <input type="password" class="form-control txt" name="c_pass" id="txtRetypePassword" required="">
-                            <span toggle="#txtRetypePassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            
                         </div>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group">
                             <label class="control-label" for="email">Upload image</label>
                             <input type="file"  name="image" required="">
+							<span>[Image should be 200x200]</span>
                             
                         </div>
                     </div>
@@ -330,6 +339,7 @@
 					</div>
 
 					<input class="theme-btn" type="submit" value="login">
+					<a href="{{URL::to('/forgot-password')}}">Forgot password?</a>
 					<a href="#home" class="popup-close"><i class="ti-close"></i></a>
 					</fieldset>
 				    

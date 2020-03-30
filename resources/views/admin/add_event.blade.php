@@ -31,6 +31,15 @@
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Event</h2>
 						
 					</div>
+					@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				    @endif
 					<div class="box-content">
 						<form class="form-horizontal" action="{{url('/save-event')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -47,7 +56,8 @@
                             <div class="control-group">
 							  <label class="control-label" for="fileInput">Event image</label>
 							  <div class="controls">
-								<input class="input-file uniform_on" name="e_image" id="fileInput" type="file">
+								<input class="input-file uniform_on" name="e_image" id="fileInput" type="file" required="">
+								<span>[ Image should be min 597x877 and max 600x880 ]</span>
 							  </div>
                             </div>  
                             

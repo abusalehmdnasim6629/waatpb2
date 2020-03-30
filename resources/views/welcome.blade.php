@@ -55,6 +55,9 @@
 					class="navbar navbar-expand-lg bsnav bsnav-sticky bsnav-transparent bsnav-sticky-slide bsnav-scrollspy">
 					<div class="container">
 						<a class="navbar-brand" href="{{URL::to('/')}}">
+						    <!-- <p  class="logo-display"><b>WAATPB</b></p>
+						    <p class="logo-scrolled"><b>WAATPB</b></p> -->
+
 							<img src="assets/img/logo/white-logo.png" class="logo-display" alt="thumb">
 							<img src="assets/img/logo/logo.png" class="logo-scrolled" alt="thumb">
 						</a>
@@ -225,7 +228,7 @@
 							{{$history->first_paragraph}}
 						</p>
 
-						<a href="{{URL::to('/full-history')}}" class="theme-btn">Read More</a>
+						<a href="{{URL::to('/full-history')}}" class="theme-btn">Read full history</a>
 					</article>
 				</div>
 			</div>
@@ -380,21 +383,21 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<input type="text" class="form-control" name="name" id="name"
-												placeholder="Enter Name">
+												placeholder="Enter Name" required="">
 											<span class="alert alert-error"></span>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<input type="email" class="form-control" name="email" id="email"
-												placeholder="Enter Email">
+												placeholder="Enter Email" required="">
 											<span class="alert alert-error"></span>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<textarea class="form-control labelup" id="comments" name="comments"
-												rows="5" placeholder="Type Message"></textarea>
+												rows="5" placeholder="Type Message" required=""></textarea>
 										</div>
 										<button type="submit" name="submit" class="theme-btn">
 											contact
@@ -427,10 +430,10 @@
 					{{ csrf_field()}}
 					<fieldset>
 						<div class="input">
-							<input type="email" placeholder="Email" name="email" class="pop-input">
+							<input type="email" placeholder="Email" name="email" class="pop-input" required="">
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Password" name="password" class="pop-input">
+							<input type="password" placeholder="Password" name="password" class="pop-input" required="">
 						</div>
 
 						<input class="theme-btn" type="submit" value="login">

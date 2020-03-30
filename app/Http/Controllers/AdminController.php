@@ -223,7 +223,18 @@ class AdminController extends Controller
 
     public function save_event(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'e_image' => 'required|image|mimes:jpeg,bmp,png|max:20000|dimensions:min_width=597,min_height=877|dimensions:max_width=600,max_height=880',
+           
+        ]);
 
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
         $event = array();
         $event['event_title'] = $request->e_title;
@@ -322,6 +333,19 @@ class AdminController extends Controller
 
     public function update_event(Request $request, $event_id)
     {
+
+        $validator = Validator::make($request->all(), [
+            'e_image' => 'required|image|mimes:jpeg,bmp,png|max:20000|dimensions:min_width=597,min_height=877|dimensions:max_width=600,max_height=880',
+           
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
         $event = array();
         $event['event_title'] = $request->e_title;
         $event['event_date'] = $request->e_date;
@@ -356,7 +380,18 @@ class AdminController extends Controller
 
     public function save_image(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+           
+        ]);
 
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
         $event = array();
         $event['image_title'] = $request->i_title;
@@ -403,6 +438,18 @@ class AdminController extends Controller
 
     public function save_about(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
+           
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
 
         $about = array();
@@ -469,7 +516,18 @@ class AdminController extends Controller
 
     public function update_about(Request $request, $about_id)
     {
+        $validator = Validator::make($request->all(), [
+            'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
+           
+        ]);
 
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
         $about = array();
         $about['about_title'] = $request->a_title;
@@ -572,6 +630,18 @@ class AdminController extends Controller
 
     public function update_image(Request $request,$image_id)
     {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png|max:20000|dimensions:width=200,height=200',
+           
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
 
         $event = array();
