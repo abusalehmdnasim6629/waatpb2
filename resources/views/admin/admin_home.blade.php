@@ -74,11 +74,10 @@
 		<div class="card mb-3 widget-content bg-midnight-bloom">
 			<div class="widget-content-wrapper text-white">
 				<div class="widget-content-left">
-					<div class="widget-heading">Total Orders</div>
-					<div class="widget-subheading">Last year expenses</div>
+					<div class="widget-heading">Total Members</div>
 				</div>
 				<div class="widget-content-right">
-					<div class="widget-numbers text-white"><span>1896</span></div>
+					<div class="widget-numbers text-white"><span>{{DB::table('tbl_member')->count()}}</span></div>
 				</div>
 			</div>
 		</div>
@@ -87,11 +86,10 @@
 		<div class="card mb-3 widget-content bg-arielle-smile">
 			<div class="widget-content-wrapper text-white">
 				<div class="widget-content-left">
-					<div class="widget-heading">Clients</div>
-					<div class="widget-subheading">Total Clients Profit</div>
+					<div class="widget-heading">Total Jobs</div>
 				</div>
 				<div class="widget-content-right">
-					<div class="widget-numbers text-white"><span>$ 568</span></div>
+					<div class="widget-numbers text-white"><span>{{DB::table('tbl_job')->count()}}</span></div>
 				</div>
 			</div>
 		</div>
@@ -100,11 +98,10 @@
 		<div class="card mb-3 widget-content bg-grow-early">
 			<div class="widget-content-wrapper text-white">
 				<div class="widget-content-left">
-					<div class="widget-heading">Followers</div>
-					<div class="widget-subheading">People Interested</div>
+					<div class="widget-heading">Total Event</div>
 				</div>
 				<div class="widget-content-right">
-					<div class="widget-numbers text-white"><span>46%</span></div>
+					<div class="widget-numbers text-white"><span>{{DB::table('tbl_event')->count()}}</span></div>
 				</div>
 			</div>
 		</div>
@@ -113,11 +110,10 @@
 		<div class="card mb-3 widget-content bg-premium-dark">
 			<div class="widget-content-wrapper text-white">
 				<div class="widget-content-left">
-					<div class="widget-heading">Products Sold</div>
-					<div class="widget-subheading">Revenue streams</div>
+					<div class="widget-heading">Member Approve</div>
 				</div>
 				<div class="widget-content-right">
-					<div class="widget-numbers text-warning"><span>$14M</span></div>
+					<div class="widget-numbers text-warning"><span>0</span></div>
 				</div>
 			</div>
 		</div>
