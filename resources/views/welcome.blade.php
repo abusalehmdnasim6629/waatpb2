@@ -132,7 +132,7 @@
 							</div>
 							<div class="col-xl-6">
 								<div class="hero-img">
-									<img src="assets/img/header/banner_img.webp" alt="thumb">
+									<img src="{{asset('assets/img/header/banner_img.webp')}}" alt="thumb">
 								</div>
 							</div>
 						</div>
