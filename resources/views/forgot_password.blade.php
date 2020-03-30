@@ -23,7 +23,7 @@
     <link href="{{asset('assets/css/slick.css')}}" rel="stylesheet">
 	<link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/swiper.min.css')}}" rel="stylesheet">
-    <link href="{{asset('style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
     
 	
