@@ -23,7 +23,7 @@
 	<link href="{{asset('assets/css/slick.css')}}" rel="stylesheet" />
 	<link href="{{asset('assets/css/themify-icons.css')}}" rel="stylesheet" />
 	<link href="{{asset('assets/css/swiper.min.css')}}" rel="stylesheet" />
-	<link href="{{asset('style.css')}}" rel="stylesheet">
+	<link href="{{asset('assets/style.css')}}" rel="stylesheet">
 	<link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet" />
 	<!-- ========== End Stylesheet ========== -->
 
@@ -129,7 +129,7 @@
 							</div>
 							<div class="col-xl-6">
 								<div class="hero-img">
-									<img src="assets/img/header/banner_img.webp" alt="thumb">
+									<img src="{{asset('assets/img/header/banner_img.webp')}}" alt="thumb">
 								</div>
 							</div>
 						</div>
