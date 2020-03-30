@@ -77,7 +77,7 @@ class MemberController extends Controller
                     $image_name = Str::random(20);
                     $ext = strtolower($image->getClientOriginalExtension());
                     $image_full_name = $image_name . '.' . $ext;
-                    $upload_path = 'image/';
+                    $upload_path = public_path() . 'image/';
                     $image_url = $upload_path . $image_full_name;
                     $success = $image->move($upload_path, $image_full_name);
 
