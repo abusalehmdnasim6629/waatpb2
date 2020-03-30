@@ -228,7 +228,7 @@
 							{{$history->first_paragraph}}
 						</p>
 
-						<a href="{{URL::to('/full-history')}}" class="theme-btn">Read More</a>
+						<a href="{{URL::to('/full-history')}}" class="theme-btn">Read full history</a>
 					</article>
 				</div>
 			</div>
