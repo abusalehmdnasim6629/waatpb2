@@ -31,6 +31,15 @@
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Image</h2>
 						
 					</div>
+					@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				    @endif
 					<div class="box-content">
 						<form class="form-horizontal" action="{{url('/save-image')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}

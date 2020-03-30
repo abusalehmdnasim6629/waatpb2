@@ -108,7 +108,15 @@
     <!--  End breadcrumb -->
 	
 
-
+	@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+	@endif
 	<div class="container" style="margin-top: 70px;margin-bottom: 70px;">
     <form action="{{url('/save-member')}}" method="post" enctype="multipart/form-data">
     {{csrf_field()}}

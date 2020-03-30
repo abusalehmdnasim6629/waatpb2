@@ -41,7 +41,7 @@
 					<tr>
 						<td>{{ $ct->image_id}}</td>
 						<td class="center">{{ $ct->image_title}}</td>
-						<td><img src="{{URL::to($ct->image)}}" alt="product image" style="height:70px; width:70px">
+						<td><img src="{{URL::to($ct->image)}}" alt="image" style="height:70px; width:70px">
 						</td>
 
 

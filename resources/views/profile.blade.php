@@ -170,6 +170,15 @@
 		
     
     ?>
+	@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+	@endif
     <div class="container" style="padding:10px;">
     <div class="row m-y-2" >
         <div class="col-lg-8 push-lg-4">
@@ -331,12 +340,7 @@
                                 <input class="form-control" type="text" name="nid" value="{{$pro->nid}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" name="pass" value="{{ $pro->password}}">
-                            </div>
-                        </div>
+                        
 
 						<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Image</label>
@@ -357,7 +361,7 @@
             </div>
         </div>
         <div class="col-lg-4 pull-lg-8 text-xs-center" style="margin-top:3%;">
-            <img src="{{$pro->image}}" style="width:250px;height:200px;"class="m-x-auto img-fluid img-circle" alt="avatar">
+            <img src="{{$pro->image}}" style="width:200px;height:200px;"class="m-x-auto img-fluid img-circle" alt="avatar">
         </div>
     </div>
 

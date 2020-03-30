@@ -55,6 +55,9 @@
 					class="navbar navbar-expand-lg bsnav bsnav-sticky bsnav-transparent bsnav-sticky-slide bsnav-scrollspy">
 					<div class="container">
 						<a class="navbar-brand" href="{{URL::to('/')}}">
+						    <!-- <p  class="logo-display"><b>WAATPB</b></p>
+						    <p class="logo-scrolled"><b>WAATPB</b></p> -->
+
 							<img src="assets/img/logo/white-logo.png" class="logo-display" alt="thumb">
 							<img src="assets/img/logo/logo.png" class="logo-scrolled" alt="thumb">
 						</a>

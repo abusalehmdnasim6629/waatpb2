@@ -34,7 +34,18 @@ class MemberController extends Controller
 
     public function save_member(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+           
+        ]);
 
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
         $data = array();
         $data['member_name'] = $request->name;
         $data['email_address'] = $request->email;
@@ -153,7 +164,18 @@ class MemberController extends Controller
 
     public function update_profile(Request $request, $member_id)
     {
-
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+           
+        ]);
+      
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
         $data = array();
         $data['member_name'] = $request->name;
         $data['email_address'] = $request->email;
