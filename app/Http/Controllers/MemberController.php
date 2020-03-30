@@ -36,6 +36,8 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+            'password' => 'required|min:6',
+
            
         ]);
 
@@ -235,7 +237,7 @@ class MemberController extends Controller
 
     public function code()
     {
-
+        $this->authcheck();
         return view('code');
     }
     public function send_code(Request $request)
@@ -254,6 +256,7 @@ class MemberController extends Controller
             $rmsg = "Yor code is : " . $code;
             Session::put('cd', $code);
             Mail::to($email)->send(new SendMail($rsub, $rmsg));
+            Alert::success('Send code', 'Code has been sent to your email');
             return Redirect::to('/code');
         }else{
             Alert::warning('Fail', 'Email is not registered');
@@ -263,6 +266,7 @@ class MemberController extends Controller
     }
     public function n_pass()
     {
+        $this->authcheck();
         return view('new_password');
     }
     public function submit_code(Request $request)
@@ -279,22 +283,45 @@ class MemberController extends Controller
     }
     public function reset_password(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'pass' => 'required|min:6',
 
+           
+        ]);
 
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
         $email = Session::get('eml');
-        $pass = $request->pass;
-        $re_pass = $request->re_pass;
-
-
-
-
         $data = array();
-        $data['password'] = $request->pass;
-
-        DB::table('tbl_member')
+        $data['password'] = bcrypt($request->pass);
+      
+        $success = DB::table('tbl_member')
             ->where('email_address', $email)
             ->update($data);
+
+        if($success){    
         Alert::success('success', 'Password reset successfully');
         return Redirect::to('/');
+        }else{
+            Alert::warning('Fail', 'Password reset failed');
+            return Redirect::to('/');
+        }
     }
+
+
+public function authcheck(){
+    $code =Session::get('cd');
+    if($code){
+      return;
+    }else{
+        return Redirect::to('/')->send();
+    }
+
+   }
+
 }

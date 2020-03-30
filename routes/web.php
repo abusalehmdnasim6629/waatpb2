@@ -109,7 +109,7 @@ Route::post('/update-image/{image_id}','AdminController@update_image');
 
 
 //history
-Route::get('/full-history', 'ContentController@full_history')->middleware('admin');
+Route::get('/full-history', 'ContentController@full_history');
 
 //profile
 Route::get('/profile', 'ContentController@profile');

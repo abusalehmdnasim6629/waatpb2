@@ -198,14 +198,14 @@
                         <div class="form-group">
                             <label class="control-label" for="email">Password</label>
                             <input type="password" class="form-control txt" name="pass" id="txtPassword" required="">
-                            <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password" ></span>
+                            <span>[Password must in 6 character]</span>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group">
                             <label class="control-label" for="email">Retype Password</label>
                             <input type="password" class="form-control txt" name="c_pass" id="txtRetypePassword" required="">
-                            <span toggle="#txtRetypePassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            
                         </div>
 					</div>
 					<div class="col-sm-12 col-md-4 col-lg-4">
@@ -339,6 +339,7 @@
 					</div>
 
 					<input class="theme-btn" type="submit" value="login">
+					<a href="{{URL::to('/forgot-password')}}">Forgot password?</a>
 					<a href="#home" class="popup-close"><i class="ti-close"></i></a>
 					</fieldset>
 				    

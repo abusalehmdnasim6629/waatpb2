@@ -514,6 +514,7 @@
 					</div>
 
 					<input class="theme-btn" type="submit" value="login">
+					<a href="{{URL::to('/forgot-password')}}">Forgot password?</a>
 					<a href="#home" class="popup-close"><i class="ti-close"></i></a>
 					</fieldset>
 				    
