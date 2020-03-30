@@ -59,6 +59,7 @@
 						<label class="control-label" for="fileInput">Event image</label>
 						<div class="controls">
 							<input class="input-file uniform_on" name="e_image" id="fileInput" type="file" required="">
+							<span>[ Image should be min 597x877 and max 600x880 ]</span>
 						</div>
 					</div>
 

@@ -57,6 +57,7 @@
 							  <label class="control-label" for="fileInput">Image</label>
 							  <div class="controls">
 								<input class="input-file uniform_on" name="image" id="fileInput" value="{{$result->image}}" type="file" required="">
+								<span>[ Image should be 200x200 ]</span>
 							  </div>
                             </div>  
                             

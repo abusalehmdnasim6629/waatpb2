@@ -438,6 +438,18 @@ class AdminController extends Controller
 
     public function save_about(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
+           
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
 
         $about = array();
@@ -504,7 +516,18 @@ class AdminController extends Controller
 
     public function update_about(Request $request, $about_id)
     {
+        $validator = Validator::make($request->all(), [
+            'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
+           
+        ]);
 
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                        ->back()
+                        ->withErrors($validator);
+                        
+        }
 
         $about = array();
         $about['about_title'] = $request->a_title;
