@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2020 at 02:21 PM
+-- Generation Time: Mar 30, 2020 at 09:20 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -47,8 +47,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2020_03_19_102016_tbl_event', 6),
 (7, '2020_03_22_062947_tbl_gallary', 7),
 (8, '2020_03_22_073640_tbl_join_event', 8),
-(9, '2014_10_12_000000_create_users_table', 9),
-(10, '2020_03_26_111001_add_role_column_in_users', 9);
+(9, '2020_03_26_100552_tbl_member_skill', 9),
+(10, '2014_10_12_000000_create_users_table', 10),
+(11, '2020_03_26_111001_add_role_column_in_users', 10),
+(12, '2020_03_27_120008_tbl_service', 11);
 
 -- --------------------------------------------------------
 
@@ -60,6 +62,7 @@ CREATE TABLE `tbl_about` (
   `about_id` int(10) UNSIGNED NOT NULL,
   `about_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `about_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -68,8 +71,8 @@ CREATE TABLE `tbl_about` (
 -- Dumping data for table `tbl_about`
 --
 
-INSERT INTO `tbl_about` (`about_id`, `about_title`, `about_description`, `created_at`, `updated_at`) VALUES
-(1, 'WELCOME TO WAATPB', 'Our mission is to bring All those Professionals from Textile & Apparel Industries under one umbrella who feels the passion for the goodwill of the sector & also would like to improve the Socio-financial status of its members.\r\n\r\nOur vision is to be the best group of the country enriched with exemplary human beings for whom every countryman feels proud.', NULL, NULL);
+INSERT INTO `tbl_about` (`about_id`, `about_title`, `about_description`, `image`, `created_at`, `updated_at`) VALUES
+(3, 'WELCOME TO WAATPB', 'Our mission is to bring All those Professionals from Textile & Apparel Industries under one umbrella who feels the passion for the goodwill of the sector & also would like to improve the Socio-financial status of its members. Our vision is to be the best group of the country enriched with exemplary human beings for whom every countryman feels proud. Our vision is to be the best group of the country enriched with exemplary human beings for whom every countryman feels proud.', 'image/JnILqLeraW.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91,9 +94,9 @@ CREATE TABLE `tbl_event` (
 --
 
 INSERT INTO `tbl_event` (`event_id`, `event_title`, `event_image`, `event_date`, `created_at`, `updated_at`) VALUES
-(1, 'Badminton', 'image/bmb6TXr7gA8Ed2p7FcDz.jpg', '2020-04-21', NULL, NULL),
-(3, 'Badminton', 'image/9R09rnr1xE3OdWehB4Xd.jpg', '2020-03-23', NULL, NULL),
-(4, 'Badminton 3', 'image/aAyn1w39TQdMLpFW9FKa.jpg', '2021-12-25', NULL, NULL);
+(1, 'Badminton', 'image/E2X4IEa8MtsS6bN1qu8m.jpg', '2020-03-31', NULL, NULL),
+(4, 'Badminton 3', 'image/S0JBljiDkDnr1fmUBxpI.jpg', '2020-04-03', NULL, NULL),
+(5, 'Badminton 3', 'image/k6fuAivbaebP56IcJX0G.jpg', '2020-04-05', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,7 +117,7 @@ CREATE TABLE `tbl_gallary` (
 --
 
 INSERT INTO `tbl_gallary` (`image_id`, `image_title`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'image_1', 'image/x9s4xO1FhcvwZTLjgjig.jpg', NULL, NULL),
+(1, 'image_1', 'image/M8Sh02ZIDObzdvvx8sfs.jpg', NULL, NULL),
 (2, 'image_2', 'image/mKZXLiyW6a3ZHepEr4lb.jpg', NULL, NULL),
 (3, 'image_3', 'image/VLztQbbv1CmExwcEbFaT.jpg', NULL, NULL),
 (4, 'image_4', 'image/5Sfj2BqHnglVBaBlGodc.jpg', NULL, NULL),
@@ -124,8 +127,7 @@ INSERT INTO `tbl_gallary` (`image_id`, `image_title`, `image`, `created_at`, `up
 (8, 'image_9', 'image/SMKcb4MrlJ5Rff2biH0u.jpg', NULL, NULL),
 (9, 'image_10', 'image/XARBCtp35PPGk8dYPPY5.jpg', NULL, NULL),
 (10, 'image_11', 'image/OgGxtwMw6M42LZhuM9C1.jpg', NULL, NULL),
-(11, 'image_12', 'image/CawKEiKg64280BN01hU3.jpg', NULL, NULL),
-(12, 'image_14', 'image/I7mDHSgeBMffuhFGtX4q.jpg', NULL, NULL);
+(11, 'image_13', 'image/tvEN0nPdoyCAyyWUBj42.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -186,7 +188,7 @@ CREATE TABLE `tbl_job` (
   `joining_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `package` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `deadline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `additional_notes` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `additional_notes` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -196,7 +198,7 @@ CREATE TABLE `tbl_job` (
 --
 
 INSERT INTO `tbl_job` (`job_id`, `employee_name`, `department`, `position`, `vacancies`, `job_location`, `joining_date`, `package`, `deadline`, `additional_notes`, `created_at`, `updated_at`) VALUES
-(1, 'Not Specified', 'WEB', 'intern', '2', 'Baridhara', '05/04/2020', 'Negotiable', '29/03/2020', 'Considering the Position, the candidate must have knowledge on production & factory activities along with Marketing & Merchandising', NULL, NULL);
+(1, 'Not Specified', 'WEB', 'intern', '3', 'Baridhara', '2020-04-02', 'Negotiable', '2020-03-27', 'Considering the Position, the candidate must have knowledge on production & factory activities along with Marketing & Merchandising', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -217,10 +219,7 @@ CREATE TABLE `tbl_join_event` (
 --
 
 INSERT INTO `tbl_join_event` (`join_id`, `member_id`, `event_id`, `created_at`, `updated_at`) VALUES
-(1, 6, 4, NULL, NULL),
-(2, 6, 4, NULL, NULL),
-(3, 6, 4, NULL, NULL),
-(4, 14, 4, NULL, NULL);
+(1, 25, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -241,6 +240,8 @@ CREATE TABLE `tbl_member` (
   `present_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `member_skill` text COLLATE utf8mb4_unicode_ci,
+  `member_hobby` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -249,9 +250,48 @@ CREATE TABLE `tbl_member` (
 -- Dumping data for table `tbl_member`
 --
 
-INSERT INTO `tbl_member` (`member_id`, `member_name`, `email_address`, `contact_number`, `nid`, `present_organization`, `blood_group`, `department`, `designation`, `present_address`, `password`, `image`, `created_at`, `updated_at`) VALUES
-(14, 'Sanjidul Islam', 'ahsanhasibdiu@gmail.com', '01721503669', '19965718738000445', 'Sanyit', 'A+', 'Web Development', 'web developer', 'Shaymoly ,Dhaka', '12345', 'image/FpZ5ynucRXxjtcH4odib.jpg', NULL, NULL),
-(22, 'A S M Nasim', 'asmnasim@hotmail.com', '01959031119', '19965718738000445', 'nasimIt', 'A+', 'Web Development', 'web developer', 'Shaymoly ,Dhaka', '123456', 'image/ridI64g1vKVlQjhIl2lm.jpg', NULL, NULL);
+INSERT INTO `tbl_member` (`member_id`, `member_name`, `email_address`, `contact_number`, `nid`, `present_organization`, `blood_group`, `department`, `designation`, `present_address`, `password`, `image`, `member_skill`, `member_hobby`, `created_at`, `updated_at`) VALUES
+(25, 'A S M Nasim', 'asmnasim@hotmail.com', '01959031119', '19965718738000445', 'nasimIt', 'A+', 'Web Development', 'web developer', 'Shaymoly ,Dhaka', '$2y$10$HfQC8q2rw1w8XHu1IJosi.VzsJc.k2h9Kx9TbBpIlVyf0gQ71VN..', 'image/GCepujCk1u7tAb9ywWov.jpg', 'HTML, CSS, PHP, Bootstrap, jQuery', 'Gaming, browsing, travelling', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_member_skill`
+--
+
+CREATE TABLE `tbl_member_skill` (
+  `member_skill_id` int(10) UNSIGNED NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `member_skill` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `member_hobby` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_service`
+--
+
+CREATE TABLE `tbl_service` (
+  `service_id` int(10) UNSIGNED NOT NULL,
+  `service_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_service`
+--
+
+INSERT INTO `tbl_service` (`service_id`, `service_title`, `created_at`, `updated_at`) VALUES
+(1, 'Welfare', NULL, NULL),
+(2, 'Training', NULL, NULL),
+(3, 'Job(Career)', NULL, NULL),
+(4, 'Research and Development', NULL, NULL),
+(5, 'Blood Donation', NULL, NULL),
+(7, 'Database', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,7 +316,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Sabbir Hossain', 'sabbir.h2668@gmail.com', NULL, '$2y$10$ZKHjhobGWoOkFGBwcdhj0utHAITlHg.xWAiyD0yM1egzULl0vSl8i', NULL, 'admin', '2020-03-26 05:21:53', '2020-03-26 05:21:53');
+(1, 'Rapples', 'asmnasim@hotmail.com', NULL, '$2y$10$2Biib2YhT5gjo9eSvrKMnODK/UyDWic6CcpLkn7zhhal1zytJ7bpm', NULL, 'admin', '2020-03-27 03:41:56', '2020-03-27 03:41:56'),
+(2, 'Admin', 'admin@rappleslimited.com', NULL, '$2y$10$VBDC3SC7qSGqQLrqOP8jaurNBFqjKr3nkuRordeTZGbM/jSTQ66wS', NULL, 'admin', '2020-03-27 10:05:08', '2020-03-27 10:05:08');
 
 --
 -- Indexes for dumped tables
@@ -337,11 +378,23 @@ ALTER TABLE `tbl_member`
   ADD PRIMARY KEY (`member_id`);
 
 --
+-- Indexes for table `tbl_member_skill`
+--
+ALTER TABLE `tbl_member_skill`
+  ADD PRIMARY KEY (`member_skill_id`);
+
+--
+-- Indexes for table `tbl_service`
+--
+ALTER TABLE `tbl_service`
+  ADD PRIMARY KEY (`service_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `tbl_users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -351,25 +404,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_about`
 --
 ALTER TABLE `tbl_about`
-  MODIFY `about_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `about_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_event`
 --
 ALTER TABLE `tbl_event`
-  MODIFY `event_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `event_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_gallary`
 --
 ALTER TABLE `tbl_gallary`
-  MODIFY `image_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `image_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_header`
@@ -393,19 +446,31 @@ ALTER TABLE `tbl_job`
 -- AUTO_INCREMENT for table `tbl_join_event`
 --
 ALTER TABLE `tbl_join_event`
-  MODIFY `join_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `join_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `member_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `member_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `tbl_member_skill`
+--
+ALTER TABLE `tbl_member_skill`
+  MODIFY `member_skill_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_service`
+--
+ALTER TABLE `tbl_service`
+  MODIFY `service_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

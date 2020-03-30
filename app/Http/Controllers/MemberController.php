@@ -36,7 +36,7 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
-            'password' => ['required|min:6'],
+            'pass' => 'required|min:6',
            
            
         ]);
@@ -44,9 +44,8 @@ class MemberController extends Controller
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
         $data = array();
         $data['member_name'] = $request->name;
@@ -60,8 +59,8 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['member_skill'] = " ";
-        $data['member_hobby'] = " ";
+        // $data['member_skill'] = "";
+        // $data['member_hobby'] = "";
 
 
         $check = DB::table('tbl_member')
@@ -72,7 +71,7 @@ class MemberController extends Controller
 
             if ($request->pass == $request->c_pass) {
 
-          
+
                 if ($request->hasfile('image')) {
 
                     $image = $request->file('image');
@@ -80,7 +79,7 @@ class MemberController extends Controller
                     $image_name = Str::random(20);
                     $ext = strtolower($image->getClientOriginalExtension());
                     $image_full_name = $image_name . '.' . $ext;
-                    $upload_path = 'image/';
+                    $upload_path = public_path() . '/image/';
                     $image_url = $upload_path . $image_full_name;
                     $success = $image->move($upload_path, $image_full_name);
 
@@ -168,15 +167,14 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
-           
+
         ]);
-      
+
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
         $data = array();
         $data['member_name'] = $request->name;
@@ -258,7 +256,7 @@ class MemberController extends Controller
            // Mail::to($email)->send(new SendMail($rsub, $rmsg));
             Alert::success('Send code', 'Code has been sent to your email');
             return Redirect::to('/code');
-        }else{
+        } else {
             Alert::warning('Fail', 'Email is not registered');
             return Redirect::to('/forgot-password');
               
@@ -276,7 +274,7 @@ class MemberController extends Controller
         if ($code == $request->code) {
 
             return Redirect::to('/new-password');
-        }else{
+        } else {
             Alert::warning('Fail', 'Code is not matched');
             return Redirect::to('/code');
         }
@@ -286,42 +284,40 @@ class MemberController extends Controller
         $validator = Validator::make($request->all(), [
             'pass' => 'required|min:6',
 
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
         $email = Session::get('eml');
         $data = array();
         $data['password'] = bcrypt($request->pass);
-      
+
         $success = DB::table('tbl_member')
             ->where('email_address', $email)
             ->update($data);
 
-        if($success){    
-        Alert::success('success', 'Password reset successfully');
-        return Redirect::to('/');
-        }else{
+        if ($success) {
+            Alert::success('success', 'Password reset successfully');
+            return Redirect::to('/');
+        } else {
             Alert::warning('Fail', 'Password reset failed');
             return Redirect::to('/');
         }
     }
 
 
-public function authcheck(){
-    $code =Session::get('cd');
-    if($code){
-      return;
-    }else{
-        return Redirect::to('/')->send();
+    public function authcheck()
+    {
+        $code = Session::get('cd');
+        if ($code) {
+            return;
+        } else {
+            return Redirect::to('/')->send();
+        }
     }
-
-   }
-
 }
