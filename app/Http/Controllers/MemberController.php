@@ -57,8 +57,8 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['member_skill'] = " ";
-        $data['member_hobby'] = " ";
+        // $data['member_skill'] = "";
+        // $data['member_hobby'] = "";
 
 
         $check = DB::table('tbl_member')
