@@ -49,9 +49,7 @@
 								<a class="btn btn-info btn-sm" href="{{URL::to('/edit-about/'.$ct->about_id)}}">
 									<i class="fa fa-edit white edit"></i>
 								</a>
-								<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-about/'.$ct->about_id)}}">
-									<i class="fa fa-trash white trash"></i>
-								</a>
+								
 							</div>
 						</td>
 					</tr>

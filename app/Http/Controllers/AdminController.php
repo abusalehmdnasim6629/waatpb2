@@ -219,21 +219,20 @@ class AdminController extends Controller
         return view('admin.add_event');
     }
 
-    
+
 
     public function save_event(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'e_image' => 'required|image|mimes:jpeg,bmp,png|max:20000|dimensions:min_width=597,min_height=877|dimensions:max_width=600,max_height=880',
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
 
         $event = array();
@@ -246,8 +245,8 @@ class AdminController extends Controller
             $image_name = Str::random(20);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
-            $upload_path = 'image/';
-            $image_url = $upload_path . $image_full_name;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -336,15 +335,14 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), [
             'e_image' => 'required|image|mimes:jpeg,bmp,png|max:20000|dimensions:min_width=597,min_height=877|dimensions:max_width=600,max_height=880',
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
         $event = array();
         $event['event_title'] = $request->e_title;
@@ -356,8 +354,8 @@ class AdminController extends Controller
             $image_name = Str::random(20);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
-            $upload_path = 'image/';
-            $image_url = $upload_path . $image_full_name;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -382,15 +380,14 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
 
         $event = array();
@@ -403,8 +400,8 @@ class AdminController extends Controller
             $image_name = Str::random(20);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
-            $upload_path = 'image/';
-            $image_url = $upload_path . $image_full_name;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -440,15 +437,14 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
 
 
@@ -462,8 +458,8 @@ class AdminController extends Controller
             $image_name = Str::random(10);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
-            $upload_path = 'image/';
-            $image_url = $upload_path . $image_full_name;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -518,15 +514,14 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
 
         $about = array();
@@ -539,8 +534,8 @@ class AdminController extends Controller
             $image_name = Str::random(10);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
-            $upload_path = 'image/';
-            $image_url = $upload_path . $image_full_name;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -557,31 +552,30 @@ class AdminController extends Controller
         }
     }
 
-    public function delete_member($member_id){
+    public function delete_member($member_id)
+    {
 
         DB::table('tbl_member')
-        ->where('member_id',$member_id)
-        ->delete();
+            ->where('member_id', $member_id)
+            ->delete();
 
         Alert::success('Successful', 'Member deleted successfully');
         return Redirect::to('/all-member');
+    }
 
 
-   }
+    public function delete_service($service_id)
+    {
 
+        DB::table('tbl_service')
+            ->where('service_id', $service_id)
+            ->delete();
 
-   public function delete_service($service_id)
-   {
+        Alert::success('Successful', 'Service deleted successfully');
+        return Redirect::to('/all-service');
+    }
 
-       DB::table('tbl_service')
-           ->where('service_id', $service_id)
-           ->delete();
-
-       Alert::success('Successful', 'Service deleted successfully');
-       return Redirect::to('/all-service');
-   }
-
-   public function edit_service($service_id)
+    public function edit_service($service_id)
     {
 
         $result =  DB::table('tbl_service')
@@ -591,33 +585,31 @@ class AdminController extends Controller
         return view('admin.edit_service')->with('result', $result);
     }
 
-    public function update_service(Request $request,$service_id){
+    public function update_service(Request $request, $service_id)
+    {
 
         $service = array();
         $service['service_title'] = $request->s_title;
 
         DB::table('tbl_service')
-        ->where('service_id',$service_id)
-        ->update($service);
+            ->where('service_id', $service_id)
+            ->update($service);
 
-       Alert::success('Successful', 'Service updated successfully');
-       return Redirect::to('/all-service');
-
-
-
+        Alert::success('Successful', 'Service updated successfully');
+        return Redirect::to('/all-service');
     }
 
     public function delete_image($image_id)
     {
- 
+
         DB::table('tbl_gallary')
             ->where('image_id', $image_id)
             ->delete();
- 
+
         Alert::success('Successful', 'Image deleted successfully');
         return Redirect::to('/all-image');
     }
-    
+
     public function edit_image($image_id)
     {
 
@@ -628,19 +620,18 @@ class AdminController extends Controller
         return view('admin.edit_image')->with('result', $result);
     }
 
-    public function update_image(Request $request,$image_id)
+    public function update_image(Request $request, $image_id)
     {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png|max:20000|dimensions:width=200,height=200',
-           
+
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
-                        ->back()
-                        ->withErrors($validator);
-                        
+                ->back()
+                ->withErrors($validator);
         }
 
 
@@ -654,15 +645,15 @@ class AdminController extends Controller
             $image_name = Str::random(20);
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
-            $upload_path = 'image/';
-            $image_url = $upload_path . $image_full_name;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
                 $event['image'] = $image_url;
                 DB::table('tbl_gallary')
-                ->where('image_id',$image_id)
-                ->update($event);
+                    ->where('image_id', $image_id)
+                    ->update($event);
                 Alert::success('Successful', 'Image updated successfully');
                 return Redirect::to('/all-image');
             } else {
