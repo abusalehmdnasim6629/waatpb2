@@ -37,8 +37,8 @@ class MemberController extends Controller
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
             'pass' => 'required|min:6',
-           
-           
+
+
         ]);
 
         if ($validator->fails()) {
@@ -80,7 +80,7 @@ class MemberController extends Controller
                     $ext = strtolower($image->getClientOriginalExtension());
                     $image_full_name = $image_name . '.' . $ext;
                     $upload_path = public_path() . '/image/';
-                    $image_url = $upload_path . $image_full_name;
+                    $image_url = 'image/' . $image_full_name;
                     $success = $image->move($upload_path, $image_full_name);
 
                     if ($success) {
@@ -203,7 +203,7 @@ class MemberController extends Controller
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name . '.' . $ext;
             $upload_path = public_path() . '/image/';
-            $image_url = $upload_path . $image_full_name;
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
             if ($success) {
@@ -253,13 +253,12 @@ class MemberController extends Controller
             $code = rand(10000, 99999);
             $rmsg = "Yor code is : " . $code;
             Session::put('cd', $code);
-           // Mail::to($email)->send(new SendMail($rsub, $rmsg));
+            // Mail::to($email)->send(new SendMail($rsub, $rmsg));
             Alert::success('Send code', 'Code has been sent to your email');
             return Redirect::to('/code');
         } else {
             Alert::warning('Fail', 'Email is not registered');
             return Redirect::to('/forgot-password');
-              
         }
     }
     public function n_pass()
