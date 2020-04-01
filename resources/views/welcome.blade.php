@@ -119,9 +119,13 @@
 				<div class="hero-single overlay-single overlay-shape">
 					<div class="container">
 						<div class="row">
+						   <div  class="col-xl-13 col-sm-12">
+							   <div class="hero-content">
+							   <h2 style="color:white;">{{$header->header_title ?? ''}}</h2>
+							   </div> 
+						   </div>
 							<div class="col-xl-6">
 								<div class="hero-content">
-									<h2>{{$header->header_title ?? ''}}</h2>
 									<p class="mb-20">
 										{{$header->header_description ?? ''}}
 									</p>
@@ -153,7 +157,7 @@
 					<div class="about-right">
 
 						<div class="about-right-content">
-							<h2>{{$about->about_title}}</h2>
+							<!-- <h2>{{$about->about_title}}</h2> -->
 							<p>
 								{{$about->about_description}}
 							</p>

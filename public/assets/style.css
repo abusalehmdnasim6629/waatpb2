@@ -38,7 +38,7 @@
 	--heading-color-sec: #2b2a2b;
 	--bg-color: #F5F5F5;
 	--body-color: #616161;
-	--theme-color: #38CEFE;
+	--theme-color: #333431;
 	--theme-color-sec: #6592fe;
 	--white-color: #fff;
 	--black-color: #000;
@@ -258,7 +258,7 @@ label {
 	-webkit-transition: .5s;
 	transition: .5s;
 	display: inline-block;
-	background: var(--heading-color);
+	background:#38b9f8 ;
 	border-radius: 3rem;
 	box-shadow: 0px 10px 19px 0px rgba(0,0,0,.5) !important;
 }
@@ -416,7 +416,7 @@ label {
 .navbar-nav .nav-item:active>.nav-link,
 .navbar-nav .nav-item:focus>.nav-link,
 .navbar-nav .nav-item:hover>.nav-link {
-    color: var(--heading-color);
+    color:  #f6f5f5;
 }
 
 .navbar.sticked.in .navbar-nav .nav-item.active>.nav-link,
@@ -424,11 +424,11 @@ label {
 .navbar.sticked.in .navbar-nav .nav-item:active>.nav-link,
 .navbar.sticked.in .navbar-nav .nav-item:focus>.nav-link,
 .navbar.sticked.in .navbar-nav .nav-item:hover>.nav-link {
-    color: var(--theme-color);
+    color: #f6f5f5;
 }
 
 .navbar.sticked.in .navbar-nav .nav-item:hover>.nav-link {
-	color: var(--theme-color);
+	color: #38b9f8;
 }
 
 .nav-item.dropdown ul li:hover > a {
@@ -624,15 +624,15 @@ label {
 }
 
 .hero-img img {
-    height: 400px;
+    height: 300px;
 }
 
 .hero-content h2 {
     color: var(--white-color);
-    font-size: 3.6rem;
+    font-size: 3.0rem;
     line-height: 1.2em;
-    font-weight: 700;
-    margin-bottom: 2rem;
+    font-weight: 600;
+    margin-bottom: 4rem;
     text-transform: uppercase;
 }
 
@@ -641,7 +641,8 @@ label {
 }
 
 .hero-content p {
-	color: var(--white-color);
+    color: var(--white-color);
+    font-size: 2.4rem;
 	margin-bottom: 3rem;
 }
 
