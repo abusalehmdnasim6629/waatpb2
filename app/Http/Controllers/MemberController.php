@@ -32,6 +32,17 @@ class MemberController extends Controller
         return view('member2');
     }
 
+    public function passwordEcrypt()
+    {
+        $mebers = DB::table('tbl_member')->get();
+
+        foreach ($mebers as $member) {
+            $newpass = Hash::make($member->password);
+
+            DB::table('tbl_member')->where('member_id', $member->member_id)->update(['password' => $newpass]);
+        }
+    }
+
     public function save_member(Request $request)
     {
         $validator = Validator::make($request->all(), [
