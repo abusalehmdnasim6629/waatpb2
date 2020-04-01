@@ -13,67 +13,47 @@
 					<i class="icon-edit"></i>
 					<a href="#">Add Image</a>
 				</li>
-			</ul>
+</ul>
 			
-			<div class="row-fluid sortable">
-                
-                <p class="alert-success">
-                   <?php
-                      $m = Session::get('messege');
-                      echo $m;
-                      Session::put('messege',null);
-                   
-                   
-                   ?>
-                </p>
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Image</h2>
+@if ($errors->any())
+			<div class="alert alert-danger">
+						<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+						</ul>
+			</div>
+@endif
+	<div class="box span12">
+		<div class="box-content">
+		   
+			<div class="col-md-8 offset-md-2">
+				<form action="{{url('/save-image')}}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="form-group">
+						<h3>Image title</h3>
+						<input type="text" class="form-control" name="i_title"  required="">
+					</div>
+					
+					
+
+					<div class="form-group">
+						<h3>Image</h3>
+						<input type="file" class="form-control form-control-bg" name="image" required="">
+						<span>[ Image should be  200x200 ]</span>
+						
 						
 					</div>
-					@if ($errors->any())
-					<div class="alert alert-danger">
-						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-					</div>
-				    @endif
-					<div class="box-content">
-						<form class="form-horizontal" action="{{url('/save-image')}}" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-						  <fieldset>
 
-							<div class="control-group">
-							  <label class="control-label" for="date01">Image title</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge" name="i_title" required="" >
-							  </div>
-							</div>
+					<button type="submit" class="btn btn-info float-right">
+						Add image
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
 
-
-                            <div class="control-group">
-							  <label class="control-label" for="fileInput">Image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="image" id="fileInput" type="file">
-								<span>[ Image should be 200x200 ]</span>
-							  </div>
-                            </div>  
-                            
-                            
-
-    	                    <br>
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Add image</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
-					</div>
-				</div><!--/span-->
-
-			</div><!--/row-->
+</div>
 
 @endsection

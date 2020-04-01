@@ -13,46 +13,37 @@
 					<i class="icon-edit"></i>
 					<a href="#">Event</a>
 				</li>
-			</ul>
-			
-			<div class="row-fluid sortable">
-                
-                <p class="alert-success">
-                   <?php
-                      $m = Session::get('messege');
-                      echo $m;
-                      Session::put('messege',null);
-                   
-                   
-                   ?>
-                </p>
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Event</h2>
-						
+</ul>
+@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+				@endif
+	<div class="box span12">
+		<div class="box-content">
+		   
+			<div class="col-md-8 offset-md-2">
+				<form action="{{url('/update-service',$result->service_id)}}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="form-group">
+						<h3>Service title</h3>
+						<input type="text" class="form-control" name="s_title" value="{{$result->service_title}}" required="">
 					</div>
-					<div class="box-content">
-						<form class="form-horizontal" action="{{url('/update-service',$result->service_id)}}" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-						  <fieldset>
+					
+					<button type="submit" class="btn btn-info float-right">
+						Update service
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
 
-							<div class="control-group">
-							  <label class="control-label" for="date01">Sevice title</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge" name="s_title" value="{{$result->service_title}}" required="" >
-							  </div>
-							</div> 
-    	                    <br>
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Update Service</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
-					</div>
-				</div><!--/span-->
-
-			</div><!--/row-->
+</div>
+		
 
 @endsection

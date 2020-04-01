@@ -13,25 +13,10 @@
 					<i class="icon-edit"></i>
 					<a href="#">Edit about</a>
 				</li>
-			</ul>
+</ul>
 			
-			<div class="row-fluid sortable">
-                
-                <p class="alert-success">
-                   <?php
-                      $m = Session::get('messege');
-                      echo $m;
-                      Session::put('messege',null);
-                   
-                   
-                   ?>
-                </p>
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit About</h2>
-						
-					</div>
-					@if ($errors->any())
+			
+				@if ($errors->any())
 						<div class="alert alert-danger">
 							<ul>
 								@foreach ($errors->all() as $error)
@@ -39,46 +24,48 @@
 								@endforeach
 							</ul>
 						</div>
-					@endif
-					<div class="box-content">
-						<form class="form-horizontal" action="{{url('/update-about',$result->about_id)}}" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-						  <fieldset>
-
-							<div class="control-group">
-							  <label class="control-label" for="date01">About title</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge" name="a_title" value="{{$result->about_title}}" required="" >
-							  </div>
-							</div>
-                            <div class="control-group">
-                                <label class="control-label">About Description</label>
-                                <div class="controls">
-                                <textarea class="cleditor" name="a_des" required=" "  rows="3">{{$result->about_description}}</textarea>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-							  <label class="control-label" for="fileInput">About image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="a_image" id="fileInput" type="file" required=" " >
-								<span>[ Image should be  800x530 ]</span>
-							  </div>
-                            </div>  
-                            
-                          
-
-    	                    <br>
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Update about</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
+				@endif
+	<div class="box span12">
+		<div class="box-content">
+		   
+			<div class="col-md-8 offset-md-2">
+				<form action="{{url('/update-about',$result->about_id)}}" method="POST" enctype="multipart/form-data">
+					@csrf
+					
+					<div class="form-group">
+						<h3>Who we are</h3>
+						<textarea name="a_des" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_description}}
+						</textarea>
 					</div>
-				</div><!--/span-->
+					<div class="form-group">
+						<h3>Mission</h3>
+						<textarea name="a_mission" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_mission}}
+						</textarea>
+					</div>
+					<div class="form-group">
+						<h3>Vision</h3>
+						<textarea name="a_vision" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_vision}}
+						</textarea>
+					</div>
+					<div class="form-group">
+						<h3>Who can be a member</h3>
+						<textarea name="a_member" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_member}}
+						</textarea>
+					</div>
+					
+					<button type="submit" class="btn btn-info float-right">
+						Update About
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
 
-			</div><!--/row-->
-
+</div>
+			
 @endsection

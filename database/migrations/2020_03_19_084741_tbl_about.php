@@ -15,9 +15,10 @@ class TblAbout extends Migration
     {
         Schema::create('tbl_about', function (Blueprint $table) {
             $table->increments('about_id');
-            $table->string('about_title');
             $table->string('about_description');
-            $table->string('image');
+            $table->string('about_mission');
+            $table->string('about_vision');
+            $table->string('about_member');
             $table->timestamps();
         });
     }

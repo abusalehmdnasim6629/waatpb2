@@ -6,79 +6,61 @@
 <ul class="breadcrumb">
 				<li>
 					<i class="icon-home"></i>
-					<a href="index.html">Home</a>
+					<a href="index.html">Home></a>
 					<i class="icon-angle-right"></i> 
 				</li>
 				<li>
 					<i class="icon-edit"></i>
 					<a href="#">Add Event</a>
 				</li>
-			</ul>
-			
-			<div class="row-fluid sortable">
-                
-                <p class="alert-success">
-                   <?php
-                      $m = Session::get('messege');
-                      echo $m;
-                      Session::put('messege',null);
-                   
-                   
-                   ?>
-                </p>
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Event</h2>
+</ul>
+
+@if ($errors->any())
+			<div class="alert alert-danger">
+						<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+						</ul>
+			</div>
+@endif
+	<div class="box span12">
+		<div class="box-content">
+		   
+			<div class="col-md-8 offset-md-2">
+				<form action="{{url('/save-event')}}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="form-group">
+						<h3>Event title</h3>
+						<input type="text" class="form-control" name="e_title"  required="">
+					</div>
+					
+					
+
+					<div class="form-group">
+						<h3>Event image</h3>
+						<input type="file" class="form-control form-control-bg" name="e_image" required="">
+						<span>[ Image should be min 597x877 and max 600x880 ]</span>
+						
 						
 					</div>
-					@if ($errors->any())
-					<div class="alert alert-danger">
-						<ul>
-							@foreach ($errors->all() as $error)
-								<li>{{ $error }}</li>
-							@endforeach
-						</ul>
+					<div class="form-group">
+						<h3>Event date</h3>
+						<input type="date" class="form-control" name="e_date"  required="">
 					</div>
-				    @endif
-					<div class="box-content">
-						<form class="form-horizontal" action="{{url('/save-event')}}" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-						  <fieldset>
 
-							<div class="control-group">
-							  <label class="control-label" for="date01">Event title</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge" name="e_title" required="" >
-							  </div>
-							</div>
+					<button type="submit" class="btn btn-info float-right">
+						Add event
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
 
+</div>
 
-                            <div class="control-group">
-							  <label class="control-label" for="fileInput">Event image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="e_image" id="fileInput" type="file" required="">
-								<span>[ Image should be min 597x877 and max 600x880 ]</span>
-							  </div>
-                            </div>  
-                            
-                            <div class="control-group">
-							  <label class="control-label" for="date01">Event date</label>
-							  <div class="controls">
-								<input type="date" class="input-xlarge" name="e_date" required="" >
-							  </div>
-							</div>
-
-    	                    <br>
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Add event</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
-					</div>
-				</div><!--/span-->
-
-			</div><!--/row-->
+			
+		
 
 @endsection

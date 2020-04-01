@@ -27,9 +27,10 @@
 				<thead>
 					<tr>
 						<th>About id</th>
-						<th>About title</th>
-						<th>About description</th>
-						<th>Image</th>
+						<th>Who we are</th>
+						<th>Mission</th>
+						<th>Vision</th>
+						<th>Who can be a member</th>
 						<th>Action</th>
 
 
@@ -40,9 +41,11 @@
 				<tbody>
 					<tr>
 						<td>{{ $ct->about_id}}</td>
-						<td class="center">{{ $ct->about_title}}</td>
 						<td class="center">{{ $ct->about_description}}</td>
-						<td><img src="{{URL::to($ct->image)}}" alt="about image" style="height:70px; width:70px">
+						<td class="center">{{ $ct->about_mission}}</td>
+						<td class="center">{{ $ct->about_vision}}</td>
+						<td class="center">{{ $ct->about_member}}</td>
+						
 
 						<td class="center">
 							<div class="btn btn-group">

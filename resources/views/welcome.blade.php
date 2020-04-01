@@ -55,7 +55,7 @@
 					class="navbar navbar-expand-lg bsnav bsnav-sticky bsnav-transparent bsnav-sticky-slide bsnav-scrollspy">
 					<div class="container">
 						<a class="navbar-brand" href="{{URL::to('/')}}">
-						    <!-- <p  class="logo-display"><b>WAATPB</b></p>
+							<!-- <p  class="logo-display"><b>WAATPB</b></p>
 						    <p class="logo-scrolled"><b>WAATPB</b></p> -->
 
 							<img src="assets/img/logo/white-logo.png" class="logo-display" alt="thumb">
@@ -119,9 +119,13 @@
 				<div class="hero-single overlay-single overlay-shape">
 					<div class="container">
 						<div class="row">
+							<div class="col-xl-13 col-sm-12">
+								<div class="hero-content">
+									<h2 style="color:white;">{{$header->header_title ?? ''}}</h2>
+								</div>
+							</div>
 							<div class="col-xl-6">
 								<div class="hero-content">
-									<h2>{{$header->header_title ?? ''}}</h2>
 									<p class="mb-20">
 										{{$header->header_description ?? ''}}
 									</p>
@@ -146,26 +150,79 @@
 		============================================= -->
 		<div id="about" class="about-area de-padding">
 			<div class="container">
-				<div class="about-wrapper grid-2">
-					<div class="about-left">
-						 <img src="{{$about->image}}" alt="thumb"> 
-					</div>
-					<div class="about-right">
+				<div class="row">
+					<div class="col-md-6">
+						<h2 style="font-size:25px;">Who we are</h2>
+						<p>
+							{{$about->about_description}}
+						</p>
 
-						<div class="about-right-content">
-							<h2>{{$about->about_title}}</h2>
-							<p>
-								{{$about->about_description}}
-							</p>
-							<p>
-								Our vision is to be the best group of the country enriched with exemplary human beings
-								for whom every countryman feels proud.
-							</p>
-							<a href="#service" class="theme-btn smooth-menu">Read More</a>
-						</div>
+						<h2 style="font-size:25px;">Vision</h2>
+						<p>
+							{{$about->about_vision}}
+						</p>
+
+					</div>
+					<div class="col-md-6">
+						<h2 style="font-size:25px;">Mission</h2>
+						<p>
+							{{$about->about_mission}}
+						</p>
+
+						<h2 style="font-size:25px;">Who can be a member</h2>
+						<p>
+							{{$about->about_member}}
+						</p>
 					</div>
 				</div>
+
+				{{-- <div class="about-wrapper grid-2">
+					<div class="about-left mx-auto  text-center ">
+						 
+						 <h2 style="font-size:25px;">Who we are</h2>
+							<p>
+								{{$about->about_description}}
+				</p>
 			</div>
+			<div class="about-right justify-content-center text-center">
+
+
+				<h2 style="font-size:25px;">Mission</h2>
+				<p>
+					{{$about->about_mission}}
+				</p>
+
+
+
+			</div>
+
+		</div>
+		<div class="about-wrapper grid-2">
+			<div class="about-left  text-center">
+
+				<h2 style="font-size:25px;">Vision</h2>
+				<p>
+					{{$about->about_vision}}
+				</p>
+			</div>
+			<div class="about-right  text-center">
+
+				<div class="about-right-content">
+					<h2 style="font-size:25px;">Who can be a member</h2>
+					<p>
+						{{$about->about_member}}
+					</p>
+
+
+				</div>
+			</div>
+
+		</div> --}}
+		<div class="event-all text-center mt-30">
+			<a href="#service" class="theme-btn smooth-menu">Read More</a>
+		</div>
+
+		</div>
 		</div>
 		<!-- End About -->
 

@@ -11,21 +11,43 @@
 				</li>
 				<li>
 					<i class="icon-edit"></i>
-					<a href="#">Add Event</a>
+					<a href="#">Add Service</a>
 				</li>
-			</ul>
+</ul>
+@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+				@endif
+	<div class="box span12">
+		<div class="box-content">
+		   
+			<div class="col-md-8 offset-md-2">
+				<form action="{{url('/save-service')}}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="form-group">
+						<h3>Service title</h3>
+						<input type="text" class="form-control" name="s_title" required="">
+					</div>
+					
+					<button type="submit" class="btn btn-info float-right">
+						Add service
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+</div>
 			
-			<div class="row-fluid sortable">
+			<!-- <div class="row-fluid sortable">
                 
-                <p class="alert-success">
-                   <?php
-                      $m = Session::get('messege');
-                      echo $m;
-                      Session::put('messege',null);
-                   
-                   
-                   ?>
-                </p>
+              
 				<div class="box span12">
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Event</h2>
@@ -51,8 +73,8 @@
 						</form>   
 
 					</div>
-				</div><!--/span-->
+				</div>
 
-			</div><!--/row-->
+			</div> -->
 
 @endsection

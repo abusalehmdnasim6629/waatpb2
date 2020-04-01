@@ -46,25 +46,31 @@
 						  <fieldset>
 
 							<div class="control-group">
-							  <label class="control-label" for="date01">About title</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge" name="a_title" required="" >
-							  </div>
-							</div>
-                            <div class="control-group">
-                                <label class="control-label">About Description</label>
+                                <label class="control-label">Who we are</label>
                                 <div class="controls">
                                 <textarea class="cleditor" name="a_des" required=" "  rows="3"></textarea>
                                 </div>
+							</div>
+							<div class="control-group">
+                                <label class="control-label">Mission</label>
+                                <div class="controls">
+                                <textarea class="cleditor" name="a_mission" required=" "  rows="3"></textarea>
+                                </div>
+							</div>
+							<div class="control-group">
+                                <label class="control-label">vission</label>
+                                <div class="controls">
+                                <textarea class="cleditor" name="a_vission" required=" "  rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Who can be a member</label>
+                                <div class="controls">
+                                <textarea class="cleditor" name="a_member" required=" "  rows="3"></textarea>
+                                </div>
                             </div>
 
-                            <div class="control-group">
-							  <label class="control-label" for="fileInput">About image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="a_image" id="fileInput" type="file">
-								<span>[ Image should be  800x530 ]</span>
-							  </div>
-                            </div>  
+
                             
                           
 

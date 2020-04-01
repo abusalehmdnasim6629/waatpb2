@@ -13,25 +13,8 @@
 					<i class="icon-edit"></i>
 					<a href="#">Edit Image</a>
 				</li>
-			</ul>
-			
-			<div class="row-fluid sortable">
-                
-                <p class="alert-success">
-                   <?php
-                      $m = Session::get('messege');
-                      echo $m;
-                      Session::put('messege',null);
-                   
-                   
-                   ?>
-                </p>
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Image</h2>
-						
-					</div>
-					@if ($errors->any())
+</ul>
+@if ($errors->any())
 						<div class="alert alert-danger">
 							<ul>
 								@foreach ($errors->all() as $error)
@@ -39,41 +22,38 @@
 								@endforeach
 							</ul>
 						</div>
-					@endif
-					<div class="box-content">
-						<form class="form-horizontal" action="{{url('/update-image',$result->image_id)}}" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-						  <fieldset>
-
-							<div class="control-group">
-							  <label class="control-label" for="date01">Image title</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge" name="i_title" value="{{$result->image_title}}" required="" >
-							  </div>
-							</div>
-
-
-                            <div class="control-group">
-							  <label class="control-label" for="fileInput">Image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="image" id="fileInput" value="{{$result->image}}" type="file" required="">
-								<span>[ Image should be 200x200 ]</span>
-							  </div>
-                            </div>  
-                            
-                            
-
-    	                    <br>
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Update image</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
+				@endif
+	<div class="box span12">
+		<div class="box-content">
+		   
+			<div class="col-md-8 offset-md-2">
+				<form action="{{url('/update-image',$result->image_id)}}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="form-group">
+						<h3>Image title</h3>
+						<input type="text" class="form-control" name="i_title" value="{{$result->image_title}}" required="">
 					</div>
-				</div><!--/span-->
+					
+					
 
-			</div><!--/row-->
+					<div class="form-group">
+						<h3>About Image</h3>
+						<input type="file" class="form-control form-control-bg" name="image" required="">
+						<span>[ Image should be  200x200 ]</span>
+						<br><br>
+						<img src="{{asset($result->image)}}" class="w-100 h-200" alt="">
+					</div>
 
+					<button type="submit" class="btn btn-info float-right">
+						Update gallary
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+</div>
+			
+			
 @endsection
