@@ -435,43 +435,20 @@ class AdminController extends Controller
 
     public function save_about(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
-
-        ]);
-
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return redirect()
-                ->back()
-                ->withErrors($validator);
-        }
+       
 
 
         $about = array();
-        $about['about_title'] = $request->a_title;
         $about['about_description'] = $request->a_des;
-        if ($request->hasfile('a_image')) {
-
-            $image = $request->file('a_image');
-
-            $image_name = Str::random(10);
-            $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name . '.' . $ext;
-            $upload_path = public_path() . '/image/';
-            $image_url = 'image/' . $image_full_name;
-            $success = $image->move($upload_path, $image_full_name);
-
-            if ($success) {
-                $about['image'] = $image_url;
+        $about['about_mission'] = $request->a_mission;
+        $about['about_vision'] = $request->a_vision;
+        $about['about_member'] = $request->a_member;
+        
+              
                 DB::table('tbl_about')->insert($about);
                 Alert::success('Successful', 'Add about successfully');
                 return Redirect::to('/add-about');
-            } else {
-                Alert::warning('Fail', 'Add about unsuccessfully');
-                return Redirect::to('/add-about');
-            }
-        }
+           
     }
 
 
@@ -512,44 +489,20 @@ class AdminController extends Controller
 
     public function update_about(Request $request, $about_id)
     {
-        $validator = Validator::make($request->all(), [
-            'a_image' => 'required|image|mimes:jpeg,bmp,png|max:2000|dimensions:width=800,height=530',
-
-        ]);
-
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return redirect()
-                ->back()
-                ->withErrors($validator);
-        }
+       
 
         $about = array();
-        $about['about_title'] = $request->a_title;
         $about['about_description'] = $request->a_des;
-        if ($request->hasfile('a_image')) {
-
-            $image = $request->file('a_image');
-
-            $image_name = Str::random(10);
-            $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name . '.' . $ext;
-            $upload_path = public_path() . '/image/';
-            $image_url = 'image/' . $image_full_name;
-            $success = $image->move($upload_path, $image_full_name);
-
-            if ($success) {
-                $about['image'] = $image_url;
+        $about['about_mission'] = $request->a_mission;
+        $about['about_vision'] = $request->a_vision;
+        $about['about_member'] = $request->a_member;
+                
                 DB::table('tbl_about')
                     ->where('about_id', $about_id)
                     ->update($about);
                 Alert::success('Successful', 'Update about successfully');
                 return Redirect::to('/all-about');
-            } else {
-                Alert::warning('Fail', 'Update about unsuccessfully');
-                return Redirect::to('/all-about');
-            }
-        }
+           
     }
 
     public function delete_member($member_id)

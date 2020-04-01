@@ -151,24 +151,51 @@
 		<div id="about" class="about-area de-padding">
 			<div class="container">
 				<div class="about-wrapper grid-2">
-					<div class="about-left">
-						 <img src="{{$about->image}}" alt="thumb"> 
-					</div>
-					<div class="about-right">
-
-						<div class="about-right-content">
-							<!-- <h2>{{$about->about_title}}</h2> -->
+					<div class="about-left mx-auto  text-center ">
+						 
+						 <h2 style="font-size:25px;">Who we are</h2>
 							<p>
 								{{$about->about_description}}
 							</p>
+					</div>
+					<div class="about-right justify-content-center text-center">
+
+						
+							<h2 style="font-size:25px;">Mission</h2>
 							<p>
-								Our vision is to be the best group of the country enriched with exemplary human beings
-								for whom every countryman feels proud.
+								{{$about->about_mission}}
 							</p>
-							<a href="#service" class="theme-btn smooth-menu">Read More</a>
+							
+							
+						
+					</div>
+					
+				</div>
+				<div class="about-wrapper grid-2">
+					<div class="about-left  text-center">
+						
+						 <h2 style="font-size:25px;">Vision</h2>
+							<p>
+								{{$about->about_vision}}
+							</p>
+					</div>
+					<div class="about-right  text-center">
+
+						<div class="about-right-content">
+							<h2 style="font-size:25px;">Who can be a member</h2>
+							<p>
+								{{$about->about_member}}
+							</p>
+							
+							
 						</div>
 					</div>
+					
 				</div>
+				<div class="event-all text-center mt-30">
+				<a href="#service" class="theme-btn smooth-menu">Read More</a>
+			   </div>
+				
 			</div>
 		</div>
 		<!-- End About -->

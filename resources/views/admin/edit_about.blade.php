@@ -31,26 +31,32 @@
 			<div class="col-md-8 offset-md-2">
 				<form action="{{url('/update-about',$result->about_id)}}" method="POST" enctype="multipart/form-data">
 					@csrf
+					
 					<div class="form-group">
-						<h3>About title</h3>
-						<input type="text" class="form-control" name="a_title" value="{{$result->about_title}}" required="">
-					</div>
-					<div class="form-group">
-						<h3>About description</h3>
+						<h3>Who we are</h3>
 						<textarea name="a_des" class="form-control" cols="30" rows="5" required="">
 						{{$result->about_description}}
 						</textarea>
 					</div>
-					
-
 					<div class="form-group">
-						<h3>About Image</h3>
-						<input type="file" class="form-control form-control-bg" name="a_image" required="">
-						<span>[ Image should be  800x530 ]</span>
-						<br><br>
-						<img src="{{asset($result->image)}}" class="w-100 h-200" alt="">
+						<h3>Mission</h3>
+						<textarea name="a_mission" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_mission}}
+						</textarea>
 					</div>
-
+					<div class="form-group">
+						<h3>Vision</h3>
+						<textarea name="a_vision" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_vision}}
+						</textarea>
+					</div>
+					<div class="form-group">
+						<h3>Who can be a member</h3>
+						<textarea name="a_member" class="form-control" cols="30" rows="5" required="">
+						{{$result->about_member}}
+						</textarea>
+					</div>
+					
 					<button type="submit" class="btn btn-info float-right">
 						Update About
 					</button>
