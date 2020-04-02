@@ -286,6 +286,22 @@
 							</li>
 							<li>
 								<a href="#">
+									<i class="metismenu-icon fa fa-users"></i>
+									Member Request
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-member-request')}}">
+											<i class="metismenu-icon"></i>
+											All member request
+										</a>
+									</li>
+
+								</ul>
+							</li>
+							<li>
+								<a href="#">
 									<i class="metismenu-icon fa fa-gavel"></i>
 									Services
 									<i class="fa fa-angle-down caret-left"></i>

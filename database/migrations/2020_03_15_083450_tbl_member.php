@@ -28,6 +28,7 @@ class TblMember extends Migration
             $table->string('image');
             $table->string('member_skill');
             $table->string('member_hobby');
+            $table->integer('status');
             $table->timestamps();
         });
     }

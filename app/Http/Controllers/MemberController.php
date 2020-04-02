@@ -70,6 +70,7 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
+        $data['status'] = 0;
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
@@ -131,6 +132,7 @@ class MemberController extends Controller
 
         $l_check = DB::table('tbl_member')
             ->where('email_address', $request->email)
+            ->where('status',1)
             ->first();
         //echo  $l_check;
         if ($l_check != null) {

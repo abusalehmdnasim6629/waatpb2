@@ -63,7 +63,7 @@
 					<div class="widget-heading">Member requests</div>
 				</div>
 				<div class="widget-content-right">
-					<div class="widget-numbers text-white"><span>5</span></div>
+					<div class="widget-numbers text-white"><span>{{DB::table('tbl_member')->where('status',0)->count()}}</span></div>
 				</div>
 			</div>
 		</div>

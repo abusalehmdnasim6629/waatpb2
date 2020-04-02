@@ -29,6 +29,11 @@ Route::get('/admin', 'AdminController@admin')->name('admin.home')->middleware('a
 Route::get('/delete-member/{member_id}', 'AdminController@delete_member')->middleware('admin');
 Route::get('/all-member', 'AdminController@all_member')->middleware('admin');
 Route::get('/member-info/{member_id}', 'AdminController@member_info')->middleware('admin');
+Route::get('/all-member-request', 'AdminController@member_request')->middleware('admin');
+Route::get('/requested-member-info/{member_id}', 'AdminController@member_aproval')->middleware('admin');
+Route::get('/accept-member/{member_id}', 'AdminController@accept_member')->middleware('admin');
+Route::get('/reject-member/{member_id}', 'AdminController@reject_member')->middleware('admin');
+
 
 
 //job

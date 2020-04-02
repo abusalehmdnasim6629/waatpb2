@@ -51,6 +51,7 @@ class AdminController extends Controller
 
         $result = DB::table('tbl_member')
             ->select('tbl_member.*')
+            ->where('status',1)
             ->get();
 
         return view('admin.all_member')->with('result', $result);
@@ -623,6 +624,56 @@ class AdminController extends Controller
         return view('admin.member_details')->with('result',$result);
 
 
+    }
+
+
+    public function member_request(){
+         
+
+        $result = DB::table('tbl_member')
+                ->where('status',0)
+                ->get();
+
+        return view('admin.member_request')->with('result',$result);
+
+
+    }
+
+    public function member_aproval($member_id){
+
+        $result = DB::table('tbl_member')
+        ->where('member_id',$member_id)
+        ->first();
+
+       return view('admin.member_approval')->with('result',$result);
+
+
+    }
+
+    public function accept_member($member_id){
+       
+        $status = array();
+        $status['status'] = 1;
+
+        DB::table('tbl_member')
+        ->where('member_id',$member_id)
+        ->update($status);
+       
+        Alert::success('Successful', 'Member accepted successfully');
+        return Redirect::to('/all-member-request');
+    }
+
+    public function reject_member($member_id){
+       
+        $status = array();
+        $status['status'] = 2;
+
+        DB::table('tbl_member')
+        ->where('member_id',$member_id)
+        ->update($status);
+       
+        Alert::warning('Reject', 'Member rejected');
+        return Redirect::to('/all-member-request');
     }
 
 
