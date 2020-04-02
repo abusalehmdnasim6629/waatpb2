@@ -28,6 +28,8 @@ Route::get('/admin', 'AdminController@admin')->name('admin.home')->middleware('a
 //member
 Route::get('/delete-member/{member_id}', 'AdminController@delete_member')->middleware('admin');
 Route::get('/all-member', 'AdminController@all_member')->middleware('admin');
+Route::get('/member-info/{member_id}', 'AdminController@member_info')->middleware('admin');
+
 
 //job
 Route::get('/add-job', 'AdminController@add_job')->middleware('admin');

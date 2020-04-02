@@ -119,11 +119,12 @@
 				<div class="hero-single overlay-single overlay-shape">
 					<div class="container">
 						<div class="row">
-						   <div  class="col-xl-13 col-sm-12">
+						   <div  class="col-xl-12 col-sm-12">
 							   <div class="hero-content">
 							   <h2 style="color:white;">{{$header->header_title ?? ''}}</h2>
 							   </div> 
 						   </div>
+		
 							<div class="col-xl-6">
 								<div class="hero-content">
 									<p class="mb-20">

@@ -609,11 +609,21 @@ class AdminController extends Controller
                     ->update($event);
                 Alert::success('Successful', 'Image updated successfully');
                 return Redirect::to('/all-image');
-            } else {
-
-                Alert::warning('Fail', 'Image updated unsuccessfull');
-                return Redirect::to('/all-image');
-            }
+            } 
         }
     }
+   
+    public function member_info($member_id){
+         
+
+        $result = DB::table('tbl_member')
+                ->where('member_id',$member_id)
+                ->first();
+
+        return view('admin.member_details')->with('result',$result);
+
+
+    }
+
+
 }

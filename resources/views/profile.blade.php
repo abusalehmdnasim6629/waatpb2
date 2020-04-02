@@ -93,7 +93,7 @@
     <!-- End header -->
 	
 	<div class="clearfix"></div>
-	<div class="site-breadcrumb-title" style="background: url(assets/img/breadcrumb/breadcrumb.png)">
+	<div class="site-breadcrumb-title col-md" style="background: url(assets/img/breadcrumb/breadcrumb.png)">
 		<h2>Profile</h2>
 		  <div class="main-breadcrumb">
 			<div class="container">
@@ -181,6 +181,10 @@
 	@endif
     <div class="container" style="padding:10px;">
     <div class="row m-y-2" >
+	    <div class="col-lg-4 pull-lg-8 text-xs-center mb-5" style="margin-top:3%;">
+            <img src="{{$pro->image}}" style="width:200px;height:200px;"class="m-x-auto img-fluid img-circle" alt="avatar">
+			<h3 class="m-y-2 mb-5" style="margin-top:20px;">{{$pro->member_name}} <hr> </h3>
+        </div>
         <div class="col-lg-8 push-lg-4">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -190,22 +194,21 @@
                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                 </li>
             </ul>
-            <div class="tab-content p-b-3">
-                <div class="tab-pane active" id="profile">
-                    <h4 class="m-y-2" style="margin-top:20px;">{{$pro->member_name}}</h4>
+            <div class="tab-content p-b-3 mt-5">
+                <div class="tab-pane active" id="profile">					
                     <div class="row">
                         <div class="col-md-6">
-                            <h6>Designation</h6>
+                            <h5>Designation</h5>
                             <p>
                                 {{$pro->designation}}
                             </p>
-                            <h6>Hobbies</h6>
+                            <h5>Hobbies</h5>
                             <p>
                                 {{$pro->member_hobby}}
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <h6>Skills</h6>
+                            <h5>Skills</h5>
                             <p>
                                 {{$pro->member_skill}}
                             </p>
@@ -320,7 +323,7 @@
 						<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Hobby</label>
                             <div class="col-lg-9">
-							<textarea class="cleditor" name="member_hobby" required="" rows="3">
+							<textarea class="form-control" name="member_hobby" required="" rows="3">
 							{{$pro->member_hobby}}
 							</textarea>
                             </div>
@@ -329,7 +332,7 @@
 						<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Skill</label>
                             <div class="col-lg-9">
-							<textarea class="cleditor" name="member_skill" required="" rows="3">
+							<textarea class="form-control" name="member_skill" required="" rows="3">
 							{{$pro->member_skill}}
 							</textarea>
                             </div>
@@ -340,12 +343,18 @@
                                 <input class="form-control" type="text" name="nid" value="{{$pro->nid}}">
                             </div>
                         </div>
+						<div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Set new password</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" name="pass">
+                            </div>
+                        </div>
                         
 
 						<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Image</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="file" name="image" required="">
+                                <input class="form-control" type="file" name="image" >
                             </div>
                         </div>
                        
@@ -360,9 +369,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 pull-lg-8 text-xs-center" style="margin-top:3%;">
-            <img src="{{$pro->image}}" style="width:200px;height:200px;"class="m-x-auto img-fluid img-circle" alt="avatar">
-        </div>
+        
     </div>
 
     <!-- placehold.it/150 -->

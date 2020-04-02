@@ -32,11 +32,11 @@
 								  <th>member name</th>
 								  <th>Image</th>
 								  <th>Email</th>
-								  <th>NID</th>
+								  <!-- <th>NID</th>
 								  <th>Contact Number</th>
 								  <th>Present Org.</th>
 								  <th>Designation</th>
-								  <th>Department</th>
+								  <th>Department</th> -->
 								 
 								  <th>Action</th>
 
@@ -50,15 +50,17 @@
 								<td class="center">{{ $ct->member_name}}</td>
 								<td><img src="{{URL::to($ct->image)}}" alt="member image" style="height:70px; width:70px">
 								<td class="center">{{ $ct->email_address}}</td>
-								<td class="center">{{ $ct->nid}}</td>
+								<!-- <td class="center">{{ $ct->nid}}</td>
                                 <td class="center">{{ $ct->contact_number}}</td>
                                 <td class="center">{{ $ct->present_organization}}</td>
                                 <td class="center">{{ $ct->designation}}</td>
-                                <td class="center">{{ $ct->department}}</td>
+                                <td class="center">{{ $ct->department}}</td> -->
                                 
 								<td class="center">
-								
-									<a class="btn btn-danger" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
+									<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$ct->member_id)}}">
+										<i class="fa fa-eye white eye"></i>
+									</a>
+									<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
 										<i class="fa fa-trash white trash"></i> 
 									</a>
 								</td>

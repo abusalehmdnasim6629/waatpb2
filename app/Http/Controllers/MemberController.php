@@ -212,12 +212,7 @@ class MemberController extends Controller
                 return Redirect::to('/profile');
             }
         }
-        // else{
-
-        //     $data['image'] = "";
-        //     DB::table('tbl_member')->insert($data);
-        //     return Redirect::to('/Registration');
-        // }
+        
 
 
 
