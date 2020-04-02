@@ -1628,6 +1628,23 @@ button.side-btn {
     color: white;
 }
 
+.social-widget-footer {
+    display: none;
+}
+
+.social-widget-footer>.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.social-widget-footer>.fa:hover {
+    opacity: 0.7;
+}
+
 @media only screen and (max-width: 768px) {
     .overlay-shape::before {
         clip-path: ellipse(175% 100% at 50% 0%) !important;
@@ -1635,12 +1652,14 @@ button.side-btn {
 }
 
 @media only screen and (max-width: 450px) {
-    .icon-bar a {
-        padding: 2px 10px;
-        font-size: 12px;
+    .icon-bar {
+        display: none !important;
     }
     .hero-single .hero-content h2 {
         font-size: 2rem !important;
         padding-top: 30px;
+    }
+    .social-widget-footer {
+        display: block !important;
     }
 }

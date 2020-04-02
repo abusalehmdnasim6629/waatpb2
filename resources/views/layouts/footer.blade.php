@@ -94,6 +94,12 @@
                     </div>
                 </div>
             </div>
+            <div class="social-widget-footer text-center">
+                <a href="#" class="fa fa-facebook facebook"></a>
+                <a href="#" class="fa fa-twitter twitter"></a>
+                <a href="#" class="fa fa-linkedin linkedin"></a>
+                <a href="#" class="fa fa-youtube youtube"></a>
+            </div>
             <div class="copyright text-center">
                 <p>All rights reserved by Rapples.Copyright © 2020.</p>
             </div>
