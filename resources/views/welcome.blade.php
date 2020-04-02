@@ -42,7 +42,7 @@
 		============================================= -->
 	<div id="about" class="about-area de-padding">
 		<div class="container">
-			<div class="row">
+			<div class="row text-justify">
 				<div class="col-md-6">
 					<h2 style="font-size:25px;">Who we are</h2>
 					<p>
@@ -173,7 +173,7 @@
 			</div>
 			<div class="history-wrapper">
 				<article class="text-center">
-					<p>
+					<p class="text-justify">
 						{{$history->first_paragraph}}
 					</p>
 
