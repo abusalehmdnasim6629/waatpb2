@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use App\User;
-
+use App\Mail\SendMail;
+use Hash;
+use Mail;
 use Session;
 
 session_start();
@@ -654,11 +656,20 @@ class AdminController extends Controller
        
         $status = array();
         $status['status'] = 1;
+        
+       
+        $email = DB::table('tbl_member')
+                ->where('member_id',$member_id)
+                ->first();
 
+        $em = $email->email_address;
+        
         DB::table('tbl_member')
         ->where('member_id',$member_id)
         ->update($status);
-       
+        $rsub = "Registration conformation";
+        $rmsg = "Your member request has been accepted";
+        Mail::to($em)->send(new SendMail($rsub, $rmsg));
         Alert::success('Successful', 'Member accepted successfully');
         return Redirect::to('/all-member-request');
     }
@@ -667,11 +678,19 @@ class AdminController extends Controller
        
         $status = array();
         $status['status'] = 2;
-
+        
+        $email = DB::table('tbl_member')
+                ->where('member_id',$member_id)
+                ->first();
+        $em = $email->email_address;
+             
         DB::table('tbl_member')
         ->where('member_id',$member_id)
         ->update($status);
-       
+
+        $rsub = "Registration conformation";
+        $rmsg = "Your member request has been rejected";
+        Mail::to($em)->send(new SendMail($rsub, $rmsg));
         Alert::warning('Reject', 'Member rejected');
         return Redirect::to('/all-member-request');
     }
