@@ -43,6 +43,17 @@ class MemberController extends Controller
         }
     }
 
+    public function removeDashMemberId()
+    {
+        $mebers = DB::table('tbl_member')->get();
+
+        foreach ($mebers as $member) {
+            $code = str_replace("-", "", $member->code);
+
+            DB::table('tbl_member')->where('member_id', $member->member_id)->update(['code' => $code]);
+        }
+    }
+
     public static function memberIdGenerate($length)
     {
         $result = '';
