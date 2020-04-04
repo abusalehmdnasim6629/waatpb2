@@ -47,23 +47,40 @@ class MemberController extends Controller
     {
         $mebers = DB::table('tbl_member')->get();
 
+        $last = 1;
         foreach ($mebers as $member) {
+            //$last = DB::table('tbl_member')->count();
+            if (strlen($last) == 1) {
+                $last = '000' . $last;
+            }
+            if (strlen($last) == 2) {
+                $last = '00' . $last;
+            }
+            if (strlen($last) == 3) {
+                $last = '0' . $last;
+            }
 
-            $code = str_replace("-", "", $member->code);
+            $code = substr(date('Y'), -2) . '-' . $last;
 
             DB::table('tbl_member')->where('member_id', $member->member_id)->update(['code' => $code]);
+            $last++;
         }
     }
 
-    public static function memberIdGenerate($length)
+    public static function memberIdGenerate()
     {
-        $result = '';
-
-        for ($i = 0; $i < $length; $i++) {
-            $result .= mt_rand(0, 9);
+        $last = DB::table('tbl_member')->count();
+        if (strlen($last) == 1) {
+            $last = '000' . $last;
+        }
+        if (strlen($last) == 2) {
+            $last = '00' . $last;
+        }
+        if (strlen($last) == 3) {
+            $last = '0' . $last;
         }
 
-        return $result;
+        return $code = substr(date('Y'), -2) . '-' . $last;
     }
 
     public function save_member(Request $request)
@@ -93,8 +110,8 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['status'] = 0;
-        $data['code'] = self::memberIdGenerate(6);
+        $data['status'] = 1;
+        $data['code'] = self::memberIdGenerate();
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
@@ -345,6 +362,4 @@ class MemberController extends Controller
             return Redirect::to('/')->send();
         }
     }
-
-    
 }
