@@ -121,6 +121,8 @@ Route::get('/full-history', 'ContentController@full_history');
 //profile
 Route::get('/profile', 'ContentController@profile');
 Route::post('/update-member','ContentController@update_profile');
+Route::get('/member-profile', 'ContentController@member_profile');
+
 
 
 
