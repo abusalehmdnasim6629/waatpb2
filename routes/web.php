@@ -176,5 +176,5 @@ Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/passenc', 'MemberController@passwordEcrypt');
+Route::get('/remove-dash-id', 'MemberController@removeDashMemberId');
 

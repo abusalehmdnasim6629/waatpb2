@@ -43,6 +43,28 @@ class MemberController extends Controller
         }
     }
 
+    public function removeDashMemberId()
+    {
+        $mebers = DB::table('tbl_member')->get();
+
+        foreach ($mebers as $member) {
+            $code = str_replace("-", "", $member->code);
+
+            DB::table('tbl_member')->where('member_id', $member->member_id)->update(['code' => $code]);
+        }
+    }
+
+    public static function memberIdGenerate($length)
+    {
+        $result = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $result .= mt_rand(0, 9);
+        }
+
+        return $result;
+    }
+
     public function save_member(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -71,6 +93,7 @@ class MemberController extends Controller
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
         $data['status'] = 0;
+        $data['code'] = memberIdGenerate(6);
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
@@ -132,7 +155,7 @@ class MemberController extends Controller
 
         $l_check = DB::table('tbl_member')
             ->where('email_address', $request->email)
-            ->where('status',1)
+            ->where('status', 1)
             ->first();
         //echo  $l_check;
         if ($l_check != null) {
@@ -225,12 +248,6 @@ class MemberController extends Controller
                 return Redirect::to('/profile');
             }
         }
-        
-
-
-
-
-
     }
 
     public function forgot_password()
