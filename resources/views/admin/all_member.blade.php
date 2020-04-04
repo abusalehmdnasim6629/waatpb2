@@ -4,75 +4,85 @@
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
-           <ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index.html">Home</a> 
-					<i class="icon-angle-right"></i>
-				</li>
-				<li><a href="#">Tables</a></li>
-			</ul>
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i>
+		<a href="index.html">Home</a>
+		<i class="icon-angle-right"></i>
+	</li>
+	<li><a href="#">Tables</a></li>
+</ul>
 
-			<div class="row-fluid sortable">		
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>Members</h2>
-						<div class="box-icon">
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-						</div>
-					</div>
-					
-					<div class="box-content">
-						<table class="table table-striped table-bordered bootstrap-datatable datatable">
-						  <thead>
-							  <tr>
-								  <th>Member id</th>
-								  <th>member name</th>
-								  <th>Image</th>
-								  <th>Email</th>
-								  <!-- <th>NID</th>
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header" data-original-title>
+			<h2><i class="halflings-icon user"></i><span class="break"></span>Members</h2>
+			<div class="box-icon">
+				<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+				<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+				<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+			</div>
+		</div>
+
+		<div class="box-content">
+			<table class="table table-striped table-bordered bootstrap-datatable datatable">
+				<thead>
+					<tr>
+						<th>Sl</th>
+						<th>Member Id</th>
+						<th>Member name</th>
+						<th>Image</th>
+						<th>Email</th>
+						<!-- <th>NID</th>
 								  <th>Contact Number</th>
 								  <th>Present Org.</th>
 								  <th>Designation</th>
 								  <th>Department</th> -->
-								 
-								  <th>Action</th>
 
-							  </tr>
-						  </thead>   
+						<th>Action</th>
 
-						@foreach($result as $ct)
-						  <tbody>
-							<tr>
-								<td>{{ $ct->member_id}}</td>
-								<td class="center">{{ $ct->member_name}}</td>
-								<td><img src="{{URL::to($ct->image)}}" alt="member image" style="height:70px; width:70px">
-								<td class="center">{{ $ct->email_address}}</td>
-								<!-- <td class="center">{{ $ct->nid}}</td>
+					</tr>
+				</thead>
+				@php
+				$i = 1;
+				@endphp
+
+				@foreach($result as $ct)
+				<tbody>
+					<tr>
+						<td>{{$i}}</td>
+						<td>{{ $ct->code}}</td>
+						<td class="center">{{ $ct->member_name}}</td>
+						<td><img src="{{URL::to($ct->image)}}" alt="member image" style="height:70px; width:70px">
+						<td class="center">{{ $ct->email_address}}</td>
+						<!-- <td class="center">{{ $ct->nid}}</td>
                                 <td class="center">{{ $ct->contact_number}}</td>
                                 <td class="center">{{ $ct->present_organization}}</td>
                                 <td class="center">{{ $ct->designation}}</td>
                                 <td class="center">{{ $ct->department}}</td> -->
-                                
-								<td class="center">
-									<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$ct->member_id)}}">
-										<i class="fa fa-eye white eye"></i>
-									</a>
-									<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
-										<i class="fa fa-trash white trash"></i> 
-									</a>
-								</td>
-							</tr>
-							
-						  </tbody>
 
-						@endforeach
+						<td class="center">
+							<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$ct->member_id)}}">
+								<i class="fa fa-eye white eye"></i>
+							</a>
+							<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
+								<i class="fa fa-trash white trash"></i>
+							</a>
+						</td>
+					</tr>
 
-					  </table>            
-					</div>
-				</div><!--/span-->
-			
-			</div><!--/row-->
+				</tbody>
+
+				@php
+				$i++;
+				@endphp
+				@endforeach
+
+			</table>
+		</div>
+	</div>
+	<!--/span-->
+
+</div>
+<!--/row-->
 @endsection

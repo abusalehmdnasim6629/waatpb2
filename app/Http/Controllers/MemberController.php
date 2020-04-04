@@ -47,28 +47,46 @@ class MemberController extends Controller
     {
         $mebers = DB::table('tbl_member')->get();
 
+        $last = 1;
         foreach ($mebers as $member) {
-            $code = str_replace("-", "", $member->code);
+            //$last = DB::table('tbl_member')->count();
+            if (strlen($last) == 1) {
+                $last = '000' . $last;
+            }
+            if (strlen($last) == 2) {
+                $last = '00' . $last;
+            }
+            if (strlen($last) == 3) {
+                $last = '0' . $last;
+            }
+
+            $code = substr(date('Y'), -2) . '-' . $last;
 
             DB::table('tbl_member')->where('member_id', $member->member_id)->update(['code' => $code]);
+            $last++;
         }
     }
 
-    public static function memberIdGenerate($length)
+    public static function memberIdGenerate()
     {
-        $result = '';
-
-        for ($i = 0; $i < $length; $i++) {
-            $result .= mt_rand(0, 9);
+        $last = DB::table('tbl_member')->count();
+        if (strlen($last) == 1) {
+            $last = '000' . $last;
+        }
+        if (strlen($last) == 2) {
+            $last = '00' . $last;
+        }
+        if (strlen($last) == 3) {
+            $last = '0' . $last;
         }
 
-        return $result;
+        return $code = substr(date('Y'), -2) . '-' . $last;
     }
 
     public function save_member(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+            'image' => 'required|image|mimes:jpeg,png|max:2000',
             'pass' => 'required|min:6',
 
 
@@ -92,8 +110,8 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['status'] = 1;
-        $data['code'] = self::memberIdGenerate(6);
+        $data['status'] = 1; // this would be zero 0, 1 for certain time only
+        $data['code'] = self::memberIdGenerate();
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
@@ -127,7 +145,7 @@ class MemberController extends Controller
                                 ->first();
                         $rsub = "Registration conformation";
                         $rmsg = "Thank you for registration";
-                        //Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
+                        Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
                         Alert::success('Successful', 'Thank you for registration');
                         Session::put('lcheck',$l_check->member_id);
                         return Redirect::to('/profile');
@@ -283,7 +301,7 @@ class MemberController extends Controller
             $code = rand(10000, 99999);
             $rmsg = "Yor code is : " . $code;
             Session::put('cd', $code);
-            // Mail::to($email)->send(new SendMail($rsub, $rmsg));
+            Mail::to($email)->send(new SendMail($rsub, $rmsg));
             Alert::success('Send code', 'Code has been sent to your email');
             return Redirect::to('/code');
         } else {
@@ -350,5 +368,7 @@ class MemberController extends Controller
         }
     }
 
-    
+    public function testMail(){
+        Mail::to('sabbir.h2668@gmail.com')->send(new SendMail("Test Mail", "Hello this is a test mail from server"));
+    }
 }
