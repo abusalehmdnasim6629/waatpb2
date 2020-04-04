@@ -344,4 +344,6 @@ class MemberController extends Controller
             return Redirect::to('/')->send();
         }
     }
+
+    
 }
