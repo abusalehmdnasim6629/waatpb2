@@ -110,7 +110,7 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['status'] = 1;
+        $data['status'] = 1; // this would be zero 0, 1 for certain time only
         $data['code'] = self::memberIdGenerate();
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
@@ -361,5 +361,9 @@ class MemberController extends Controller
         } else {
             return Redirect::to('/')->send();
         }
+    }
+
+    public function testMail(){
+        Mail::to('sabbir.h2668@gmail.com')->send(new SendMail("Test Mail", "Hello this is a test mail from server"));
     }
 }

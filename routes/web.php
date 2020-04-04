@@ -56,9 +56,9 @@ Route::post('/history/update/{id}', 'AdminController@historyUpdate')->name('hist
 Route::get('/all-about', 'AdminController@all_about')->middleware('admin');
 Route::get('/add-about', 'AdminController@add_about')->middleware('admin');
 Route::post('/save-about', 'AdminController@save_about')->middleware('admin');
-Route::get('/delete-about/{about_id}','AdminController@delete_about')->middleware('admin');
-Route::get('/edit-about/{about_id}','AdminController@edit_about')->middleware('admin');
-Route::post('/update-about/{about_id}','AdminController@update_about')->middleware('admin');
+Route::get('/delete-about/{about_id}', 'AdminController@delete_about')->middleware('admin');
+Route::get('/edit-about/{about_id}', 'AdminController@edit_about')->middleware('admin');
+Route::post('/update-about/{about_id}', 'AdminController@update_about')->middleware('admin');
 
 
 
@@ -67,9 +67,9 @@ Route::post('/update-about/{about_id}','AdminController@update_about')->middlewa
 Route::get('/add-service', 'AdminController@add_service')->middleware('admin');
 Route::get('/all-service', 'AdminController@all_service')->middleware('admin');
 Route::post('/save-service', 'AdminController@save_service')->middleware('admin');
-Route::get('/delete-service/{service_id}','AdminController@delete_service')->middleware('admin');
-Route::get('/edit-service/{service_id}','AdminController@edit_service')->middleware('admin');
-Route::post('/update-service/{service_id}','AdminController@update_service')->middleware('admin');
+Route::get('/delete-service/{service_id}', 'AdminController@delete_service')->middleware('admin');
+Route::get('/edit-service/{service_id}', 'AdminController@edit_service')->middleware('admin');
+Route::post('/update-service/{service_id}', 'AdminController@update_service')->middleware('admin');
 
 
 
@@ -94,9 +94,9 @@ Route::get('/event/show-people/{event_id}', 'AdminController@showPeople')->name(
 
 Route::get('/join', 'ContentController@join_event');
 Route::get('/view-all-event', 'ContentController@view_event');
-Route::get('/delete-event/{event_id}','AdminController@delete_event');
-Route::get('/edit-event/{event_id}','AdminController@edit_event');
-Route::post('/update-event/{event_id}','AdminController@update_event');
+Route::get('/delete-event/{event_id}', 'AdminController@delete_event');
+Route::get('/edit-event/{event_id}', 'AdminController@edit_event');
+Route::post('/update-event/{event_id}', 'AdminController@update_event');
 
 
 
@@ -107,9 +107,9 @@ Route::get('/add-image', 'AdminController@add_image')->middleware('admin');
 Route::post('/save-image', 'AdminController@save_image')->middleware('admin');
 Route::get('/all-image', 'AdminController@all_image')->middleware('admin');
 Route::get('/view-all', 'ContentController@view_all');
-Route::get('/delete-image/{image_id}','AdminController@delete_image')->middleware('admin');
-Route::get('/edit-image/{image_id}','AdminController@edit_image')->middleware('admin');
-Route::post('/update-image/{image_id}','AdminController@update_image');
+Route::get('/delete-image/{image_id}', 'AdminController@delete_image')->middleware('admin');
+Route::get('/edit-image/{image_id}', 'AdminController@edit_image')->middleware('admin');
+Route::post('/update-image/{image_id}', 'AdminController@update_image');
 
 
 
@@ -120,7 +120,7 @@ Route::get('/full-history', 'ContentController@full_history');
 
 //profile
 Route::get('/profile', 'ContentController@profile');
-Route::post('/update-member','ContentController@update_profile');
+Route::post('/update-member', 'ContentController@update_profile');
 Route::get('/member-profile', 'ContentController@member_profile');
 
 
@@ -177,4 +177,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/remove-dash-id', 'MemberController@removeDashMemberId');
-
+Route::get('/test-mail', 'MemberController@testMail');
