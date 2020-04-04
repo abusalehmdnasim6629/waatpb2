@@ -281,4 +281,19 @@ class ContentController extends Controller
       return Redirect::to('/');
     }
   }
+
+
+  public function member_profile(){
+
+    return view('member_profile');
+     
+
+  }
+  
+
+
+
+
+
+
 }

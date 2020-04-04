@@ -94,7 +94,7 @@ class MemberController extends Controller
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
         $data['status'] = 0;
-        $data['code'] = memberIdGenerate(6);
+        $data['code'] = self::memberIdGenerate(6);
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
@@ -345,4 +345,6 @@ class MemberController extends Controller
             return Redirect::to('/')->send();
         }
     }
+
+    
 }

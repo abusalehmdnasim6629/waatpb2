@@ -129,6 +129,11 @@
 							<h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>About</h4>
 							<table class="table table-hover table-striped">
 								<tbody>
+							     	<tr>
+										<td>
+											<strong>Member id: </strong>{{$pro->code}}
+										</td>
+									</tr>
 									<tr>
 										<td>
 											<strong>Department: </strong> {{$pro->department}}

@@ -21,6 +21,10 @@
        <div class="col-md">
         <table>
            <tr>
+           <td><b> Member id : </b></td>
+           <td>{{$result->code}}</td>
+           </tr>
+           <tr>
            <td><b> Name : </b></td>
            <td>{{$result->member_name}}</td>
            </tr>
