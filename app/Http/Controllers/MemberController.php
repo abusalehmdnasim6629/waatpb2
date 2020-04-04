@@ -110,7 +110,7 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['status'] = 0;
+        $data['status'] = 1;
         $data['code'] = self::memberIdGenerate();
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
