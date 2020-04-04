@@ -49,7 +49,7 @@ class MemberController extends Controller
 
         $last = 1;
         foreach ($mebers as $member) {
-            $last = DB::table('tbl_member')->count();
+            //$last = DB::table('tbl_member')->count();
             if (strlen($last) == 1) {
                 $last = '000' . $last;
             }
@@ -86,7 +86,7 @@ class MemberController extends Controller
     public function save_member(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+            'image' => 'required|image|mimes:jpeg,png|max:2000',
             'pass' => 'required|min:6',
 
 
