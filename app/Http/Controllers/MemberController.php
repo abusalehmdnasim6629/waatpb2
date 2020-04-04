@@ -141,7 +141,7 @@ class MemberController extends Controller
                         DB::table('tbl_member')->insert($data);
                         $rsub = "Registration conformation";
                         $rmsg = "Thank you for registration";
-                        //Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
+                        Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
                         Alert::success('Successful', 'Thank you for registration');
                         return Redirect::to('/member-registration');
                     } else {
@@ -296,7 +296,7 @@ class MemberController extends Controller
             $code = rand(10000, 99999);
             $rmsg = "Yor code is : " . $code;
             Session::put('cd', $code);
-            // Mail::to($email)->send(new SendMail($rsub, $rmsg));
+            Mail::to($email)->send(new SendMail($rsub, $rmsg));
             Alert::success('Send code', 'Code has been sent to your email');
             return Redirect::to('/code');
         } else {
