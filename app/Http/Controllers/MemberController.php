@@ -48,6 +48,7 @@ class MemberController extends Controller
         $mebers = DB::table('tbl_member')->get();
 
         foreach ($mebers as $member) {
+
             $code = str_replace("-", "", $member->code);
 
             DB::table('tbl_member')->where('member_id', $member->member_id)->update(['code' => $code]);
@@ -68,7 +69,7 @@ class MemberController extends Controller
     public function save_member(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+            'image' => 'required|image|mimes:jpeg,png|max:2000',
             'pass' => 'required|min:6',
 
 
