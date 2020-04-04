@@ -130,7 +130,7 @@
 							<div class="form-group">
 								<label class="control-label" for="email">Upload image</label>
 								<input type="file" name="image" required="">
-								<span>[Image should be 200x200]</span>
+								<span>[Image should be 2Mb or less]</span>
 
 							</div>
 						</div>

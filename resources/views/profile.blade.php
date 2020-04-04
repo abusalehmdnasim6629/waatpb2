@@ -276,6 +276,7 @@
 							<label class="col-lg-3 col-form-label form-control-label">Image</label>
 							<div class="col-lg-9">
 								<input class="form-control" type="file" name="image" >
+								<span>[Image should be 2Mb or less]</span>
 							</div>
 						</div>
 
