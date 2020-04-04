@@ -1,6 +1,8 @@
 @extends('layouts.webview')
 
 @section('content')
+@include('sweetalert::alert')
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 <div class="site-breadcrumb-title" style="background: url(assets/img/breadcrumb/breadcrumb.png)">
 	<h2>Profile</h2>
 	<div class="main-breadcrumb">

@@ -92,12 +92,12 @@ class MemberController extends Controller
         $data['contact_number'] = $request->contact;
         $data['present_organization'] = $request->po;
         $data['blood_group'] = $request->b_g;
-        $data['status'] = 0;
+        $data['status'] = 1;
         $data['code'] = self::memberIdGenerate(6);
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
-
+        
         $check = DB::table('tbl_member')
             ->where('email_address', $request->email)
             ->where('contact_number', $request->contact)
@@ -121,11 +121,16 @@ class MemberController extends Controller
                     if ($success) {
                         $data['image'] = $image_url;
                         DB::table('tbl_member')->insert($data);
+
+                        $l_check = DB::table('tbl_member')
+                                ->where('email_address',$request->email)
+                                ->first();
                         $rsub = "Registration conformation";
                         $rmsg = "Thank you for registration";
                         //Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
                         Alert::success('Successful', 'Thank you for registration');
-                        return Redirect::to('/member-registration');
+                        Session::put('lcheck',$l_check->member_id);
+                        return Redirect::to('/profile');
                     } else {
                         Alert::warning('Fail', 'Please enter valid input');
                         return Redirect::to('/member-registration');
