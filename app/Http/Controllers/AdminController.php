@@ -696,4 +696,24 @@ class AdminController extends Controller
     }
 
 
+
+
+    public function search_member(Request $request){
+           
+       $email = $request->email;
+       $result = DB::table('tbl_member')
+        ->where('email_address','like','%'.$email.'%')
+        ->first();
+      // return $result->email_address;
+       if($result){
+         
+            return view('admin.member_search')->with('result',$result);
+
+       } else{
+
+        Alert::warning('Not found', 'Member is not registered');
+        return Redirect::to('all-member');
+       }
+
+    }
 }

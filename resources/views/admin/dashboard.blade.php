@@ -56,16 +56,31 @@
 				</span>
 			</div>
 			<div class="app-header__content">
+			
 				<div class="app-header-left">
+				
 					<div class="search-wrapper">
 						<div class="input-holder">
-							<input type="text" class="search-input" placeholder="Type to search">
+						
+							<input type="email" class="search-input" name="email" placeholder="Search for registered member">
 							<button class="search-icon"><span></span></button>
+							
 						</div>
 						<button class="close"></button>
 					</div>
+					
 				</div>
+				
 				<div class="app-header-right">
+				<form action="{{url('/search-member')}}" method="POST" enctype="multipart/form-data">
+				          	@csrf
+				
+						
+							<input type="email" class="search-input" name="email" placeholder="Search by email">
+							<button type="submit"><span>Search</span></button>
+							
+						
+				</form>
 					<div class="header-btn-lg pr-0">
 						<div class="widget-content p-0">
 							<div class="widget-content-wrapper">
