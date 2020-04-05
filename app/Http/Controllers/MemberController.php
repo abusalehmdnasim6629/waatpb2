@@ -74,7 +74,7 @@ class MemberController extends Controller
     public function save_member(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png|max:2000',
+            'image' => 'nullable|image|mimes:jpeg,png|max:2000',
             'pass' => 'required|min:6',
 
 
@@ -113,8 +113,8 @@ class MemberController extends Controller
             if ($request->pass == $request->c_pass) {
 
 
+                // if ($request->hasfile('image')) {
                 if ($request->hasfile('image')) {
-
                     $image = $request->file('image');
 
                     $image_name = Str::random(20);
@@ -123,29 +123,30 @@ class MemberController extends Controller
                     $upload_path = public_path() . '/image/';
                     $image_url = 'image/' . $image_full_name;
                     $success = $image->move($upload_path, $image_full_name);
-
-                    if ($success) {
-                        $data['image'] = $image_url;
-                        DB::table('tbl_member')->insert($data);
-
-                        $l_check = DB::table('tbl_member')
-                            ->where('email_address', $request->email)
-                            ->first();
-                        $rsub = "Registration conformation";
-                        $rmsg = "Thank you for registration";
-                        Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
-                        Alert::success('Successful', 'Thank you for registration');
-                        Session::put('lcheck', $l_check->member_id);
-                        return Redirect::to('/profile');
-                    } else {
-                        Alert::warning('Fail', 'Please enter valid input');
-                        return Redirect::to('/member-registration');
-                    }
-                } else {
-
-                    Alert::warning('Fail', 'Please upload image');
-                    return Redirect::to('/member-registration');
+                    $data['image'] = $image_url;
                 }
+                // if ($success) {
+
+                DB::table('tbl_member')->insert($data);
+
+                $l_check = DB::table('tbl_member')
+                    ->where('email_address', $request->email)
+                    ->first();
+                $rsub = "Registration conformation";
+                $rmsg = "Thank you for registration";
+                Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
+                Alert::success('Successful', 'Thank you for registration');
+                Session::put('lcheck', $l_check->member_id);
+                return Redirect::to('/profile');
+                // } else {
+                //     Alert::warning('Fail', 'Please enter valid input');
+                //     return Redirect::to('/member-registration');
+                // }
+                // } else {
+
+                //     Alert::warning('Fail', 'Please upload image');
+                //     return Redirect::to('/member-registration');
+                // }
             } else {
                 Alert::warning('Fail', 'Password and confirm password is not matched');
                 return Redirect::to('/member-registration');
