@@ -45,27 +45,15 @@ class MemberController extends Controller
 
     public function removeDashMemberId()
     {
-        $mebers = DB::table('tbl_member')->get();
+        $mebers = DB::table('tbl_mem')->get();
 
-        $last = 1;
+
         foreach ($mebers as $member) {
-            //$last = DB::table('tbl_member')->count();
-            if (strlen($last) == 1) {
-                $last = '000' . $last;
-            }
-            if (strlen($last) == 2) {
-                $last = '00' . $last;
-            }
-            if (strlen($last) == 3) {
-                $last = '0' . $last;
-            }
-
-            $code = substr(date('Y'), -2) . '-' . $last;
-
-            DB::table('tbl_member')->where('member_id', $member->member_id)->update(['code' => $code]);
-            $last++;
+            DB::table('tbl_member')->where('email_address', $member->email_address)->update(['code' => $member->code]);
         }
     }
+
+
 
     public static function memberIdGenerate()
     {
@@ -115,7 +103,7 @@ class MemberController extends Controller
         // $data['member_skill'] = "";
         // $data['member_hobby'] = "";
 
-        
+
         $check = DB::table('tbl_member')
             ->where('email_address', $request->email)
             ->where('contact_number', $request->contact)
@@ -141,13 +129,13 @@ class MemberController extends Controller
                         DB::table('tbl_member')->insert($data);
 
                         $l_check = DB::table('tbl_member')
-                                ->where('email_address',$request->email)
-                                ->first();
+                            ->where('email_address', $request->email)
+                            ->first();
                         $rsub = "Registration conformation";
                         $rmsg = "Thank you for registration";
                         Mail::to($data['email_address'])->send(new SendMail($rsub, $rmsg));
                         Alert::success('Successful', 'Thank you for registration');
-                        Session::put('lcheck',$l_check->member_id);
+                        Session::put('lcheck', $l_check->member_id);
                         return Redirect::to('/profile');
                     } else {
                         Alert::warning('Fail', 'Please enter valid input');
@@ -368,7 +356,8 @@ class MemberController extends Controller
         }
     }
 
-    public function testMail(){
+    public function testMail()
+    {
         Mail::to('sabbir.h2668@gmail.com')->send(new SendMail("Test Mail", "Hello this is a test mail from server"));
     }
 }
