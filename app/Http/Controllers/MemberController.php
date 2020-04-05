@@ -173,7 +173,7 @@ class MemberController extends Controller
             if (Hash::check($request->password, $l_check->password)) {
                 Session::put('lcheck', $l_check->member_id);
                 Alert::success('success', 'Login successfully');
-                return Redirect::to('/');
+                return Redirect::to('/profile');
             } else {
                 Alert::warning('fail', 'Login unsuccessfull');
                 return Redirect::to('/');
