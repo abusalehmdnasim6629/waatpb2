@@ -176,11 +176,11 @@ class MemberController extends Controller
                 Alert::success('success', 'Login successfully');
                 return Redirect::to('/profile');
             } else {
-                Alert::warning('fail', 'Login unsuccessfull');
+                Alert::warning('fail', 'Login unsuccessfull, Password not mathced!');
                 return Redirect::to('/');
             }
         } else {
-            Alert::warning('fail', 'Login unsuccessfull');
+            Alert::warning('fail', 'Login unsuccessfull, Email not found!');
             return Redirect::to('/');
         }
     }
