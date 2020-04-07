@@ -53,10 +53,20 @@ class AdminController extends Controller
 
         $result = DB::table('tbl_member')
             ->select('tbl_member.*')
-            ->where('status',1)
+            ->where('status', 1)
             ->get();
 
         return view('admin.all_member')->with('result', $result);
+    }
+
+    public function makePaid($member_id)
+    {
+
+        $result = DB::table('tbl_member')
+            ->where('member_id', $member_id)
+            ->update(['is_paid' => 1]);
+
+        return \redirect()->back();
     }
 
     public function add_job()
@@ -438,7 +448,7 @@ class AdminController extends Controller
 
     public function save_about(Request $request)
     {
-       
+
 
 
         $about = array();
@@ -446,12 +456,11 @@ class AdminController extends Controller
         $about['about_mission'] = $request->a_mission;
         $about['about_vision'] = $request->a_vision;
         $about['about_member'] = $request->a_member;
-        
-              
-                DB::table('tbl_about')->insert($about);
-                Alert::success('Successful', 'Add about successfully');
-                return Redirect::to('/add-about');
-           
+
+
+        DB::table('tbl_about')->insert($about);
+        Alert::success('Successful', 'Add about successfully');
+        return Redirect::to('/add-about');
     }
 
 
@@ -492,20 +501,19 @@ class AdminController extends Controller
 
     public function update_about(Request $request, $about_id)
     {
-       
+
 
         $about = array();
         $about['about_description'] = $request->a_des;
         $about['about_mission'] = $request->a_mission;
         $about['about_vision'] = $request->a_vision;
         $about['about_member'] = $request->a_member;
-                
-                DB::table('tbl_about')
-                    ->where('about_id', $about_id)
-                    ->update($about);
-                Alert::success('Successful', 'Update about successfully');
-                return Redirect::to('/all-about');
-           
+
+        DB::table('tbl_about')
+            ->where('about_id', $about_id)
+            ->update($about);
+        Alert::success('Successful', 'Update about successfully');
+        return Redirect::to('/all-about');
     }
 
     public function delete_member($member_id)
@@ -612,61 +620,59 @@ class AdminController extends Controller
                     ->update($event);
                 Alert::success('Successful', 'Image updated successfully');
                 return Redirect::to('/all-image');
-            } 
+            }
         }
     }
-   
-    public function member_info($member_id){
-         
+
+    public function member_info($member_id)
+    {
+
 
         $result = DB::table('tbl_member')
-                ->where('member_id',$member_id)
-                ->first();
+            ->where('member_id', $member_id)
+            ->first();
 
-        return view('admin.member_details')->with('result',$result);
-
-
+        return view('admin.member_details')->with('result', $result);
     }
 
 
-    public function member_request(){
-         
+    public function member_request()
+    {
+
 
         $result = DB::table('tbl_member')
-                ->where('status',0)
-                ->get();
+            ->where('status', 0)
+            ->get();
 
-        return view('admin.member_request')->with('result',$result);
-
-
+        return view('admin.member_request')->with('result', $result);
     }
 
-    public function member_aproval($member_id){
+    public function member_aproval($member_id)
+    {
 
         $result = DB::table('tbl_member')
-        ->where('member_id',$member_id)
-        ->first();
+            ->where('member_id', $member_id)
+            ->first();
 
-       return view('admin.member_approval')->with('result',$result);
-
-
+        return view('admin.member_approval')->with('result', $result);
     }
 
-    public function accept_member($member_id){
-       
+    public function accept_member($member_id)
+    {
+
         $status = array();
         $status['status'] = 1;
-        
-       
+
+
         $email = DB::table('tbl_member')
-                ->where('member_id',$member_id)
-                ->first();
+            ->where('member_id', $member_id)
+            ->first();
 
         $em = $email->email_address;
-        
+
         DB::table('tbl_member')
-        ->where('member_id',$member_id)
-        ->update($status);
+            ->where('member_id', $member_id)
+            ->update($status);
         $rsub = "Registration conformation";
         $rmsg = "Your member request has been accepted";
         Mail::to($em)->send(new SendMail($rsub, $rmsg));
@@ -674,19 +680,20 @@ class AdminController extends Controller
         return Redirect::to('/all-member-request');
     }
 
-    public function reject_member($member_id){
-       
+    public function reject_member($member_id)
+    {
+
         $status = array();
         $status['status'] = 2;
-        
+
         $email = DB::table('tbl_member')
-                ->where('member_id',$member_id)
-                ->first();
+            ->where('member_id', $member_id)
+            ->first();
         $em = $email->email_address;
-             
+
         DB::table('tbl_member')
-        ->where('member_id',$member_id)
-        ->update($status);
+            ->where('member_id', $member_id)
+            ->update($status);
 
         $rsub = "Registration conformation";
         $rmsg = "Your member request has been rejected";
@@ -698,22 +705,21 @@ class AdminController extends Controller
 
 
 
-    public function search_member(Request $request){
-           
-       $email = $request->email;
-       $result = DB::table('tbl_member')
-        ->where('email_address','like','%'.$email.'%')
-        ->first();
-      // return $result->email_address;
-       if($result){
-         
-            return view('admin.member_search')->with('result',$result);
+    public function search_member(Request $request)
+    {
 
-       } else{
+        $email = $request->email;
+        $result = DB::table('tbl_member')
+            ->where('email_address', 'like', '%' . $email . '%')
+            ->first();
+        // return $result->email_address;
+        if ($result) {
 
-        Alert::warning('Not found', 'Member is not registered');
-        return Redirect::to('all-member');
-       }
+            return view('admin.member_search')->with('result', $result);
+        } else {
 
+            Alert::warning('Not found', 'Member is not registered');
+            return Redirect::to('all-member');
+        }
     }
 }

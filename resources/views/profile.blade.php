@@ -91,23 +91,26 @@
 @endif
 <div class="container" style="padding:10px;">
 	<div class="row m-y-2 pd-2">
-	    <div class="col-lg-4 pull-lg-8 text-xs-center pd-5" style="margin-top:3%;">
+		<div class="col-lg-4 pull-lg-8 text-xs-center pd-5" style="margin-top:3%;">
 			<img src="{{$pro->image}}" style="width:200px;height:200px;" class="m-x-auto img-fluid img-circle"
 				alt="avatar">
-				<h4 class="m-y-2 " style="margin-top:20px;">{{$pro->member_name}}</h4>
+			<h4 class="m-y-2 " style="margin-top:20px;">{{$pro->member_name}}</h4>
 		</div>
 		<div class="col-lg-8 push-lg-4">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+					<a href="#profile" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
 				</li>
 				<li class="nav-item">
-					<a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+					<a href="#edit" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+				</li>
+				<li class="nav-item">
+					<a href="#setting" data-target="#setting" data-toggle="tab" class="nav-link">Settings</a>
 				</li>
 			</ul>
 			<div class="tab-content p-b-3 mt-5">
 				<div class="tab-pane active" id="profile">
-					
+
 					<div class="row">
 						<div class="col-md-6">
 							<h6>Designation</h6>
@@ -131,7 +134,7 @@
 							<h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>About</h4>
 							<table class="table table-hover table-striped">
 								<tbody>
-							     	<tr>
+									<tr>
 										<td>
 											<strong>Member id: </strong>{{$pro->code}}
 										</td>
@@ -264,18 +267,13 @@
 								<input class="form-control" type="text" name="nid" value="{{$pro->nid}}">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Set new password</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="password" name="pass" >
-							</div>
-						</div>
+
 
 
 						<div class="form-group row">
 							<label class="col-lg-3 col-form-label form-control-label">Image</label>
 							<div class="col-lg-9">
-								<input class="form-control" type="file" name="image" >
+								<input class="form-control" type="file" name="image">
 								<span>[Image should be 2Mb or less]</span>
 							</div>
 						</div>
@@ -289,9 +287,33 @@
 						</div>
 					</form>
 				</div>
+
+				<div class="tab-pane" id="setting">
+					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
+					<form role="form" action="{{url('/change-password')}}" method="post">
+						{{csrf_field()}}
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label form-control-label">Old Password</label>
+							<div class="col-lg-9">
+								<input class="form-control" type="password" name="old_password" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label form-control-label">New Password</label>
+							<div class="col-lg-9">
+								<input class="form-control" type="password" name="password" required>
+							</div>
+						</div>
+
+						<button class="btn btn-success btn-lg float-right" type="submit">Change Password</button>
+
+					</form>
+				</div>
+
 			</div>
 		</div>
-		
+
 	</div>
 
 	<!-- placehold.it/150 -->
