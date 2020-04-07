@@ -85,6 +85,7 @@
 				@endforeach
 
 			</table>
+			{{$result->links()}}
 		</div>
 	</div>
 	<!--/span-->

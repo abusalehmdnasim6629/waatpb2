@@ -54,7 +54,7 @@ class AdminController extends Controller
         $result = DB::table('tbl_member')
             ->select('tbl_member.*')
             ->where('status', 1)
-            ->get();
+            ->paginate(20);
 
         return view('admin.all_member')->with('result', $result);
     }
