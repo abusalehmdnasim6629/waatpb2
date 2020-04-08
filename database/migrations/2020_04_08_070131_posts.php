@@ -18,6 +18,7 @@ class Posts extends Migration
             $table->integer('member_id');
             $table->string('title');
             $table->string('description');
+            $table->string('post_image');
             $table->string('date');
             $table->timestamps();
         });

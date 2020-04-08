@@ -64,6 +64,7 @@ a:hover { text-decoration:none; }
                 <div class="controls mb-3">
                     <textarea class="form-control " name="s_post" required=" " placeholder="Write post "  rows="3"></textarea>
                 </div>
+                <input type="file" class="form-control mb-2 mt-5" name="image" placeholder="Enter title">
             </div>
             <button type="submit" class="btn btn-info float-right">
 						Add post
@@ -101,7 +102,7 @@ a:hover { text-decoration:none; }
                     <div class="row post-content">
                         <div class="col-md-3">
                             <a href="#">
-                                <img src="{{URL::to('assets/img/blog/blog3.jpg')}}" alt="" class="img-responsive">
+                                <img src="{{URL::to($r->post_image)}}" alt="" class="img-responsive">
                             </a>
                         </div>
                         <div class="col-md-9">

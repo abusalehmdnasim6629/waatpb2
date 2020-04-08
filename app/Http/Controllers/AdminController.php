@@ -871,11 +871,33 @@ class AdminController extends Controller
         $post['description'] = $request->s_post;
         $post['date'] = date('Y-m-d');
         $post['member_id'] = $member_id;
+        if ($request->hasfile('image')) {
 
-        DB::table('posts')->insert($post);
-        Alert::success('Successful', 'post added successfully');
-        return Redirect::to('/blog');
+            $image = $request->file('image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $post['post_image'] = $image_url;
+                DB::table('posts')->insert($post);
+                Alert::success('Successful', 'post added successfully');
+                return Redirect::to('/blog');
+            }
         }else{
+            $post['post_image'] = "";
+            DB::table('posts')->insert($post);
+            Alert::success('Successful', 'post added successfully');
+            return Redirect::to('/blog');
+
+        }
+
+
+      }   else{
 
 
             Alert::warning('Fail', 'please login first');
