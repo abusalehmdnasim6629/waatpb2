@@ -850,4 +850,59 @@ class AdminController extends Controller
          
         return $res->member_name;
     }
+
+    public function blog(){
+        
+
+
+      $result =  DB::table('posts')
+           ->join('tbl_member','posts.member_id','=','tbl_member.member_id')    
+           ->select('posts.*','tbl_member.*')
+           ->get();
+
+        return view('blog')->with('result',$result);
+    }
+
+    public function save_post(Request $request){
+        $member_id = Session::get('lcheck');
+        if($member_id){  
+        $post = array(); 
+        $post['title'] = $request->title;
+        $post['description'] = $request->s_post;
+        $post['date'] = date('Y-m-d');
+        $post['member_id'] = $member_id;
+
+        DB::table('posts')->insert($post);
+        Alert::success('Successful', 'post added successfully');
+        return Redirect::to('/blog');
+        }else{
+
+
+            Alert::warning('Fail', 'please login first');
+            return Redirect::to('/blog');
+        }
+
+    }
+
+    public function save_comment(Request $request,$id){
+        $member_id = Session::get('lcheck');
+        if($member_id){  
+             $cm = array();
+             $cm['post_id'] = $id;
+             $cm['member_id'] = $member_id;
+             $cm['comment'] = $request->comment;
+             $cm['date'] = date('Y-m-d');
+
+            DB::table('comments')->insert($cm);
+            
+            Alert::success('Successful', 'Comment added successfully');
+            return Redirect::to('/blog');
+        }else{
+
+
+            Alert::warning('Fail', 'please login first');
+            return Redirect::to('/blog');
+        }
+
+    }
 }

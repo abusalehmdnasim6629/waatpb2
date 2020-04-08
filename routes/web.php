@@ -191,3 +191,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/remove-dash-id', 'MemberController@removeDashMemberId');
 Route::get('/test-mail', 'MemberController@testMail');
+
+//blog
+Route::get('/blog', 'AdminController@blog');
+Route::post('/save-post', 'AdminController@save_post');
+Route::post('/save-comment/{id}', 'AdminController@save_comment');
+
+
+

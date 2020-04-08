@@ -211,18 +211,13 @@
                         data: { name: name },
                         success: function(response)
                         {
-                           // document.getElementById('price').value = response;
+                           
                           console.log(response);
                            
                           $('#mymodal').modal('show');
                         }
                     });
-
-                //  // 
-
             });
 
-    });
-    
-    
+    }); 
     </script>

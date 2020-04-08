@@ -32,6 +32,8 @@
                             </li>
                             <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{request()->is('/') ? '#gallary' : url('view-all')}}">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-menu"
+                                    href="{{URL::to('/blog')}}">Blog</a></li>
                             <?php 
 								$lg = Session::get('lcheck');
 								if($lg!=null){								
