@@ -327,7 +327,7 @@ class AdminController extends Controller
             Alert::success('Successful', 'Header updated successfully!');
             return redirect()->route('header.all');
         } else {
-            Alert::success('fail', 'Header updated failed!');
+            Alert::warning('fail', 'Header updated failed!');
             return redirect()->back();
         }
     }
@@ -715,5 +715,133 @@ class AdminController extends Controller
         return Redirect::to('all-member');
        }
 
+    }
+
+    public function add_advertisement(){
+
+          return view('admin.add_advertisement');
+
+    }
+
+    public function save_advertisement(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ad_image' => 'required|image|mimes:jpeg,png|max:20000|dimensions:width=800,height=600',
+
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                ->back()
+                ->withErrors($validator);
+        }
+
+        $add = array();
+        $add['advertisement_title'] = $request->ad_title;
+        $add['advertisement_description'] = $request->ad_description;
+        
+        if ($request->hasfile('ad_image')) {
+            
+            $image = $request->file('ad_image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name .'.'.$ext;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/'.$image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success){
+                $add['advertisement_image'] = $image_url;
+                DB::table('tbl_advertisement')->insert($add);
+                Alert::success('Successful', 'Add advertisement successfully');
+                return Redirect::to('/add-advertisement');
+            }
+        }
+    }
+
+    public function all_advertisement()
+    {
+
+        $result = DB::table('tbl_advertisement')
+            ->select('tbl_advertisement.*')
+            ->get();
+
+        return view('admin.all_advertisement')->with('result', $result);
+    }
+    public function edit_advertisement($advertisement_id)
+    {
+
+        $result =  DB::table('tbl_advertisement')
+            ->where('advertisement_id', $advertisement_id)
+            ->first();
+
+        return view('admin.edit_advertisement')->with('result', $result);
+    }   
+
+    public function update_advertisement(Request $request, $advertisement_id)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'ad_image' => 'required|image|mimes:jpeg,png|max:20000|dimensions:width=800,height=600',
+
+        ]);
+      
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+                ->back()
+                ->withErrors($validator);
+        }
+        $add = array();
+        $add['advertisement_title'] = $request->ad_title;
+        $add['advertisement_description'] = $request->ad_description;
+        if ($request->hasfile('ad_image')) {
+
+            $image = $request->file('ad_image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $add['advertisement_image'] = $image_url;
+                DB::table('tbl_advertisement')
+                    ->where('advertisement_id', $advertisement_id)
+                    ->update($add);
+
+                Alert::success('Successful', 'Update advertisement successfully');
+                return Redirect::to('/all-advertisement');
+            }
+        }
+    }
+    public function delete_advertisement($advertisement_id)
+    {
+
+        DB::table('tbl_advertisement')
+            ->where('advertisement_id', $advertisement_id)
+            ->delete();
+
+        Alert::success('Successful', 'Advertisement deleted successfully');
+        return Redirect::to('/all-advertisement');
+    }
+
+
+
+    public function getmember()      {
+                 
+              
+        $name = $_GET['name'];
+        
+        $res = DB::table('tbl_member')
+                ->select('tbl_member.*')
+                ->where('member_name','LIKE','%'.$name.'%')
+                ->first();
+         
+        return $res->member_name;
     }
 }

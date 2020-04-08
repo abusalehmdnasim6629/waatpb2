@@ -183,7 +183,35 @@
 		</div>
 	</div>
 	<!-- End History -->
+     <!-- start advertisement -->
+   
+	 <div class="event-area bg de-padding" id="event">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 offset-xl-2">
+					<div class="site-title">
+						<h2>Advertisement</h2>
+					</div>
+				</div>
+			</div>
+			<div class="event-wrapper grid-3">
+				<?php foreach($advertisement as $a){ ?>
+				<div class="event-box text-center">
+					<div class="event-img">
+						<img src="{{URL::to($a->advertisement_image)}}" alt="thumb">
+						
+					</div>
+					
+				</div>
+				<?php  } ?>
 
+
+			</div>
+		</div>
+		
+	</div>
+
+	 <!-- ende advertisement -->
 	<!-- Start Event
 		============================================= -->
 	<div class="event-area bg de-padding" id="event">

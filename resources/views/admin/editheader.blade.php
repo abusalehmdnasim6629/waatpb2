@@ -1,6 +1,7 @@
 @extends('admin.dashboard')
 @section('admin_content')
-
+@include('sweetalert::alert')
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 <ul class="breadcrumb">
 	<li>
 		<i class="icon-home"></i>
@@ -13,7 +14,7 @@
 <div class="row-fluid sortable">
 	<div class="box span12">
 		{{-- <div class="box-header" data-original-title>
-			<h2><i class="halflings-icon user"></i><span class="break"></span>Members</h2>
+			<h2><i class="halflings-icon user"></i><span class="break"></span>Header</h2>
 			<div class="box-icon">
 				<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 				<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>

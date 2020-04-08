@@ -335,6 +335,28 @@
 										</a>
 									</li>
 								</ul>
+								<li>
+								<a href="#">
+									<i class="metismenu-icon fa fa-gavel"></i>
+									Advertisment
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-advertisement')}}">
+											<i class="metismenu-icon"></i>
+											All advertisment
+										</a>
+									</li>
+									<li>
+										<a href="{{URL::to('/add-advertisement')}}">
+											<i class="metismenu-icon"></i>
+											Add advertisment
+										</a>
+									</li>
+
+								</ul>
+							</li>
 							</li>
 						</ul>
 					</div>

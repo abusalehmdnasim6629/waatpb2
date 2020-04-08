@@ -58,6 +58,9 @@ class ContentController extends Controller
       ->where('service_title', 'like', '%' . 'database' . '%')
       ->first();
 
+    $advertisement =  DB::table('tbl_advertisement')
+      ->limit(3)
+      ->get();
 
 
 
@@ -65,7 +68,19 @@ class ContentController extends Controller
 
 
 
-    return view('welcome')->with('about', $about)->with('history', $history)->with('header', $header)->with('event', $event)->with('gallary', $gallary)->with('welfare', $welfare)->with('job', $job)->with('research', $research)->with('blood', $blood)->with('training', $training)->with('database', $database);
+    return view('welcome')
+            ->with('about', $about)
+            ->with('history', $history)
+            ->with('header', $header)
+            ->with('advertisement',$advertisement)
+            ->with('event', $event)
+            ->with('gallary', $gallary)
+            ->with('welfare', $welfare)
+            ->with('job', $job)
+            ->with('research', $research)
+            ->with('blood', $blood)
+            ->with('training', $training)
+            ->with('database', $database);
 
     $login_check =  Session::get('lcheck');
     $e_id =  Session::get('e_id');

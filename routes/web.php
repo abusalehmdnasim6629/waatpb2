@@ -74,8 +74,13 @@ Route::get('/edit-service/{service_id}', 'AdminController@edit_service')->middle
 Route::post('/update-service/{service_id}', 'AdminController@update_service')->middleware('admin');
 
 
-
-
+//advertisement
+Route::get('/add-advertisement', 'AdminController@add_advertisement')->middleware('admin');
+Route::post('/save-advertisement', 'AdminController@save_advertisement')->middleware('admin');
+Route::get('/all-advertisement', 'AdminController@all_advertisement')->middleware('admin');
+Route::get('/edit-advertisement/{advertisement_id}', 'AdminController@edit_advertisement')->middleware('admin');
+Route::post('/update-advertisement/{advertisement_id}', 'AdminController@update_advertisement')->middleware('admin');
+Route::get('/delete-advertisement/{advertisement_id}', 'AdminController@delete_advertisement')->middleware('admin');
 
 
 
@@ -152,6 +157,9 @@ Route::post('/submit-code', 'MemberController@submit_code');
 Route::get('/new-password', 'MemberController@n_pass');
 Route::post('/reset-password', 'MemberController@reset_password');
 Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact.mail');
+
+//Search
+Route::get('/getmember/{name}','AdminController@getmember');
 
 /**
  * 1. password increaption - 1

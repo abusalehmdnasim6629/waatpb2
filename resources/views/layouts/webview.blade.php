@@ -34,9 +34,48 @@
 	  <script src="assets/js/html5/html5shiv.min.js"></script>
 	  <script src="assets/js/html5/respond.min.js"></script>
 	<![endif]-->
+    <style>
+     .bg-area {
+            height: 800px;
+        }
 
+        .bg-area::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            RIGHT: 0;
+            height: 100%;
+            width: 75%;
+            background-color: #404040;
+            z-index: -2;
+        }
+
+        .bg-area::after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 35%;
+            background-color: #6b7c72;
+            z-index: -2;
+        }
+
+        .member-image {
+            height: 565px;
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        .member-text-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
     
-
+    </style>
+    
 </head>
 
 <body>
@@ -95,6 +134,9 @@
         </div>
     </div>
     <!-- end popup -->
+    
+    
+
     <!-- jQuery Frameworks 
             ============================================= -->
 
