@@ -17,25 +17,21 @@
                             <li class="nav-item"><a class="nav-link smooth-menu" href="{{URL::to('/')}}">Home</a>
                             </li>
                             @if (request()->is('/'))
-                            <li class="nav-item"><a class="nav-link smooth-menu" href="#about"
-                                    >About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-menu" href="#about">About</a></li>
                             @endif
 
                             @if (request()->is('/'))
-                            <li class="nav-item"><a class="nav-link smooth-menu" href="#service"
-                                    >Services</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-menu" href="#service">Services</a></li>
                             @endif
 
                             <li class="nav-item"><a class="nav-link smooth-menu"
-                                    href="{{request()->is('/') ? '#history' : url('full-history')}}"
-                                    >History</a></li>
+                                    href="{{request()->is('/') ? '#history' : url('full-history')}}">History</a></li>
                             <li class="nav-item"><a class="nav-link smooth-menu"
-                                    href="{{request()->is('/') ? '#event' : url('view-all-event')}}"
-                                    >Event</a></li>
+                                    href="{{request()->is('/') ? '#event' : url('view-all-event')}}">Event</a></li>
                             <li class="nav-item"><a class="nav-link smooth-menu" href="{{url('/career')}}">Career</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link smooth-menu" href="{{request()->is('/') ? '#gallary' : url('view-all')}}" 
-                                    >Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-menu"
+                                    href="{{request()->is('/') ? '#gallary' : url('view-all')}}">Gallery</a></li>
                             <?php 
 								$lg = Session::get('lcheck');
 								if($lg!=null){								
@@ -48,9 +44,10 @@
 
                             <?php }else{ ?>
                             <li class="nav-item"><a class="nav-link" href="#port-popup">Login</a></li>
-                            <?php } ?>
                             <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{URL::to('/member-registration')}}">Member</a></li>
+                            <?php } ?>
+
 
                         </ul>
                     </div>

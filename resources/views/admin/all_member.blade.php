@@ -39,7 +39,8 @@
 								  <th>Designation</th>
 								  <th>Department</th> -->
 
-						<th>Action</th>
+						<th class="text-center">Member Type</th>
+						<th class="text-center">Action</th>
 
 					</tr>
 				</thead>
@@ -60,7 +61,12 @@
                                 <td class="center">{{ $ct->present_organization}}</td>
                                 <td class="center">{{ $ct->designation}}</td>
                                 <td class="center">{{ $ct->department}}</td> -->
+						<td class="text-center">{{$ct->is_paid == 1 ? 'Paid' : 'Unpaid'}} <br>
+							@if ($ct->is_paid == 0)
+							<a href="{{route('make.paid',$ct->member_id)}}" class="btn btn-success btn-sm">Make Paid</a>
+							@endif
 
+						</td>
 						<td class="center">
 							<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$ct->member_id)}}">
 								<i class="fa fa-eye white eye"></i>
@@ -79,6 +85,7 @@
 				@endforeach
 
 			</table>
+			{{$result->links()}}
 		</div>
 	</div>
 	<!--/span-->

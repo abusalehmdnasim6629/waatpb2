@@ -28,6 +28,8 @@ Route::get('/admin', 'AdminController@admin')->name('admin.home')->middleware('a
 //member
 Route::get('/delete-member/{member_id}', 'AdminController@delete_member')->middleware('admin');
 Route::get('/all-member', 'AdminController@all_member')->middleware('admin');
+Route::get('/member/make-paid/{member_id}', 'AdminController@makePaid')->name('make.paid')->middleware('admin');
+
 Route::get('/member-info/{member_id}', 'AdminController@member_info')->middleware('admin');
 Route::get('/all-member-request', 'AdminController@member_request')->middleware('admin');
 Route::get('/requested-member-info/{member_id}', 'AdminController@member_aproval')->middleware('admin');
@@ -129,6 +131,7 @@ Route::get('/full-history', 'ContentController@full_history');
 Route::get('/profile', 'ContentController@profile');
 Route::post('/update-member', 'ContentController@update_profile');
 Route::get('/member-profile', 'ContentController@member_profile');
+Route::post('/change-password', 'ContentController@changePassowrd');
 
 
 
