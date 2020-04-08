@@ -54,6 +54,11 @@ a:hover { text-decoration:none; }
 </div>
 
 <main class="main">  
+<?php 
+ $mid = Session::get('lcheck');
+
+?>
+@if($mid)
 <div class="container">
    <div class="row">
        <div class="col-md-6">
@@ -73,6 +78,7 @@ a:hover { text-decoration:none; }
        </div>
    </div>
 </div>
+@endif
 <!-- style="background: url(assets/img/breadcrumb/breadcrumb.png)" -->
 <div class="container">
     <div class="row">
