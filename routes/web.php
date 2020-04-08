@@ -196,6 +196,10 @@ Route::get('/test-mail', 'MemberController@testMail');
 Route::get('/blog', 'AdminController@blog');
 Route::post('/save-post', 'AdminController@save_post');
 Route::post('/save-comment/{id}', 'AdminController@save_comment');
+Route::get('/like/{p_id}','AdminController@like');
+Route::get('/unlike/{p_id}','AdminController@unlike');
+
+
 
 
 

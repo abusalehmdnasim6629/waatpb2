@@ -117,7 +117,19 @@ a:hover { text-decoration:none; }
                             </p>
                             <p>
                                 <a class="btn btn-read-more" href="#">Read more</a></p>
-                                <p><a class="fa fa-thumbs-o-up" href="#"><span style="margin-left:2px;">like</span></a></p>   
+                                <?php  $p_id = $r->id;
+                                        $m_id = Session::get('lcheck');
+                                    $lk =   DB::table('likes')->where('post_id',$p_id)
+                                         ->where('member_id',$m_id)
+                                         ->count();
+                                
+                                
+                                ?>
+                                @if($lk == 0 )
+                                <p><a class="fa fa-thumbs-o-up" href="{{URL::to('/like',$p_id)}}" >like</a></p> 
+                                @else
+                                <p><a class="fa fa-thumbs-o-up text-info" href="{{URL::to('/unlike',$p_id)}}" >like</a></p> 
+                                @endif
                             <p><a  class="fa fa-comment-o" href="#"><span style="margin-left:2px;">comment</span></a></p>  
                             <div class="col-md-6">
                                     <form action="{{url('/save-comment',$r->id )}}" method="POST" enctype="multipart/form-data">
@@ -132,6 +144,9 @@ a:hover { text-decoration:none; }
                                         </button>
                                     </form>
                             </div>
+                            <input type="hidden" id="member" value="{{Session::get('lcheck')}}">
+                            <input type="hidden" id="post" value="{{$r->id}}">
+                            <!-- <span style="margin-left:2px;">like</span> -->
                         </div>
                     </div>
                 </div>
@@ -148,7 +163,31 @@ a:hover { text-decoration:none; }
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
-   
+<script>
+     $(document).ready(function(){
+            $('#like').click(function(){
+
+                var m_id = $('#member').val();
+                var p_id = $('#post').val();
+
+        
+                    $.ajax({
+                        url: 'like',
+                        type: 'post',
+                        data: { m_id: m_id,
+                            p_id=p_id },
+                        success: function(response)
+                        {
+                           
+                          console.log(response);
+                           
+                         
+                        }
+                    });
+            });
+
+    }); 
+    </script>
 
 
 @endsection

@@ -927,4 +927,38 @@ class AdminController extends Controller
         }
 
     }
+
+    public function like($p_id){
+
+          
+          $m_id =  Session::get('lcheck');
+          $like = array();
+
+          $like['post_id'] = $p_id;
+          $like['member_id'] = $m_id;
+          $like['date'] = date('Y-m-d');
+         if($m_id){
+          DB::table('likes')->insert($like);
+          return Redirect::to('/blog');
+         }else{
+            Alert::warning('Fail', 'You have to login');
+            return Redirect::to('/blog');
+
+         }
+          
+    }
+    public function unlike($p_id){
+
+          
+        $m_id =  Session::get('lcheck');
+
+
+        DB::table('likes')
+          ->where('member_id',$m_id)
+          ->where('post_id',$p_id)
+          ->delete();
+        return Redirect::to('/blog');
+        
+        
+  }
 }
