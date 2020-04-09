@@ -17,7 +17,7 @@ class AddIsPaidColumnOnMemberTbl extends Migration
             $table->tinyInteger('is_paid')->default(0);
         });
     }
-
+   
     /**
      * Reverse the migrations.
      *

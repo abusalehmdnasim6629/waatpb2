@@ -27,22 +27,16 @@
 		<div class="box-content">
 			<table class="table table-striped table-bordered bootstrap-datatable datatable">
 				<thead>
-					<tr>
-						<th>Sl</th>
-						<th>Member Id</th>
-						<th>Member name</th>
-						<th>Image</th>
-						<th>Email</th>
-						<!-- <th>NID</th>
-								  <th>Contact Number</th>
-								  <th>Present Org.</th>
-								  <th>Designation</th>
-								  <th>Department</th> -->
-
+					
+						<th class="text-center">Sl</th>
+						<th class="text-center">Member Id</th>
+						<th class="text-center">Member name</th>
+						<th class="text-center">Image</th>
+						<th class="text-center">Email</th>
 						<th class="text-center">Member Type</th>
 						<th class="text-center">Action</th>
 
-					</tr>
+					
 				</thead>
 				@php
 				$i = 1;
@@ -51,11 +45,11 @@
 				@foreach($result as $ct)
 				<tbody>
 					<tr>
-						<td>{{$i}}</td>
-						<td>{{ $ct->code}}</td>
-						<td class="center">{{ $ct->member_name}}</td>
-						<td><img src="{{URL::to($ct->image)}}" alt="member image" style="height:70px; width:70px">
-						<td class="center">{{ $ct->email_address}}</td>
+						<td class="text-center">{{$i}}</td>
+						<td class="text-center">{{ $ct->code}}</td>
+						<td class="text-center">{{ $ct->member_name}}</td>
+						<td class="text-center"><img src="{{URL::to($ct->image)}}" alt="member image" style="height:70px; width:70px">
+						<td class="text-center">{{ $ct->email_address}}</td>
 						<!-- <td class="center">{{ $ct->nid}}</td>
                                 <td class="center">{{ $ct->contact_number}}</td>
                                 <td class="center">{{ $ct->present_organization}}</td>
@@ -67,7 +61,7 @@
 							@endif
 
 						</td>
-						<td class="center">
+						<td class="text-center">
 							<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$ct->member_id)}}">
 								<i class="fa fa-eye white eye"></i>
 							</a>

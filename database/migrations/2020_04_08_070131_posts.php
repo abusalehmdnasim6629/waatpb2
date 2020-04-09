@@ -20,6 +20,7 @@ class Posts extends Migration
             $table->string('description');
             $table->string('post_image');
             $table->string('date');
+            $table->integer('status');
             $table->timestamps();
         });
     }

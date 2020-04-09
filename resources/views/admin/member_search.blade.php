@@ -28,18 +28,12 @@
 			<table class="table table-striped table-bordered bootstrap-datatable datatable">
 				<thead>
 					<tr>
-						<th>Sl</th>
-						<th>Member Id</th>
-						<th>Member name</th>
-						<th>Image</th>
-						<th>Email</th>
-						<!-- <th>NID</th>
-								  <th>Contact Number</th>
-								  <th>Present Org.</th>
-								  <th>Designation</th>
-								  <th>Department</th> -->
-
-						<th>Action</th>
+						<th class="text-center">Sl</th>
+						<th class="text-center">Member Id</th>
+						<th class="text-center">Member name</th>
+						<th class="text-center">Image</th>
+						<th class="text-center">Email</th>
+						<th class="text-center">Action</th>
 
 					</tr>
 				</thead>
@@ -50,19 +44,22 @@
 			
 				<tbody>
 					<tr>
-						<td>{{$i}}</td>
-						<td>{{ $result->code}}</td>
-						<td class="center">{{ $result->member_name}}</td>
-						<td><img src="{{URL::to($result->image)}}" alt="member image" style="height:70px; width:70px">
-						<td class="center">{{ $result->email_address}}</td>
+						<td class="text-center">{{$i}}</td>
+						<td class="text-center">{{ $result->code}}</td>
+						<td class="text-center">{{ $result->member_name}}</td>
+						<td class="text-center"><img src="{{URL::to($result->image)}}" alt="member image" style="height:70px; width:70px">
+						<td class="text-center">{{ $result->email_address}}</td>
 						
 
-						<td class="center">
+						<td class="text-center">
 							<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$result->member_id)}}">
 								<i class="fa fa-eye white eye"></i>
 							</a>
 							<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$result->member_id)}}">
 								<i class="fa fa-trash white trash"></i>
+							</a>
+							<a class="btn btn-info btn-sm"  href="{{URL::to('/member-edit/'.$result->member_id)}}">
+									<i class="fa fa-edit white edit"></i>
 							</a>
 						</td>
 					</tr>
