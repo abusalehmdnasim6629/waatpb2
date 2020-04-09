@@ -961,4 +961,65 @@ class AdminController extends Controller
         
         
   }
+
+  public function edit_member($member_id){
+
+       $result = DB::table('tbl_member')
+           ->where('member_id',$member_id)
+           ->first();
+
+       return view('admin.edit_member')->with('result',$result);    
+
+  }
+
+    public function update_member(Request $request,$member_id){
+      $validator = Validator::make($request->all(), [
+            'image' => 'nullable|image|mimes:jpeg,png|max:2000',
+            
+            
+
+
+        ]);
+        $member = array();
+        $member['member_name'] = $request->name;
+        $member['email_address'] = $request->email;
+        $member['contact_number'] = $request->contact;
+        $member['code'] = $request->code;
+        $member['present_organization'] = $request->p_o;
+        $member['present_address'] = $request->p_a;
+        $member['blood_group'] = $request->b_g;
+        $member['department'] = $request->department;
+        $member['designation'] = $request->designation;
+        $member['member_skill'] = $request->skill;
+        $member['member_hobby'] = $request->hobby;
+        if ($request->hasfile('image')) {
+
+            $image = $request->file('image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $member['image'] = $image_url;
+                DB::table('tbl_member')
+                   ->where('member_id',$member_id)
+                   ->update($member);
+                Alert::success('Successful', 'member updated successfully');
+                return Redirect::to('/all-member');
+            }
+
+        }else{
+
+            DB::table('tbl_member')
+                   ->where('member_id',$member_id)
+                   ->update($member);
+                Alert::success('Successful', 'member updated successfully');
+                return Redirect::to('/all-member');
+        }
+    }
+
 }

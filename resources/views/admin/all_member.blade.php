@@ -74,6 +74,9 @@
 							<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
 								<i class="fa fa-trash white trash"></i>
 							</a>
+							<a class="btn btn-info btn-sm"  href="{{URL::to('/member-edit/'.$ct->member_id)}}">
+									<i class="fa fa-edit white edit"></i>
+							</a>
 						</td>
 					</tr>
 

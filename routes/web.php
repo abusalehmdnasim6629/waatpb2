@@ -36,6 +36,10 @@ Route::get('/requested-member-info/{member_id}', 'AdminController@member_aproval
 Route::get('/accept-member/{member_id}', 'AdminController@accept_member')->middleware('admin');
 Route::get('/reject-member/{member_id}', 'AdminController@reject_member')->middleware('admin');
 Route::post('/search-member', 'AdminController@search_member')->middleware('admin');
+Route::get('/member-edit/{member_id}', 'AdminController@edit_member')->middleware('admin');
+Route::post('/update-member/{member_id}', 'AdminController@update_member')->middleware('admin');
+
+
 
 
 
