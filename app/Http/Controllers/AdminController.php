@@ -710,7 +710,7 @@ class AdminController extends Controller
 
         $email = $request->email;
         $result = DB::table('tbl_member')
-            ->where('email_address', 'like', '%' . $email . '%')
+            ->where('email_address', 'like'. '%' . $email . '%')
             ->first();
         // return $result->email_address;
         if ($result) {

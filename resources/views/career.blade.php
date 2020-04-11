@@ -72,12 +72,12 @@
      $result = Session::get('lcheck');
      Session::put('join',$result);
      
-       if($result != null){
+if($result != null){
      ?>
 <ul class="breadcrumb">
 	<li>
 		<i class="icon-home"></i>
-		<a href="{{url::to('/career')}}">Career</a>
+		<a href="{{URL::to('/career')}}">Career</a>
 		<i class="icon-angle-right"></i>
 	</li>
 
