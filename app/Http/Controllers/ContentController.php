@@ -63,6 +63,9 @@ class ContentController extends Controller
       ->limit(3)
       ->get();
 
+     $g_category= DB::table('gallary_category')
+                  ->get(); 
+
 
 
 
@@ -76,6 +79,7 @@ class ContentController extends Controller
             ->with('advertisement',$advertisement)
             ->with('event', $event)
             ->with('gallary', $gallary)
+            ->with('g_category', $g_category)
             ->with('welfare', $welfare)
             ->with('job', $job)
             ->with('research', $research)
@@ -249,8 +253,9 @@ class ContentController extends Controller
   public function view_all()
   {
 
-
-    return view('gallary');
+   $gallary = DB::table('tbl_gallary')
+       ->paginate(9);
+    return view('gallary')->with('gallary',$gallary);
   }
 
 

@@ -34,7 +34,24 @@
 						<h3>Image title</h3>
 						<input type="text" class="form-control" name="i_title"  required="">
 					</div>
-					
+					<div class="col-sm-12 col-md-4 col-lg-4">
+					<div class="form-group">
+					        <h3>category</h3>
+								
+								  <select id="selectError3" name="category_id" class="form-control">
+                                  <option >Select category</option>
+
+                                  <?php
+                                    $all_category = DB::table('gallary_category')
+                                                ->get();
+                                    foreach($all_category as $c){?>
+									<option value="{{$c->id}}">{{ $c->category}}</option>
+            	
+                                    <?php } ?>
+								  </select>
+								
+					</div>
+					</div>
 					
 
 					<div class="form-group">

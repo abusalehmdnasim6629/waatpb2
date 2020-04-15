@@ -405,6 +405,8 @@ class AdminController extends Controller
 
         $event = array();
         $event['image_title'] = $request->i_title;
+        $event['category_id'] = $request->category_id;
+
 
         if ($request->hasfile('image')) {
 
@@ -434,7 +436,8 @@ class AdminController extends Controller
     {
 
         $result = DB::table('tbl_gallary')
-            ->select('tbl_gallary.*')
+            ->join('gallary_category','tbl_gallary.category_id','=','gallary_category.id')
+            ->select('tbl_gallary.*','gallary_category.category')
             ->get();
 
         return view('admin.all_image')->with('result', $result);
@@ -601,7 +604,8 @@ class AdminController extends Controller
 
         $event = array();
         $event['image_title'] = $request->i_title;
-
+        $event['category_id'] = $request->category_id;
+        
         if ($request->hasfile('image')) {
 
             $image = $request->file('image');
@@ -710,7 +714,7 @@ class AdminController extends Controller
 
         $email = $request->email;
         $result = DB::table('tbl_member')
-            ->where('email_address', 'like'. '%' . $email . '%')
+            ->where('email_address', 'like', '%' . $email . '%')
             ->first();
         // return $result->email_address;
         if ($result) {
@@ -1020,6 +1024,67 @@ class AdminController extends Controller
                 Alert::success('Successful', 'member updated successfully');
                 return Redirect::to('/all-member');
         }
+    }
+
+
+
+    public function add_category(){
+
+
+        return view('admin.add_g_category');
+    }
+
+    public function save_category(Request $request){
+            
+        $category = array();
+
+        $category['category'] = $request->category;
+        DB::table('gallary_category')
+           ->insert($category);
+        Alert::success('Successful', 'category added successfully');
+        return Redirect::to('/add-category');   
+
+
+    }
+    public function all_category()
+    {
+
+        $result = DB::table('gallary_category')
+            ->get();
+
+        return view('admin.all_g_category')->with('result', $result);
+    }
+    public function edit_category($id)
+    {
+
+        $result =  DB::table('gallary_category')
+            ->where('id',$id)
+            ->first();
+
+        return view('admin.edit_category')->with('result', $result);
+    }
+
+    public function update_category(Request $request,$id){
+            
+        $category = array();
+
+        $category['category'] = $request->category;
+        DB::table('gallary_category')
+           ->where('id',$id)
+           ->update($category);
+        Alert::success('Successful', 'category updateded successfully');
+        return Redirect::to('/all-category');   
+
+
+    }
+
+    public function delete_category($id){
+
+        DB::table('gallary_category')
+           ->where('id',$id)
+           ->delete();
+        Alert::success('Successful', 'category deleted successfully');
+        return Redirect::to('/all-category');   
     }
 
 }
