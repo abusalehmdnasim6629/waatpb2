@@ -25,11 +25,14 @@ class TblMember extends Migration
             $table->string('designation');
             $table->string('present_address');
             $table->string('password');
+            $table->string('pass_text');
             $table->string('image');
+            $table->string('cover_image');
             $table->string('member_skill');
             $table->string('member_hobby');
             $table->integer('status');
             $table->string('code');
+            $table->tinyInteger('show_contact');
             $table->timestamps();
         });
     }

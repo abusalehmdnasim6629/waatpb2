@@ -89,17 +89,28 @@
 	</ul>
 </div>
 @endif
-<div class="container" style="padding:10px;">
-	<div class="row m-y-2 pd-2">
-		<div class="col-lg-4 pull-lg-8 text-xs-center pd-5" style="margin-top:3%;">
-			<img src="{{$pro->image}}" style="width:200px;height:200px;" class="m-x-auto img-fluid img-circle"
+<div class="container" style="padding:10px;background-color:#f5f5f5;">
+  
+	<div class="row pd-2">
+		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;"  class="position-relative"
 				alt="avatar">
-			<h4 class="m-y-2 " style="margin-top:20px;">{{$pro->member_name}}</h4>
+	    
+			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
+				alt="avatar">
+				
+		
+			
 		</div>
-		<div class="col-lg-8 push-lg-4">
+	</div>
+	<div class="row m-y-2 pd-2 " >
+		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
+			    <li class="nav-item">
+					<a href="#timeline" data-target="#timeline" data-toggle="tab" class="nav-link active">Timeline</a>
+				</li>
 				<li class="nav-item">
-					<a href="#profile" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+					<a href="#profile" data-target="#profile" data-toggle="tab" class="nav-link ">Profile</a>
 				</li>
 				<li class="nav-item">
 					<a href="#edit" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
@@ -108,10 +119,41 @@
 					<a href="#setting" data-target="#setting" data-toggle="tab" class="nav-link">Settings</a>
 				</li>
 			</ul>
+		   <?php 
+		   
+			$post = DB::table('posts')
+			   ->where('member_id',Session::get('lcheck'))
+			   ->get();
+		    ?>
+
 			<div class="tab-content p-b-3 mt-5">
-				<div class="tab-pane active" id="profile">
+
+
+			   <div class="tab-pane active" id="timeline">
+				  <div class="row">
+					<div class="col-md-12">
+					@foreach($post as $p)
+					    <div class="col-md-8">
+						<h4 class="m-y-2" style="padding:10px;">{{$p->title}}</h4>
+						<img src="{{$p->post_image}}" style="width:200px;height:200px;" class="mx-auto img-fluid img-circle image-responsive"
+				           alt="post">
+						</div>
+					    <div class="col-md-12">
+					      
+					      <p class="mt-2">
+						    {{$p->description}}
+						  </p>
+                        </div>
+					@endforeach	
+					</div>
+				   </div>
+				</div>
+				<div class="tab-pane" id="profile">
 
 					<div class="row">
+					    <div class="col-md-12">
+						<h4 class="m-y-2 text-center" style="margin-top:30px;">{{$pro->member_name}}</h4>
+						</div>
 						<div class="col-md-6">
 							<h6>Designation</h6>
 							<p>
@@ -121,8 +163,8 @@
 							<p>
 								{{$pro->member_hobby}}
 							</p>
-						</div>
-						<div class="col-md-6">
+					
+						
 							<h6>Skills</h6>
 							<p>
 								{{$pro->member_skill}}
@@ -178,9 +220,14 @@
 					<!--/row-->
 				</div>
 				<div class="tab-pane" id="edit">
+				  <div class="row">
+					    <div class="col-md-12">
 					<h4 class="m-y-2" style="padding:10px;">Edit Profile</h4>
-					<form role="form" action="{{url('/update-member')}}" method="post" enctype="multipart/form-data">
+					
+					 <form role="form" action="{{url('/update-member')}}" method="post" enctype="multipart/form-data">
 						{{csrf_field()}}
+					<div class="row">
+					  <div class="col-md-6">	
 						<div class="form-group row">
 							<label class="col-lg-3 col-form-label form-control-label">Name</label>
 							<div class="col-lg-9">
@@ -244,6 +291,8 @@
 								</select>
 							</div>
 						</div>
+						</div>
+						<div class="col-md-6">
 						<div class="form-group row">
 							<label class="col-lg-3 col-form-label form-control-label">Hobby</label>
 							<div class="col-lg-9">
@@ -273,7 +322,15 @@
 						<div class="form-group row">
 							<label class="col-lg-3 col-form-label form-control-label">Image</label>
 							<div class="col-lg-9">
-								<input class="form-control" type="file" name="image">
+								<input class="form-control-file" type="file" name="image">
+								<span>[Image should be 2Mb or less]</span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label form-control-label">Cover image</label>
+							<div class="col-lg-9">
+								<input class="form-control-file" type="file" name="cover_image">
 								<span>[Image should be 2Mb or less]</span>
 							</div>
 						</div>
@@ -285,10 +342,16 @@
 								<input type="submit" class="btn btn-primary" value="Save Changes">
 							</div>
 						</div>
+						</div>
+						</div>		
 					</form>
+					  </div>
+					</div>
 				</div>
 
 				<div class="tab-pane" id="setting">
+				  <div class="row">
+					    <div class="col-md-12">
 					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
 					<form role="form" action="{{url('/change-password')}}" method="post">
 						{{csrf_field()}}
@@ -309,9 +372,12 @@
 						<button class="btn btn-success btn-lg float-right" type="submit">Change Password</button>
 
 					</form>
+					 </div>
+					</div>
 				</div>
 
 			</div>
+		</div>
 		</div>
 
 	</div>
