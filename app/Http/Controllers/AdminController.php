@@ -723,10 +723,10 @@ class AdminController extends Controller
         }
     }
 
-    public function add_advertisement(){
+    public function add_advertisement()
+    {
 
-          return view('admin.add_advertisement');
-
+        return view('admin.add_advertisement');
     }
 
     public function save_advertisement(Request $request)
@@ -746,19 +746,19 @@ class AdminController extends Controller
         $add = array();
         $add['advertisement_title'] = $request->ad_title;
         $add['advertisement_description'] = $request->ad_description;
-        
+
         if ($request->hasfile('ad_image')) {
-            
+
             $image = $request->file('ad_image');
 
             $image_name = Str::random(20);
             $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name .'.'.$ext;
+            $image_full_name = $image_name . '.' . $ext;
             $upload_path = public_path() . '/image/';
-            $image_url = 'image/'.$image_full_name;
+            $image_url = 'image/' . $image_full_name;
             $success = $image->move($upload_path, $image_full_name);
 
-            if ($success){
+            if ($success) {
                 $add['advertisement_image'] = $image_url;
                 DB::table('tbl_advertisement')->insert($add);
                 Alert::success('Successful', 'Add advertisement successfully');
@@ -784,7 +784,7 @@ class AdminController extends Controller
             ->first();
 
         return view('admin.edit_advertisement')->with('result', $result);
-    }   
+    }
 
     public function update_advertisement(Request $request, $advertisement_id)
     {
@@ -793,7 +793,7 @@ class AdminController extends Controller
             'ad_image' => 'required|image|mimes:jpeg,png|max:20000|dimensions:width=800,height=600',
 
         ]);
-      
+
         if ($validator->fails()) {
             $errors = $validator->errors();
             return redirect()
@@ -838,145 +838,158 @@ class AdminController extends Controller
 
 
 
-    public function getmember()      {
-                 
-              
+    public function getmember()
+    {
+
+
         $name = $_GET['name'];
-        
+
         $res = DB::table('tbl_member')
-                ->select('tbl_member.*')
-                ->where('member_name','LIKE','%'.$name.'%')
-                ->first();
-         
+            ->select('tbl_member.*')
+            ->where('member_name', 'LIKE', '%' . $name . '%')
+            ->first();
+
         return $res->member_name;
     }
 
-    public function blog(){
-        
+    public function memberSuggest($value)
+    {
+        $res = DB::table('tbl_member')
+            ->select('*')
+            ->where('member_name', 'LIKE', '%' . $value . '%')
+            ->orWhere('member_id', 'LIKE', '%' . $value . '%')
+            ->limit(10, 'DESC')
+            ->get();
 
-
-      $result =  DB::table('posts')
-           ->join('tbl_member','posts.member_id','=','tbl_member.member_id')    
-           ->select('posts.*','tbl_member.*')
-           ->get();
-
-        return view('blog')->with('result',$result);
+        return $res;
     }
 
-    public function save_post(Request $request){
+    public function memberIdividual($id)
+    {
+        $result = DB::table('tbl_member')->select('member_id', 'code', 'member_name', 'email_address', 'contact_number', 'nid', 'present_organization', 'blood_group', 'department', 'designation', 'present_address', 'image', 'member_skill', 'member_hobby', 'status')->where('member_id', $id)->first();
+        return response()->json($result);
+    }
+
+    public function blog()
+    {
+        $result =  DB::table('posts')
+            ->join('tbl_member', 'posts.member_id', '=', 'tbl_member.member_id')
+            ->select('posts.*', 'tbl_member.*')
+            ->get();
+
+        return view('blog')->with('result', $result);
+    }
+
+    public function save_post(Request $request)
+    {
         $member_id = Session::get('lcheck');
-        if($member_id){  
-        $post = array(); 
-        $post['title'] = $request->title;
-        $post['description'] = $request->s_post;
-        $post['date'] = date('Y-m-d');
-        $post['member_id'] = $member_id;
-        if ($request->hasfile('image')) {
+        if ($member_id) {
+            $post = array();
+            $post['title'] = $request->title;
+            $post['description'] = $request->s_post;
+            $post['date'] = date('Y-m-d');
+            $post['member_id'] = $member_id;
+            if ($request->hasfile('image')) {
 
-            $image = $request->file('image');
+                $image = $request->file('image');
 
-            $image_name = Str::random(20);
-            $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name . '.' . $ext;
-            $upload_path = public_path() . '/image/';
-            $image_url = 'image/' . $image_full_name;
-            $success = $image->move($upload_path, $image_full_name);
+                $image_name = Str::random(20);
+                $ext = strtolower($image->getClientOriginalExtension());
+                $image_full_name = $image_name . '.' . $ext;
+                $upload_path = public_path() . '/image/';
+                $image_url = 'image/' . $image_full_name;
+                $success = $image->move($upload_path, $image_full_name);
 
-            if ($success) {
-                $post['post_image'] = $image_url;
+                if ($success) {
+                    $post['post_image'] = $image_url;
+                    DB::table('posts')->insert($post);
+                    Alert::success('Successful', 'post added successfully');
+                    return Redirect::to('/blog');
+                }
+            } else {
+                $post['post_image'] = "";
                 DB::table('posts')->insert($post);
                 Alert::success('Successful', 'post added successfully');
                 return Redirect::to('/blog');
             }
-        }else{
-            $post['post_image'] = "";
-            DB::table('posts')->insert($post);
-            Alert::success('Successful', 'post added successfully');
-            return Redirect::to('/blog');
-
-        }
-
-
-      }   else{
+        } else {
 
 
             Alert::warning('Fail', 'please login first');
             return Redirect::to('/blog');
         }
-
     }
 
-    public function save_comment(Request $request,$id){
+    public function save_comment(Request $request, $id)
+    {
         $member_id = Session::get('lcheck');
-        if($member_id){  
-             $cm = array();
-             $cm['post_id'] = $id;
-             $cm['member_id'] = $member_id;
-             $cm['comment'] = $request->comment;
-             $cm['date'] = date('Y-m-d');
+        if ($member_id) {
+            $cm = array();
+            $cm['post_id'] = $id;
+            $cm['member_id'] = $member_id;
+            $cm['comment'] = $request->comment;
+            $cm['date'] = date('Y-m-d');
 
             DB::table('comments')->insert($cm);
-            
+
             Alert::success('Successful', 'Comment added successfully');
             return Redirect::to('/blog');
-        }else{
+        } else {
 
 
             Alert::warning('Fail', 'please login first');
             return Redirect::to('/blog');
         }
-
     }
 
-    public function like($p_id){
+    public function like($p_id)
+    {
 
-          
-          $m_id =  Session::get('lcheck');
-          $like = array();
 
-          $like['post_id'] = $p_id;
-          $like['member_id'] = $m_id;
-          $like['date'] = date('Y-m-d');
-         if($m_id){
-          DB::table('likes')->insert($like);
-          return Redirect::to('/blog');
-         }else{
+        $m_id =  Session::get('lcheck');
+        $like = array();
+
+        $like['post_id'] = $p_id;
+        $like['member_id'] = $m_id;
+        $like['date'] = date('Y-m-d');
+        if ($m_id) {
+            DB::table('likes')->insert($like);
+            return Redirect::to('/blog');
+        } else {
             Alert::warning('Fail', 'You have to login');
             return Redirect::to('/blog');
-
-         }
-          
+        }
     }
-    public function unlike($p_id){
+    public function unlike($p_id)
+    {
 
-          
+
         $m_id =  Session::get('lcheck');
 
 
         DB::table('likes')
-          ->where('member_id',$m_id)
-          ->where('post_id',$p_id)
-          ->delete();
+            ->where('member_id', $m_id)
+            ->where('post_id', $p_id)
+            ->delete();
         return Redirect::to('/blog');
-        
-        
-  }
+    }
 
-  public function edit_member($member_id){
+    public function edit_member($member_id)
+    {
 
-       $result = DB::table('tbl_member')
-           ->where('member_id',$member_id)
-           ->first();
+        $result = DB::table('tbl_member')
+            ->where('member_id', $member_id)
+            ->first();
 
-       return view('admin.edit_member')->with('result',$result);    
+        return view('admin.edit_member')->with('result', $result);
+    }
 
-  }
-
-    public function update_member(Request $request,$member_id){
-      $validator = Validator::make($request->all(), [
+    public function update_member(Request $request, $member_id)
+    {
+        $validator = Validator::make($request->all(), [
             'image' => 'nullable|image|mimes:jpeg,png|max:2000',
-            
-            
+
+
 
 
         ]);
@@ -1006,20 +1019,18 @@ class AdminController extends Controller
             if ($success) {
                 $member['image'] = $image_url;
                 DB::table('tbl_member')
-                   ->where('member_id',$member_id)
-                   ->update($member);
+                    ->where('member_id', $member_id)
+                    ->update($member);
                 Alert::success('Successful', 'member updated successfully');
                 return Redirect::to('/all-member');
             }
-
-        }else{
+        } else {
 
             DB::table('tbl_member')
-                   ->where('member_id',$member_id)
-                   ->update($member);
-                Alert::success('Successful', 'member updated successfully');
-                return Redirect::to('/all-member');
+                ->where('member_id', $member_id)
+                ->update($member);
+            Alert::success('Successful', 'member updated successfully');
+            return Redirect::to('/all-member');
         }
     }
-
 }

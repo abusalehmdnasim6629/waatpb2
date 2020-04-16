@@ -166,7 +166,9 @@ Route::post('/reset-password', 'MemberController@reset_password');
 Route::post('/contact-mail', 'ContentController@sendContactMail')->name('contact.mail');
 
 //Search
-Route::get('/getmember/{name}','AdminController@getmember');
+Route::get('/getmember/{name}', 'AdminController@getmember');
+Route::get('/member-suggest/{value}', 'AdminController@memberSuggest')->name('member.suggest');
+Route::get('/individual-member/{id}', 'AdminController@memberIdividual');
 
 /**
  * 1. password increaption - 1
@@ -200,10 +202,5 @@ Route::get('/test-mail', 'MemberController@testMail');
 Route::get('/blog', 'AdminController@blog');
 Route::post('/save-post', 'AdminController@save_post');
 Route::post('/save-comment/{id}', 'AdminController@save_comment');
-Route::get('/like/{p_id}','AdminController@like');
-Route::get('/unlike/{p_id}','AdminController@unlike');
-
-
-
-
-
+Route::get('/like/{p_id}', 'AdminController@like');
+Route::get('/unlike/{p_id}', 'AdminController@unlike');
