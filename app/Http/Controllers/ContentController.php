@@ -63,6 +63,9 @@ class ContentController extends Controller
       ->limit(3)
       ->get();
 
+     $g_category= DB::table('gallary_category')
+                  ->get(); 
+
 
 
 
@@ -76,6 +79,7 @@ class ContentController extends Controller
             ->with('advertisement',$advertisement)
             ->with('event', $event)
             ->with('gallary', $gallary)
+            ->with('g_category', $g_category)
             ->with('welfare', $welfare)
             ->with('job', $job)
             ->with('research', $research)
@@ -126,10 +130,70 @@ class ContentController extends Controller
   }
   public function update_profile(Request $request)
   {
-    if ($request->pass != null) {
+    // if ($request->pass != null) {
+    //   $validator = Validator::make($request->all(), [
+    //     'image' => 'image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
+    //     'pass' => 'min:6',
+
+    //   ]);
+
+    //   if ($validator->fails()) {
+    //     $errors = $validator->errors();
+    //     return redirect()
+    //       ->back()
+    //       ->withErrors($validator);
+    //   }
+
+    //   $mid = Session::get('lcheck');
+    //   $data = array();
+    //   $data['member_name'] = $request->name;
+    //   $data['email_address'] = $request->email;
+    //   $data['nid'] = $request->nid;
+    //   $data['password'] = bcrypt($request->pass);
+    //   $data['pass-text'] = $request->pass;
+    //   $data['department'] = $request->department;
+    //   $data['present_address'] = $request->p_a;
+    //   $data['designation'] = $request->designation;
+
+
+
+    //   $data['contact_number'] = $request->contact_number;
+    //   $data['present_organization'] = $request->p_o;
+    //   $data['blood_group'] = $request->b_g;
+    //   $data['member_skill'] = $request->member_skill;
+    //   $data['member_hobby'] = $request->member_hobby;
+
+
+
+
+
+    //   if ($request->hasfile('image')) {
+
+    //     $image = $request->file('image');
+
+    //     $image_name = Str::random(20);
+    //     $ext = strtolower($image->getClientOriginalExtension());
+    //     $image_full_name = $image_name . '.' . $ext;
+    //     $upload_path = public_path() . '/image/';
+    //     $image_url = 'image/' . $image_full_name;
+    //     $success = $image->move($upload_path, $image_full_name);
+
+    //     if ($success) {
+    //       $data['image'] = $image_url;
+    //       DB::table('tbl_member')->where('member_id', $mid)->update($data);
+    //       return Redirect::to('/profile');
+    //     }
+    //   } else {
+
+
+    //     DB::table('tbl_member')->where('member_id', $mid)->update($data);
+    //     return Redirect::to('/profile');
+    //   }
+    // } else {
       $validator = Validator::make($request->all(), [
-        'image' => 'image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
-        'pass' => 'min:6',
+        'image' => 'image|mimes:jpeg,png|max:2000',
+        'cover_image' => 'image|mimes:jpeg,png|max:2000',
+
 
       ]);
 
@@ -145,7 +209,7 @@ class ContentController extends Controller
       $data['member_name'] = $request->name;
       $data['email_address'] = $request->email;
       $data['nid'] = $request->nid;
-      $data['password'] = bcrypt($request->pass);
+
       $data['department'] = $request->department;
       $data['present_address'] = $request->p_a;
       $data['designation'] = $request->designation;
@@ -175,54 +239,13 @@ class ContentController extends Controller
 
         if ($success) {
           $data['image'] = $image_url;
-          DB::table('tbl_member')->where('member_id', $mid)->update($data);
-          return Redirect::to('/profile');
+          
         }
-      } else {
+      } 
 
+      if ($request->hasfile('cover_image')) {
 
-        DB::table('tbl_member')->where('member_id', $mid)->update($data);
-        return Redirect::to('/profile');
-      }
-    } else {
-      $validator = Validator::make($request->all(), [
-        'image' => 'image|mimes:jpeg,png|max:2000|dimensions:width=200,height=200',
-
-
-      ]);
-
-      if ($validator->fails()) {
-        $errors = $validator->errors();
-        return redirect()
-          ->back()
-          ->withErrors($validator);
-      }
-
-      $mid = Session::get('lcheck');
-      $data = array();
-      $data['member_name'] = $request->name;
-      $data['email_address'] = $request->email;
-      $data['nid'] = $request->nid;
-
-      $data['department'] = $request->department;
-      $data['present_address'] = $request->p_a;
-      $data['designation'] = $request->designation;
-
-
-
-      $data['contact_number'] = $request->contact_number;
-      $data['present_organization'] = $request->p_o;
-      $data['blood_group'] = $request->b_g;
-      $data['member_skill'] = $request->member_skill;
-      $data['member_hobby'] = $request->member_hobby;
-
-
-
-
-
-      if ($request->hasfile('image')) {
-
-        $image = $request->file('image');
+        $image = $request->file('cover_image');
 
         $image_name = Str::random(20);
         $ext = strtolower($image->getClientOriginalExtension());
@@ -232,25 +255,28 @@ class ContentController extends Controller
         $success = $image->move($upload_path, $image_full_name);
 
         if ($success) {
-          $data['image'] = $image_url;
-          DB::table('tbl_member')->where('member_id', $mid)->update($data);
-          return Redirect::to('/profile');
+          $data['cover_image'] = $image_url;
+          
         }
-      } else {
+      } 
+      
+      
 
 
         DB::table('tbl_member')->where('member_id', $mid)->update($data);
         return Redirect::to('/profile');
-      }
-    }
+      
+      
+    
   }
 
 
   public function view_all()
   {
 
-
-    return view('gallary');
+   $gallary = DB::table('tbl_gallary')
+       ->paginate(9);
+    return view('gallary')->with('gallary',$gallary);
   }
 
 
@@ -301,11 +327,11 @@ class ContentController extends Controller
     $member = DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->first();
     
     if (Hash::check($request->old_password, $member->password)) {
-      DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->update(['password' => bcrypt($request->password)]);
+      DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->update(['password' => bcrypt($request->password),'pass_text' => $request->password]);
       Alert::success('Success', 'Password changed successfuly!');
       return redirect()->back();
     } else {
-      Alert::warning('Fail', 'Password not matched!');
+      Alert::error('Fail', 'Old password not matched!');
       return redirect()->back();
     }
   }

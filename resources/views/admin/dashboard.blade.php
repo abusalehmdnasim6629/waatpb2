@@ -211,6 +211,27 @@
 							<li>
 								<a href="#">
 									<i class="metismenu-icon fa fa-picture-o"></i>
+									Gallery category
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-category')}}">
+											<i class="metismenu-icon"></i>
+											All category
+										</a>
+									</li>
+									<li>
+										<a href="{{URL::to('/add-category')}}">
+											<i class="metismenu-icon"></i>
+											Add category
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">
+									<i class="metismenu-icon fa fa-picture-o"></i>
 									Gallery
 									<i class="fa fa-angle-down caret-left"></i>
 								</a>

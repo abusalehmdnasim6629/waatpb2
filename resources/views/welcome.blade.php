@@ -183,35 +183,7 @@
 		</div>
 	</div>
 	<!-- End History -->
-     <!-- start advertisement -->
    
-	 <div class="event-area bg de-padding" id="event">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-8 offset-xl-2">
-					<div class="site-title">
-						<h2>Advertisement</h2>
-					</div>
-				</div>
-			</div>
-			<div class="event-wrapper grid-3">
-				<?php foreach($advertisement as $a){ ?>
-				<div class="event-box text-center">
-					<div class="event-img">
-						<img src="{{URL::to($a->advertisement_image)}}" alt="thumb">
-						
-					</div>
-					
-				</div>
-				<?php  } ?>
-
-
-			</div>
-		</div>
-		
-	</div>
-
-	 <!-- ende advertisement -->
 	<!-- Start Event
 		============================================= -->
 	<div class="event-area bg de-padding" id="event">
@@ -270,24 +242,38 @@
 
 
 				<hr class="mt-2 mb-5">
-
-				<div class="row text-center text-lg-left">
-					<?php foreach($gallary as $g){ ?>
-					<div class="col-lg-3 col-md-4 col-6">
-						<a href="{{URL::to($g->image)}}" class="d-block mb-4 h-100">
-							<img class="img-fluid img-thumbnail" style="width:200px;height:200px;"
-								src="{{URL::to($g->image)}}" alt="image">
-						</a>
-					</div>
-					<?php } ?>
-
-
+                
+				<div class="row">
+				   @foreach($g_category as $gc)
+				   <div class="mx-2 col-md text-center bg-white border" style="border-color: transparent; ">
+				        <h4 class="mt-5">{{$gc->category}}</h4> 
+						<?php 
+						   $imageByCategory = DB::table('tbl_gallary')
+							  ->where('category_id',$gc->id)
+							  ->limit(6)
+							  ->get();
+						
+						?>
+						<div class="row">
+						@foreach($imageByCategory as $ibc)
+						<div class="col-md-6">
+							<a href="{{URL::to($ibc->image)}}" class="d-block mb-4 h-100">
+								<img class="img-fluid img-thumbnail" style="width:200px;height:200px;"
+									src="{{URL::to($ibc->image)}}" alt="image">
+							</a>
+					   </div>
+					   @endforeach
+					   </div>
+					   
+				   </div>
+				   
+				   @endforeach
+				
 				</div>
 
 			</div>
-
-			<div class="event-all text-center mt-30">
-				<a href="{{URL::to('/view-all')}}" class="theme-btn">View All</a>
+			<div class="event-all text-center mt-30 mb-5">
+						<a href="{{URL::to('/view-all')}}" class="theme-btn">View All</a>
 			</div>
 		</div>
 

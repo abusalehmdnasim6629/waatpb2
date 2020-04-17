@@ -67,17 +67,11 @@
 	<!-- End hero -->
 
 </main>
-<div style="padding:20px;">
-	<?php 
-	 $gallary =  DB::table('tbl_gallary')
-	          ->paginate(8);
-              
-    
-    
-    ?>
-	<div class="event-wrapper grid-4 pd-2 mb-5">
+<div class="container" style="padding:20px;">
+	
+	<div class="row">
 		<?php foreach($gallary as $g){ ?>
-		<div class="event-box text-center">
+		<div class="col-md-4 text-center px-2 py-2">
 			<div class="gallary-img">
 				<img src="{{URL::to($g->image)}}" style="width:200px;height:200px;" alt="thumb">
 			</div>

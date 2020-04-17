@@ -91,6 +91,7 @@ class MemberController extends Controller
         $data['email_address'] = $request->email;
         $data['nid'] = $request->nid;
         $data['password'] = bcrypt($request->pass);
+        $data['pass_text'] = $request->pass;
         $data['department'] = $request->department;
         $data['present_address'] = $request->p_a;
         $data['designation'] = $request->designation;

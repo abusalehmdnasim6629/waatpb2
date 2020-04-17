@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TblGallary extends Migration
+class GallaryCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class TblGallary extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_gallary', function (Blueprint $table) {
-            $table->increments('image_id');
-            $table->integer('category_id');
-            $table->string('image_title');
-            $table->string('image');
+        Schema::create('gallary_category', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('category');
             $table->timestamps();
         });
     }

@@ -123,6 +123,18 @@ Route::get('/view-all', 'ContentController@view_all');
 Route::get('/delete-image/{image_id}', 'AdminController@delete_image')->middleware('admin');
 Route::get('/edit-image/{image_id}', 'AdminController@edit_image')->middleware('admin');
 Route::post('/update-image/{image_id}', 'AdminController@update_image');
+Route::get('/add-category', 'AdminController@add_category')->middleware('admin');
+Route::post('/save-category', 'AdminController@save_category')->middleware('admin');
+Route::get('/all-category', 'AdminController@all_category')->middleware('admin');
+Route::get('/edit-category/{id}', 'AdminController@edit_category')->middleware('admin');
+Route::post('/update-category/{id}', 'AdminController@update_category')->middleware('admin');
+Route::get('/delete-category/{id}', 'AdminController@delete_category')->middleware('admin');
+
+
+
+
+
+
 
 
 

@@ -80,7 +80,7 @@
 									<option value="O-">O-</option>
 								</select>
 							</div>
-						</div>
+					</div>
                     <div class="form-group">
 						<h3>Skill</h3>
 						<textarea name="skill" class="form-control" cols="30" rows="5" >
