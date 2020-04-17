@@ -148,6 +148,10 @@ Route::get('/profile', 'ContentController@profile');
 Route::post('/update-member', 'ContentController@update_profile');
 Route::get('/member-profile', 'ContentController@member_profile');
 Route::post('/change-password', 'ContentController@changePassowrd');
+Route::get('/show-profile', 'ContentController@show_profile');
+Route::get('/edit', 'ContentController@edit');
+Route::get('/settings', 'ContentController@settings');
+
 
 
 

@@ -335,4 +335,18 @@ class ContentController extends Controller
       return redirect()->back();
     }
   }
+  public function show_profile(){
+
+    return view('show_profile');
+  }
+  public function edit(){
+
+    return view('edit_pro');
+  }
+  public function settings(){
+
+    return view('settings');
+  }
+
+
 }

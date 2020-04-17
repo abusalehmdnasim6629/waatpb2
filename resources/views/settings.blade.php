@@ -107,16 +107,16 @@
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
 			    <li class="nav-item">
-					<a href="{{url::to('/profile')}}"  class="nav-link active">Timeline</a>
+					<a href="{{url::to('/profile')}}"  class="nav-link ">Timeline</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/show-profile')}}" class="nav-link ">Profile</a>
+					<a href="{{url::to('/show-profile')}}" class="nav-link">Profile</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/edit')}}" class="nav-link">Edit</a>
+					<a href="{{url::to('/edit')}}"  class="nav-link">Edit</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/settings')}}" class="nav-link">Settings</a>
+					<a href="{{url::to('/settings')}}"  class="nav-link active">Settings</a>
 				</li>
 			</ul>
 		   <?php 
@@ -128,28 +128,32 @@
 
 			<div class="tab-content p-b-3 mt-5">
 
-
-			   <div class="tab-pane active" id="timeline">
+				<div class="tab-pane active" id="setting">
 				  <div class="row">
-					<div class="col-md-12">
-					@foreach($post as $p)
-					    <div class="col-md-8">
-						<h4 class="m-y-2" style="padding:10px;">{{$p->title}}</h4>
-						<img src="{{$p->post_image}}" style="width:200px;height:200px;" class="mx-auto img-fluid img-circle image-responsive"
-				           alt="post">
-						</div>
 					    <div class="col-md-12">
-					      
-					      <p class="mt-2">
-						    {{$p->description}}
-						  </p>
-                        </div>
-					@endforeach	
+					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
+					<form role="form" action="{{url('/change-password')}}" method="post">
+						{{csrf_field()}}
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label form-control-label">Old Password</label>
+							<div class="col-lg-9">
+								<input class="form-control" type="password" name="old_password" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label form-control-label">New Password</label>
+							<div class="col-lg-9">
+								<input class="form-control" type="password" name="password" required>
+							</div>
+						</div>
+
+						<button class="btn btn-success btn-lg float-right" type="submit">Change Password</button>
+
+					</form>
+					 </div>
 					</div>
-				   </div>
 				</div>
-				
-				
 
 			</div>
 		</div>
