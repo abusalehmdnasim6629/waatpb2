@@ -93,7 +93,7 @@
   
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;"  class="position-relative"
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	    
 			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
@@ -132,7 +132,7 @@
 				  <div class="row">
 					    <div class="col-md-12">
 					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
-					<form role="form" action="{{url('/change-password')}}" method="post">
+					<form role="form" action="{{url('/change-password')}}" method="post" >
 						{{csrf_field()}}
 						<div class="form-group row">
 							<label class="col-lg-3 col-form-label form-control-label">Old Password</label>
@@ -148,7 +148,7 @@
 							</div>
 						</div>
 
-						<button class="btn btn-success btn-lg float-right" type="submit">Change Password</button>
+						<button class="btn btn-success btn-lg float-right mb-5" type="submit">Change Password</button>
 
 					</form>
 					 </div>

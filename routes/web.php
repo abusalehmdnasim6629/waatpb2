@@ -151,6 +151,12 @@ Route::post('/change-password', 'ContentController@changePassowrd');
 Route::get('/show-profile', 'ContentController@show_profile');
 Route::get('/edit', 'ContentController@edit');
 Route::get('/settings', 'ContentController@settings');
+Route::get('/delete-post/{id}', 'ContentController@delete_post');
+Route::get('/edit-post/{id}', 'ContentController@edit_post');
+Route::post('/update-post/{id}', 'ContentController@update_post');
+
+
+
 
 
 

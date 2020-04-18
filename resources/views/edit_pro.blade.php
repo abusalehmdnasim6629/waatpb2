@@ -93,7 +93,7 @@
   
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;"  class="position-relative"
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	    
 			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
@@ -130,14 +130,14 @@
 
 				<div class="tab-pane active" id="edit">
 				  <div class="row">
-					    <div class="col-md-12">
+				  <div class="col-md-12 border-bottom" style="border-color:transparent;">
 					<h4 class="m-y-2" style="padding:10px;">Edit Profile</h4>
 					
 					 <form role="form" action="{{url('/update-member')}}" method="post" enctype="multipart/form-data">
 						{{csrf_field()}}
 					<div class="row">
-					  <div class="col-md-6">	
-						<div class="form-group row">
+					  <div class="col-md-6 ">	
+						<div class="form-group row mt-2">
 							<label class="col-lg-3 col-form-label form-control-label">Name</label>
 							<div class="col-lg-9">
 								<input class="form-control" type="text" name="name" value="{{$pro->member_name}}">
@@ -201,8 +201,8 @@
 							</div>
 						</div>
 						</div>
-						<div class="col-md-6">
-						<div class="form-group row">
+						<div class="col-md-6 " >
+						<div class="form-group row mt-2">
 							<label class="col-lg-3 col-form-label form-control-label">Hobby</label>
 							<div class="col-lg-9">
 								<textarea class="form-control" name="member_hobby" required="" rows="3">

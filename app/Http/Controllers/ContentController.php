@@ -348,5 +348,61 @@ class ContentController extends Controller
     return view('settings');
   }
 
+  public function delete_post($id){
+
+     DB::table('posts')
+        ->where('id',$id)
+        ->delete();
+        Alert::success('Success', 'Post deleted successfuly!');
+        return Redirect::to('/profile');   
+  }
+
+  public function edit_post($id){
+
+   $result = DB::table('posts')
+       ->where('id',$id)
+       ->first();
+       
+     return view('edit_post')->with('result',$result);
+ }
+
+
+
+ public function update_post(Request $request,$id){
+  $member_id = Session::get('lcheck');
+  
+  $post = array(); 
+  $post['title'] = $request->title;
+  $post['description'] = $request->s_post;
+  $post['date'] = date('Y-m-d');
+  $post['member_id'] = $member_id;
+  if ($request->hasfile('image')) {
+
+      $image = $request->file('image');
+
+      $image_name = Str::random(20);
+      $ext = strtolower($image->getClientOriginalExtension());
+      $image_full_name = $image_name . '.' . $ext;
+      $upload_path = public_path() . '/image/';
+      $image_url = 'image/' . $image_full_name;
+      $success = $image->move($upload_path, $image_full_name);
+
+      if ($success) {
+          $post['post_image'] = $image_url;
+          DB::table('posts')->where('id',$id)->update($post);
+          Alert::success('Successful', 'post updated successfully');
+          return Redirect::to('/profile');
+      }
+  }else{
+      $post['post_image'] = "";
+      DB::table('posts')->where('id',$id)->update($post);
+      Alert::success('Successful', 'post updated successfully');
+      return Redirect::to('/profile');
+
+  }
+
+
+
+}
 
 }

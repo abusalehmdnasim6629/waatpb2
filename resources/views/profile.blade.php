@@ -93,7 +93,7 @@
   
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;"  class="position-relative"
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	    
 			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
@@ -131,19 +131,42 @@
 
 			   <div class="tab-pane active" id="timeline">
 				  <div class="row">
-					<div class="col-md-12">
+					<div class="col-sm-12">
 					@foreach($post as $p)
-					    <div class="col-md-8">
-						<h4 class="m-y-2" style="padding:10px;">{{$p->title}}</h4>
+				    <h4 class="m-y-2 " style="padding:10px;">{{$p->title}}</h4>
+					    <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>{{$p->date}} | <span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+                            ?>
+                            <a href="#">{{$numOfcomment}} Comments</a> 
+                        </div>
+					     <div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-12  post-header-line text-sm-right"> 
+									<a href="{{url::to('/edit-post',$p->id)}}"class="btn btn-link">Edit</a> |
+									<a href="{{url::to('/delete-post',$p->id)}}"class="btn btn-link">Delete</a>
+								</div>
+							</div>
+						
+						@if($p->post_image)
 						<img src="{{$p->post_image}}" style="width:200px;height:200px;" class="mx-auto img-fluid img-circle image-responsive"
 				           alt="post">
-						</div>
-					    <div class="col-md-12">
+						@endif   
+					</div>
+					
+					
+					<div class="col-md-12">
 					      
-					      <p class="mt-2">
+					      <p class="mt-2 text-justify">
 						    {{$p->description}}
 						  </p>
-                        </div>
+                    </div>
+					
 					@endforeach	
 					</div>
 				   </div>

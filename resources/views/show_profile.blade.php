@@ -93,7 +93,7 @@
   
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;"  class="position-relative"
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	    
 			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
