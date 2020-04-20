@@ -24,10 +24,14 @@
                         <li><a href="#">works</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms and Conditions</a></li>
+                        
                         <li>
-                        <input type="text" name="search" id="srch" placeholder="Search member">
-                        <button class="btn btn-success mt-2" id="search">search</button>
+                        <form action="{{url('/search')}}" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <input type="text" name="search"  placeholder="Search member">
+                        <button type="submit" class="btn btn-primary mt-2" id="search">search</button>
                         <!-- <a href="" class="btn btn-success mt-2" id="search">search</a> -->
+                        </form>
                         </li>
                         <!-- data-toggle="modal" data-target="#mymodal" 
                          data-toggle="modal" data-target="#mymodal"-->
@@ -38,7 +42,7 @@
                     <div class="recent-post">
                         <div class="re-post-single">
                             <div class="re-post-img">
-                                <img src="assets/img/footer/blog-thumb-1.png" alt="thumb">
+                                <img src="{{asset('assets/img/footer/blog-thumb-1.png')}}" alt="thumb">
                             </div>
                             <div class="re-post-desc">
                                 <a href="single.html">
@@ -50,7 +54,7 @@
                         <div class="re-post-single">
                             <a href="single.html">
                                 <div class="re-post-img">
-                                    <img src="assets/img/footer/blog-thumb-2.png" alt="thumb">
+                                    <img src="{{asset('assets/img/footer/blog-thumb-2.png')}}" alt="thumb">
                                 </div>
                                 <div class="re-post-desc">
                                     <a href="single.html">

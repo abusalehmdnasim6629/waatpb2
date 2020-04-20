@@ -103,6 +103,28 @@
 			
 		</div>
 	</div>
+	<?php 
+		   
+           
+		   $count = DB::table('connections')
+		   ->where(function($startQuery) {
+				 $startQuery
+				 ->where(function($thisYearQuery) {
+					 $thisYearQuery
+					 ->where('s_member_id',Session::get('lcheck'));
+					 
+						 })
+						 ->orwhere('f_member_id',Session::get('lcheck'));
+						 })
+		   ->where('connections.status',1)
+		   ->count();
+		   
+		   $count2 = DB::table('connections')
+		   ->where('s_member_id',Session::get('lcheck'))
+		   ->where('connections.status',0)
+		   ->count();
+         
+		    ?>
 	<div class="row m-y-2 pd-2 " >
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
@@ -113,8 +135,15 @@
 					<a href="{{url::to('/show-profile')}}" class="nav-link ">Profile</a>
 				</li>
 				<li class="nav-item">
+					<a href="{{url::to('/friends')}}" class="nav-link ">Friends ({{$count}})</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{url::to('/friend-request')}}" class="nav-link ">Friend request ({{$count2}})</a>
+				</li>
+				<li class="nav-item">
 					<a href="{{url::to('/edit')}}" class="nav-link active">Edit</a>
 				</li>
+				
 				<li class="nav-item">
 					<a href="{{url::to('/settings')}}"  class="nav-link">Settings</a>
 				</li>

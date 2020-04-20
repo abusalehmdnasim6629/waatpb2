@@ -338,6 +338,7 @@ class ContentController extends Controller
   public function show_profile(){
 
     return view('show_profile');
+  
   }
   public function edit(){
 
@@ -404,5 +405,135 @@ class ContentController extends Controller
 
 
 }
+public function friend_request(){
+  $req = DB::table('connections')
+         ->join('tbl_member','connections.f_member_id','=','tbl_member.member_id')
+         ->where('s_member_id',Session::get('lcheck'))
+         ->where('connections.status',0)
+         ->select('connections.*','tbl_member.*')
+			   ->get();
+  return view('friend_request')->with('req',$req);
+}
+
+public function friends(){
+  $req = DB::table('connections')
+         ->join('tbl_member','connections.f_member_id','=','tbl_member.member_id')
+         ->where('s_member_id',Session::get('lcheck'))
+         //->orwhere('f_member_id',Session::get('lcheck'))
+         ->where('connections.status',1)
+         ->select('connections.*','tbl_member.*')
+         ->get();
+         
+$req2 = DB::table('connections')
+         ->join('tbl_member','connections.s_member_id','=','tbl_member.member_id')
+         ->where('f_member_id',Session::get('lcheck'))
+         //->orwhere('f_member_id',Session::get('lcheck'))
+         ->where('connections.status',1)
+         ->select('connections.*','tbl_member.*')
+			   ->get();       
+  return view('friends')->with('req',$req)->with('req2',$req2);
+}
+public function accept_request($id){
+  $accept_req =array();
+   $accept_req['action_by'] = Session::get('lcheck');
+   $accept_req['status'] =1;
+  $req = DB::table('connections')
+         ->where('connections.id',$id)
+			   ->update($accept_req);
+   return Redirect::to('/profile');
+}
+
+public function declien_request($id){
+  $accept_req =array();
+   $accept_req['action_by'] = Session::get('lcheck');
+   $accept_req['status'] =2;
+  $req = DB::table('connections')
+         ->where('connections.id',$id)
+			   ->update($accept_req);
+   return Redirect::to('/profile');
+}
+
+ public function search(Request $request){
+   
+
+     $member_name = $request->search;
+
+    $searched = DB::table('tbl_member')
+        ->where('member_name','like','%'.$member_name.'%')
+        ->get();
+    
+    return view('get_members')->with('searched',$searched);
+ }
+ public function get_member($member_id){
+   
+
+  Session::put('memid',$member_id);
+ if(Session::get('lcheck') != $member_id){
+ $pro = DB::table('tbl_member')
+     ->where('member_id',$member_id)
+     ->select('tbl_member.*')
+     ->first();
+
+ $pr = DB::table('posts')
+     ->where('member_id',$member_id)
+     ->select('posts.*')
+     ->get();   
+ //return $pr;
+ return view('search_member')->with('pro',$pro)
+                             ->with('pr',$pr);
+ }else{
+   return Redirect::to('/profile');
+ }
+}
+
+public function searched_profile($memid){
+
+ $pro = DB::table('tbl_member')
+     ->where('member_id',$memid)
+     ->select('tbl_member.*')
+     ->first();
+
+ return view('searched_profile')->with('pro',$pro);
+}
+ 
+ public function send_request($member_id){
+   
+
+      if(Session::get('lcheck') != null){
+          
+         $con_check = DB::table('connections')
+            ->where('f_member_id',Session::get('lcheck'))
+            ->where('s_member_id',$member_id)
+            ->count();
+
+        if($con_check<1){
+          $connection = array();
+            
+          $connection['f_member_id'] = Session::get('lcheck');
+          $connection['s_member_id'] = $member_id;
+          $connection['status'] = 0;
+          $connection['action_by'] = Session::get('lcheck');
+          
+          DB::table('connections')
+              ->insert($connection);
+          
+
+          Alert::success('Successful', 'request sent successfully');
+          return Redirect::to('/');
+          }else{
+            Session::put('con',$con_check);
+            return Redirect::to('/');
+          }
+          
+          
+       }else{
+         
+          Alert::warning('Fail', 'please login first');
+          return Redirect::to('/');
+         
+       }
+ }
+
+
 
 }

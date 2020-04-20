@@ -154,6 +154,21 @@ Route::get('/settings', 'ContentController@settings');
 Route::get('/delete-post/{id}', 'ContentController@delete_post');
 Route::get('/edit-post/{id}', 'ContentController@edit_post');
 Route::post('/update-post/{id}', 'ContentController@update_post');
+Route::get('/friend-request', 'ContentController@friend_request');
+Route::get('/friends', 'ContentController@friends');
+Route::get('/accept-request/{id}', 'ContentController@accept_request');
+Route::get('/declien-request/{id}', 'ContentController@declien_request');
+Route::post('/search', 'ContentController@search');
+Route::get('/get-member/{member_id}', 'ContentController@get_member');
+Route::get('/searched-profile/{memid}', 'ContentController@searched_profile');
+Route::get('/send-request/{member_id}','ContentController@send_request');
+
+
+
+
+
+
+
 
 
 

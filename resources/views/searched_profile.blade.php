@@ -71,15 +71,8 @@
 </main>
 <?php 
       $mid = Session::get('lcheck');
-	  $pro=  DB::table('tbl_member')
-			->select('tbl_member.*')
-			->where('member_id',$mid)
-			->first();
-
-			
-		
-    
-    ?>
+	 
+?>
 @if ($errors->any())
 <div class="alert alert-danger">
 	<ul>
@@ -92,11 +85,11 @@
 <div class="container" style="padding:10px;background-color:#f5f5f5;">
   
 	<div class="row pd-2">
-		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+		<div class="col-sm-8 mx-auto" style="margin-top:2%;">  
+		<img src="{{asset($pro->cover_image)}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	    
-			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
+			<img src="{{asset($pro->image)}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
 				alt="avatar">
 				
 		
@@ -105,47 +98,25 @@
 	</div>
 	<?php 
 		   
-           
-		   $count = DB::table('connections')
-		   ->where(function($startQuery) {
-				 $startQuery
-				 ->where(function($thisYearQuery) {
-					 $thisYearQuery
-					 ->where('s_member_id',Session::get('lcheck'));
-					 
-						 })
-						 ->orwhere('f_member_id',Session::get('lcheck'));
-						 })
-		   ->where('connections.status',1)
-		   ->count();
+		   $mem = Session::get('memid');
+		  
 		   
-		   $count2 = DB::table('connections')
-		   ->where('s_member_id',Session::get('lcheck'))
-		   ->where('connections.status',0)
-		   ->count();	
+           $count = DB::table('connections')
+              ->where('s_member_id',Session::get('lcheck'))
+              ->where('connections.status',1)
+              ->count();
          
 		    ?>
 	<div class="row m-y-2 pd-2 " >
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
 			    <li class="nav-item">
-					<a href="{{url::to('/profile')}}"  class="nav-link ">Timeline</a>
+					<a href="{{url::to('/get-member/'.$mem)}}"  class="nav-link ">Timeline</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/show-profile')}}" class="nav-link active">Profile</a>
+					<a href="{{url::to('/searched-profile/'.$mem)}}" class="nav-link active">Profile</a>
 				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/friends')}}" class="nav-link ">Friends ({{$count}})</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/friend-request')}}" class="nav-link">Friend request ({{$count2}})</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/edit')}}"  class="nav-link">Edit</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/settings')}}"  class="nav-link">Settings</a>
-				</li>
+				
 			</ul>
 		   <?php 
 		   

@@ -71,32 +71,18 @@
 </main>
 <?php 
       $mid = Session::get('lcheck');
-	  $pro=  DB::table('tbl_member')
-			->select('tbl_member.*')
-			->where('member_id',$mid)
-			->first();
-
-			
-		
+	
     
     ?>
-@if ($errors->any())
-<div class="alert alert-danger">
-	<ul>
-		@foreach ($errors->all() as $error)
-		<li>{{ $error }}</li>
-		@endforeach
-	</ul>
-</div>
-@endif
+
 <div class="container" style="padding:10px;background-color:#f5f5f5;">
   
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+		    <img src="{{asset($pro->cover_image)}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	    
-			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
+			<img src="{{asset($pro->image)}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
 				alt="avatar">
 				
 		
@@ -104,48 +90,24 @@
 		</div>
 	</div>
 	<?php 
-		   
+		    $mem = Session::get('memid');
            
-		   $count = DB::table('connections')
-		   ->where(function($startQuery) {
-				 $startQuery
-				 ->where(function($thisYearQuery) {
-					 $thisYearQuery
-					 ->where('s_member_id',Session::get('lcheck'));
-					 
-						 })
-						 ->orwhere('f_member_id',Session::get('lcheck'));
-						 })
-		   ->where('connections.status',1)
-		   ->count();
-		   
-		   $count2 = DB::table('connections')
-		   ->where('s_member_id',Session::get('lcheck'))
-		   ->where('connections.status',0)
-		   ->count();
+           $count = DB::table('connections')
+              ->where('s_member_id',Session::get('lcheck'))
+              ->where('connections.status',1)
+              ->count();
          
 		    ?>
 	<div class="row m-y-2 pd-2 " >
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
 			    <li class="nav-item">
-					<a href="{{url::to('/profile')}}"  class="nav-link ">Timeline</a>
+					<a href="{{url::to('/get-member/'.$mem)}}"  class="nav-link active">Timeline</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/show-profile')}}" class="nav-link">Profile</a>
+					<a href="{{url::to('/searched-profile/'.$mem)}}" class="nav-link ">Profile</a>
 				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/friends')}}" class="nav-link ">Friends ({{$count}})</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/friend-request')}}" class="nav-link ">Friend request ({{$count2}})</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/edit')}}"  class="nav-link">Edit</a>
-				</li>
-				<li class="nav-item">
-					<a href="{{url::to('/settings')}}"  class="nav-link active">Settings</a>
-				</li>
+				
 			</ul>
 		   <?php 
 		   
@@ -156,32 +118,46 @@
 
 			<div class="tab-content p-b-3 mt-5">
 
-				<div class="tab-pane active" id="setting">
+
+			   <div class="tab-pane active" id="timeline">
 				  <div class="row">
-					    <div class="col-md-12">
-					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
-					<form role="form" action="{{url('/change-password')}}" method="post" >
-						{{csrf_field()}}
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Old Password</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="password" name="old_password" required>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">New Password</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="password" name="password" required>
-							</div>
-						</div>
-
-						<button class="btn btn-success btn-lg float-right mb-5" type="submit">Change Password</button>
-
-					</form>
-					 </div>
+					<div class="col-sm-12">
+					@foreach($pr as $p)
+				    <h4 class="m-y-2 " style="padding:10px;">{{$p->title}}</h4>
+					    <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>{{$p->date}} | <span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+                            ?>
+                            <a href="#">{{$numOfcomment}} Comments</a> 
+                        </div>
+					     <div class="col-sm-12">
+							
+						
+						@if($p->post_image)
+						<img src="{{asset($p->post_image)}}" style="width:200px;height:200px;" class="mx-auto img-fluid img-circle image-responsive"
+				           alt="post">
+						@endif   
 					</div>
+					
+					
+					<div class="col-md-12">
+					      
+					      <p class="mt-2 text-justify">
+						    {{$p->description}}
+						  </p>
+                    </div>
+					
+					@endforeach	
+					</div>
+				   </div>
 				</div>
+				
+				
 
 			</div>
 		</div>
