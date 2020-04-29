@@ -375,7 +375,7 @@ class ContentController extends Controller
   $post = array(); 
   $post['title'] = $request->title;
   $post['description'] = $request->s_post;
-  $post['date'] = date('Y-m-d');
+  $post['date'] = date('Y-m-d H:i:s');
   $post['member_id'] = $member_id;
   if ($request->hasfile('image')) {
 
@@ -534,6 +534,40 @@ public function searched_profile($memid){
        }
  }
 
+public function cancel_request($member_id){
 
+    DB::table('connections')
+      ->where('f_member_id',Session::get('lcheck'))
+      ->where('s_member_id',$member_id)
+      ->where('status',0)
+      ->delete();
+
+    DB::table('connections')
+      ->where('s_member_id',Session::get('lcheck'))
+      ->where('f_member_id',$member_id)
+      ->where('status',0)
+      ->delete();      
+   
+      Alert::success('success', 'request cancel');
+      return Redirect::to('/');
+}
+
+public function unfriend_request($member_id){
+
+  DB::table('connections')
+    ->where('f_member_id',Session::get('lcheck'))
+    ->where('s_member_id',$member_id)
+    ->where('status',1)
+    ->delete();
+
+    DB::table('connections')
+    ->where('s_member_id',Session::get('lcheck'))
+    ->where('f_member_id',$member_id)
+    ->where('status',1)
+    ->delete();  
+ 
+    Alert::success('success', 'friendship has been canceled');
+    return Redirect::to('/');
+}
 
 }

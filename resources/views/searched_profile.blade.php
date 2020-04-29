@@ -70,7 +70,8 @@
 
 </main>
 <?php 
-      $mid = Session::get('lcheck');
+	  $mid = Session::get('lcheck');
+	  
 	 
 ?>
 @if ($errors->any())
@@ -84,15 +85,20 @@
 @endif
 <div class="container" style="padding:10px;background-color:#f5f5f5;">
   
-	<div class="row pd-2">
-		<div class="col-sm-8 mx-auto" style="margin-top:2%;">  
-		<img src="{{asset($pro->cover_image)}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+<div class="row pd-2">
+		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
+		    
+			@if($pro->cover_image)
+		    <img src="{{asset($pro->cover_image)}}" style="width:100%;height:100%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
-	    
-			<img src="{{asset($pro->image)}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
+	        @else
+			<img src="https://via.placeholder.com/150" style="width:100%;height:100%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
-				
-		
+			@endif	
+			<img src="{{asset($pro->image)}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+				alt="avatar">
+			
+		 
 			
 		</div>
 	</div>
@@ -104,18 +110,68 @@
            $count = DB::table('connections')
               ->where('s_member_id',Session::get('lcheck'))
               ->where('connections.status',1)
-              ->count();
-         
-		    ?>
+			  ->count();
+			  
+			  $con_check = DB::table('connections')
+			  ->where('f_member_id',Session::get('lcheck'))
+			  ->where('s_member_id',$mem)
+			  ->where('status',0)
+			  ->count();
+
+			  $con_check3 = DB::table('connections')
+			  ->where('s_member_id',Session::get('lcheck'))
+			  ->where('f_member_id',$mem)
+			  ->where('status',0)
+			  ->count();
+
+			  $con_check2 = DB::table('connections')
+			  ->where('f_member_id',Session::get('lcheck'))
+			  ->where('s_member_id',$mem)
+			  ->where('status',1)
+			  ->count();
+
+			  $con_check4 = DB::table('connections')
+			  ->where('s_member_id',Session::get('lcheck'))
+			  ->where('f_member_id',$mem)
+			  ->where('status',1)
+			  ->count();	  
+         ?>
+	<div class="row" >
+	<div class="col-sm-8 mx-auto text-right">
+	                            @if(Session::get('lcheck') == $mem)
+								<h6>Me</h6>
+                                @else
+								    @if($con_check || $con_check3)
+									    <h6>Request sent</h6>
+									@elseif($con_check2 || $con_check4)
+									<h6 class="mx-auto"><i class="fas fa-user"></i></h6>
+										<a class="btn btn-danger" href="{{url::to('/unfriend-request/'.$mem)}}">
+										<i class="fas fa-user-slash"></i>
+											
+										</a>	
+								    @else	
+									    <a class="btn btn-primary btn-sm pd-2" href="{{url::to('/send-request/'.$mem)}}">
+										<i class="fas fa-user-plus"></i>
+										</a>
+								    @endif		
+                                @endif
+	
+	</div>
+	</div>		
 	<div class="row m-y-2 pd-2 " >
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
 			    <li class="nav-item">
-					<a href="{{url::to('/get-member/'.$mem)}}"  class="nav-link ">Timeline</a>
+					<a href="{{url::to('/get-member/'.$mem)}}"  class="nav-link ">
+					<i class="fas fa-newspaper"></i>
+					Timeline</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/searched-profile/'.$mem)}}" class="nav-link active">Profile</a>
+					<a href="{{url::to('/searched-profile/'.$mem)}}" class="nav-link active">
+					<i class="fas fa-user-circle"></i>
+					Profile</a>
 				</li>
+				
 				
 			</ul>
 		   <?php 

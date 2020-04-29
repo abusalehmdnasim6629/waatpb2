@@ -125,18 +125,27 @@
 								<h6>Me</h6>
                                 @else
 								    @if($con_check || $con_check3)
+								        
 									    <h6>Request sent</h6>
+										<a class="btn btn-danger" href="{{url::to('/cancel-request/'.$p->member_id)}}">
+										<i class="fa fa-remove" aria-hidden="true"></i>
+											cancel request
+										</a>
 									@elseif($con_check2 || $con_check4)
-									    <h6>Friend</h6>	
+									<h6 class="mx-auto"><i class="fas fa-user"></i></h6>
+											
+									
+									    
 								    @else	
-									    <a class="btn btn-primary btn-sm pd-2" href="{{url::to('/send-request/'.$p->member_id)}}">
-											send request
+									    <a class="btn btn-primary " href="{{url::to('/send-request/'.$p->member_id)}}">
+										<i class="fas fa-user-plus"></i>
+											
 										</a>
 								    @endif		
                                 @endif
                           </div>
                        </div>
-					
+					   <hr>
 					@endforeach	
 					
 					

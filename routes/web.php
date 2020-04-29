@@ -162,6 +162,10 @@ Route::post('/search', 'ContentController@search');
 Route::get('/get-member/{member_id}', 'ContentController@get_member');
 Route::get('/searched-profile/{memid}', 'ContentController@searched_profile');
 Route::get('/send-request/{member_id}','ContentController@send_request');
+Route::get('/cancel-request/{member_id}','ContentController@cancel_request');
+Route::get('/unfriend-request/{member_id}','ContentController@unfriend_request');
+
+
 
 
 
@@ -239,6 +243,11 @@ Route::post('/save-post', 'AdminController@save_post');
 Route::post('/save-comment/{id}', 'AdminController@save_comment');
 Route::get('/like/{p_id}','AdminController@like');
 Route::get('/unlike/{p_id}','AdminController@unlike');
+Route::get('/unlike/{p_id}','AdminController@unlike');
+Route::get('/read-more/{p_id}','AdminController@read_more');
+Route::get('/delete-comment/{id}','AdminController@delete_comment');
+
+
 
 
 

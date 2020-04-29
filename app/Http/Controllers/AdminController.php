@@ -12,6 +12,7 @@ use App\User;
 use App\Mail\SendMail;
 use Hash;
 use Mail;
+use Carbon\Carbon;
 use Session;
 
 session_start();
@@ -862,6 +863,7 @@ class AdminController extends Controller
       $result =  DB::table('posts')
            ->join('tbl_member','posts.member_id','=','tbl_member.member_id')    
            ->select('posts.*','tbl_member.*')
+           ->orderBy('date', 'desc')
            ->get();
 
         return view('blog')->with('result',$result);
@@ -873,7 +875,7 @@ class AdminController extends Controller
         $post = array(); 
         $post['title'] = $request->title;
         $post['description'] = $request->s_post;
-        $post['date'] = date('Y-m-d');
+        $post['date'] = date('Y-m-d H:i:s');
         $post['member_id'] = $member_id;
         if ($request->hasfile('image')) {
 
@@ -896,7 +898,7 @@ class AdminController extends Controller
             $post['post_image'] = "";
             DB::table('posts')->insert($post);
             Alert::success('Successful', 'post added successfully');
-            return Redirect::to('/blog');
+            return Redirect()->back();
 
         }
 
@@ -922,12 +924,12 @@ class AdminController extends Controller
             DB::table('comments')->insert($cm);
             
             Alert::success('Successful', 'Comment added successfully');
-            return Redirect::to('/blog');
+            return Redirect()->back();
         }else{
 
 
             Alert::warning('Fail', 'please login first');
-            return Redirect::to('/blog');
+            return Redirect()->back();
         }
 
     }
@@ -943,10 +945,10 @@ class AdminController extends Controller
           $like['date'] = date('Y-m-d');
          if($m_id){
           DB::table('likes')->insert($like);
-          return Redirect::to('/blog');
+          return Redirect()->back();
          }else{
             Alert::warning('Fail', 'You have to login');
-            return Redirect::to('/blog');
+            return Redirect()->back();
 
          }
           
@@ -961,7 +963,7 @@ class AdminController extends Controller
           ->where('member_id',$m_id)
           ->where('post_id',$p_id)
           ->delete();
-        return Redirect::to('/blog');
+        return Redirect()->back();
         
         
   }
@@ -1085,6 +1087,26 @@ class AdminController extends Controller
            ->delete();
         Alert::success('Successful', 'category deleted successfully');
         return Redirect::to('/all-category');   
+    }
+
+    public function read_more($p_id){
+
+           $result = DB::table('posts')
+               ->join('tbl_member','posts.member_id','=','tbl_member.member_id')
+               ->where('posts.id',$p_id)
+               ->select('posts.*','tbl_member.member_name')
+               ->first();
+
+            return view('read_more')->with('r',$result);
+
+    }
+
+    public function delete_comment($id){
+         
+        DB::table('comments')
+           ->where('id',$id)
+           ->delete();
+        return redirect()->back();   
     }
 
 }

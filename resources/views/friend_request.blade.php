@@ -91,15 +91,20 @@
 @endif
 <div class="container" style="padding:10px;background-color:#f5f5f5;">
   
-	<div class="row pd-2">
+<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+		    
+			@if($pro->cover_image)
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:100%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
-	    
-			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
+	        @else
+			<img src="https://via.placeholder.com/150" style="width:100%;height:100%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
-				
-		
+			@endif	
+			<img src="{{$pro->image}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+				alt="avatar">
+			
+		 
 			
 		</div>
 	</div>
@@ -129,22 +134,32 @@
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
 			    <li class="nav-item">
-					<a href="{{url::to('/profile')}}"  class="nav-link ">Timeline</a>
+					<a href="{{url::to('/profile')}}"  class="nav-link ">
+					<i class="fas fa-newspaper"></i>
+					Timeline</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/show-profile')}}" class="nav-link ">Profile</a>
+					<a href="{{url::to('/show-profile')}}" class="nav-link ">
+					<i class="fas fa-user-circle"></i>
+					Profile</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/friends')}}" class="nav-link ">Friends ({{$count}})</a>
+					<a href="{{url::to('/friends')}}" class="nav-link ">
+					<i class="fas fa-user-friends"></i>
+					 ({{$count}})</a>
 				</li>
 				<li class="nav-item">
 					<a href="{{url::to('/friend-request')}}" class="nav-link active">Friend request ({{$count2}})</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/edit')}}" class="nav-link">Edit</a>
+					<a href="{{url::to('/edit')}}" class="nav-link">
+					<i class="fas fa-edit"></i>
+					Edit</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{url::to('/settings')}}" class="nav-link">Settings</a>
+					<a href="{{url::to('/settings')}}" class="nav-link">
+					<i class="fa fa-cog fa-fw"></i>
+					Settings</a>
 				</li>
 			</ul>
 		  

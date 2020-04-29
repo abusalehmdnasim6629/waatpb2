@@ -43,7 +43,9 @@
 					<tr>
 						<td>{{ $ct->advertisement_id}}</td>
 						<td class="center">{{ $ct->advertisement_title}}</td>
-						<td><img src="{{URL::to($ct->advertisement_image)}}" alt="about image" style="height:70px; width:70px">
+						<td>
+						<img src="{{URL::to($ct->advertisement_image)}}" alt="about image" style="height:70px; width:70px">
+						</td>
 						<td class="center">{{ $ct->advertisement_description}}</td>
 						
 						<td class="text-center">

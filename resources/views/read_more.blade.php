@@ -63,56 +63,17 @@ a:hover { text-decoration:none; }
  $mid = Session::get('lcheck');
 
 ?>
-@if($mid)
-<div class="container">
-   <div class="row">
-      <div class="col-md-12">
-       
-       <div class="col-md-8 mx-auto">
-         <form action="{{url('/save-post')}}" method="POST" enctype="multipart/form-data">
-			@csrf
-           <div class="control-group">
-                <input type="text" class="form-control mb-2 mt-5" name="title" placeholder="Enter title" style="border-radius:5px">
-                <div class="controls mb-3">
-                    <textarea class="form-control " name="s_post" required=" " placeholder="Write post "  rows="3" style="border-radius:5px"></textarea>
-                </div>
-                <!-- <input type="file" class="form-control-file mb-2 mt-5" name="image" placeholder="Enter title"> -->
-                <div class="file-field">
-						<div class="btn btn-light btn-sm float-left">
-							<input type="file" class="form-control-file" name="image">
-						</div>
-					</div>
-				</div>
 
-				<button type="submit" class="btn-lg btn-outline-secondary float-right mb-2">
-					Add post
-				</button>
-          </form>
-       </div>
-      
-       </div>  
-   </div>
-</div>
-@endif
 
-<?php
 
-// $startDate = Carbon::createFromFormat('Y-m-d H:i:s', '2016-11-05 12:00:00');
-// $endDate = Carbon::createFromFormat('Y-m-d H:i:s', '2016-11-08 14:25:00');
-
-// $days = $startDate->diffInDays($endDate);
-// $hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
-// $minutes = $startDate->copy()->addDays($days)->addHours($hours)->diffInMinutes($endDate);
-// echo $days.'day'.$hours.'hr'.$minutes.'min';
-?>
 <!-- style="background: url(assets/img/breadcrumb/breadcrumb.png)" -->
 <div class="container ">
     <div class="row">
         <div class="col-md-12">
         
-          @foreach($result as $r )
+         
           <?php
-               
+
                 $startDate = Carbon::createFromFormat('Y-m-d H:i:s',$r->date);
                 $endDate = Carbon::createFromFormat('Y-m-d H:i:s',date('Y-m-d H:i:s'));
 
@@ -138,7 +99,8 @@ a:hover { text-decoration:none; }
                             @else
                             <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> {{ $r->member_name}}</b></a> 
                             @endif
-                            | <span class="glyphicon glyphicon-calendar">
+                              
+                              | <span class="glyphicon glyphicon-calendar">
                               <span class="glyphicon glyphicon-comment"></span> | 
                             <?php 
                              
@@ -158,8 +120,7 @@ a:hover { text-decoration:none; }
                             <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> you</b></a>
                             @else
                             <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> {{ $r->member_name}}</b></a> 
-                            @endif 
-                            
+                            @endif
                             | <span class="glyphicon glyphicon-calendar">
                              <span class="glyphicon glyphicon-comment"></span> | 
                             <?php 
@@ -181,8 +142,7 @@ a:hover { text-decoration:none; }
                             <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> you</b></a>
                             @else
                             <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> {{ $r->member_name}}</b></a> 
-                            @endif 
-                            
+                            @endif
                             | <span class="glyphicon glyphicon-calendar">
                             <span class="glyphicon glyphicon-comment"></span> | 
                             <?php 
@@ -211,7 +171,7 @@ a:hover { text-decoration:none; }
                             {{$r->description}}
                             </p>
                             <p>
-                                <a class="btn btn-read-more" href="{{URL::to('/read-more',$r->id)}}">Read more</a></p>
+                                
                                 <?php  $p_id = $r->id;
                                         $m_id = Session::get('lcheck');
                                     $lk =   DB::table('likes')->where('post_id',$p_id)
@@ -239,17 +199,80 @@ a:hover { text-decoration:none; }
                                         </button>
                                     </form>
                             </div>
-                            <input type="hidden" id="member" value="{{Session::get('lcheck')}}">
-                            <input type="hidden" id="post" value="{{$r->id}}">
-                            <!-- <span style="margin-left:2px;">like</span> -->
+
+                            <?php
+                             $com = DB::table('comments')
+                                 ->join('tbl_member','comments.member_id','=','tbl_member.member_id')
+                                 ->select('comments.*','tbl_member.member_name')
+                                 ->where('post_id',$r->id)
+                                 ->orderBy('created_at','desc')
+                                 ->get();
+                            ?>
+                            
                         </div>
+                        @if(Session::get('lcheck') != $r->member_id)
+                        <div class="col-sm-8">
+                                <h6 class="col-sm fa fa-comments"> All Comments:</h6>
+                                <hr>
+                                @foreach($com as $c)
+                                 @if(Session::get('lcheck') == $c->member_id)
+                                    
+                                    <div class="col-sm">
+                                        <label for=""><a href="{{URL::to('/get-member/'.$c->member_id)}}"><strong>{{$c->member_name}}</strong></a></label><br>
+                                        
+                                        
+                                        <div class="col-sm   text-sm-right"> 
+                                            <a href="{{URL::to('/delete-comment/'.$c->id)}}"class="btn btn-link text-danger">
+                                            <i class="fas fa-remove"></i>
+                                            Delete</a>
+                                        </div>
+                                        <div class="col-sm">
+                                        <p class="fa fa-comment text-justify"> {{$c->comment}}</p>                        
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                  @else
+                                    <div class="col-sm-8">
+                                            <label for=""><a href="{{URL::to('/get-member/'.$c->member_id)}}"><strong>{{$c->member_name}}</strong></a></label><br>
+                                            <div class="col-sm-8">
+                                            <p class="fa fa-comment text-justify"> {{$c->comment}}</p>                        
+                                            </div>
+                                    </div>
+                                   @endif 
 
-
+                                <hr>
+                                @endforeach
+                        </div> 
+                        @else  
+                        <div class="col-sm-8">
+                                <h6 class="col-sm fa fa-comments"> All Comments:</h6>
+                                <hr>
+                                @foreach($com as $c)
+                                <div class="col-sm">
+                                        <label for=""><a href="{{URL::to('/get-member/'.$c->member_id)}}"><strong>{{$c->member_name}}</strong></a></label><br>
+                                        
+                                        
+                                        <div class="col-sm   text-sm-right"> 
+                                            <a href="{{URL::to('/delete-comment/'.$c->id)}}"class="btn btn-link text-danger">
+                                            <i class="fas fa-remove"></i>
+                                            Delete</a>
+                                        </div>
+                                        <div class="col-sm">
+                                        <p class="fa fa-comment text-justify"> {{$c->comment}}</p>                        
+                                        </div>
+                                        
+                                    </div>
+                                <hr>
+                                @endforeach
+                        </div> 
+                        @endif  
+                      
                     </div>
                 </div>
             </div>
            
-            @endforeach
+           
           
         </div>
         
