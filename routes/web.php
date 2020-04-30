@@ -148,6 +148,35 @@ Route::get('/profile', 'ContentController@profile');
 Route::post('/update-member', 'ContentController@update_profile');
 Route::get('/member-profile', 'ContentController@member_profile');
 Route::post('/change-password', 'ContentController@changePassowrd');
+Route::get('/show-profile', 'ContentController@show_profile');
+Route::get('/edit', 'ContentController@edit');
+Route::get('/settings', 'ContentController@settings');
+Route::get('/delete-post/{id}', 'ContentController@delete_post');
+Route::get('/edit-post/{id}', 'ContentController@edit_post');
+Route::post('/update-post/{id}', 'ContentController@update_post');
+Route::get('/friend-request', 'ContentController@friend_request');
+Route::get('/friends', 'ContentController@friends');
+Route::get('/accept-request/{id}', 'ContentController@accept_request');
+Route::get('/declien-request/{id}', 'ContentController@declien_request');
+Route::post('/search', 'ContentController@search');
+Route::get('/get-member/{member_id}', 'ContentController@get_member');
+Route::get('/searched-profile/{memid}', 'ContentController@searched_profile');
+Route::get('/send-request/{member_id}','ContentController@send_request');
+Route::get('/cancel-request/{member_id}','ContentController@cancel_request');
+Route::get('/unfriend-request/{member_id}','ContentController@unfriend_request');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -214,5 +243,15 @@ Route::get('/test-mail', 'MemberController@testMail');
 Route::get('/blog', 'AdminController@blog');
 Route::post('/save-post', 'AdminController@save_post');
 Route::post('/save-comment/{id}', 'AdminController@save_comment');
-Route::get('/like/{p_id}', 'AdminController@like');
-Route::get('/unlike/{p_id}', 'AdminController@unlike');
+Route::get('/like/{p_id}','AdminController@like');
+Route::get('/unlike/{p_id}','AdminController@unlike');
+Route::get('/unlike/{p_id}','AdminController@unlike');
+Route::get('/read-more/{p_id}','AdminController@read_more');
+Route::get('/delete-comment/{id}','AdminController@delete_comment');
+
+
+
+
+
+
+

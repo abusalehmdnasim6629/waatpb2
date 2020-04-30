@@ -3,8 +3,8 @@
 @section('content')
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
-<div class="site-breadcrumb-title" style="background: url(assets/img/breadcrumb/breadcrumb.png)">
-	<h2>Profile</h2>
+<div class="site-breadcrumb-title" style="height:100px;" >
+	<!-- <h2>Profile</h2>
 	<div class="main-breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb-menu clearfix">
@@ -12,11 +12,11 @@
 				<li class="active"><a href="{{URL::to('/profile')}}">Profile</a></li>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 </div>
 
 <main class="main">
-
+    
 	<!-- Start Slider
 		============================================= -->
 	<div id="home" class="hero-section">
@@ -93,36 +93,80 @@
   
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
-		    <img src="{{$pro->cover_image}}" style="width:100%;height:60%;"  class="position-relative"
+		    
+			@if($pro->cover_image)
+		    <img src="{{$pro->cover_image}}" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
-	    
-			<img src="{{$pro->image}}" style="width:300px;height:300px;border-radius:50%;padding:20px;top:20%; left:32%;" class="position-absolute mt-5 m-x-auto img-fluid img-circle"
+	        @else
+			<img src="https://via.placeholder.com/150" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
-				
-		
+			@endif	
+			<img src="{{$pro->image}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+				alt="avatar">
+			
+		 
 			
 		</div>
 	</div>
+	<?php 
+		   
+           
+		   $count = DB::table('connections')
+		   ->where(function($startQuery) {
+				 $startQuery
+				 ->where(function($thisYearQuery) {
+					 $thisYearQuery
+					 ->where('s_member_id',Session::get('lcheck'));
+					 
+						 })
+						 ->orwhere('f_member_id',Session::get('lcheck'));
+						 })
+		   ->where('connections.status',1)
+		   ->count();
+		   
+		   $count2 = DB::table('connections')
+		   ->where('s_member_id',Session::get('lcheck'))
+		   ->where('connections.status',0)
+		   ->count();
+         
+		    ?>
 	<div class="row m-y-2 pd-2 " >
 		<div class="col-sm-8 mx-auto border bg-white mt-5" style="border-color:trasparent;">
 			<ul class="nav nav-tabs">
 			    <li class="nav-item">
-					<a href="#timeline" data-target="#timeline" data-toggle="tab" class="nav-link active">Timeline</a>
+					<a href="{{url::to('/profile')}}"  class="nav-link active">
+					<i class="fas fa-newspaper"></i>
+					Timeline</a>
 				</li>
 				<li class="nav-item">
-					<a href="#profile" data-target="#profile" data-toggle="tab" class="nav-link ">Profile</a>
+					<a href="{{url::to('/show-profile')}}" class="nav-link ">
+					<i class="fas fa-user-circle"></i>
+					Profile</a>
 				</li>
 				<li class="nav-item">
-					<a href="#edit" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+					<a href="{{url::to('/friends')}}" class="nav-link ">
+					<i class="fas fa-user-friends"></i>
+					 ({{$count}})</a>
 				</li>
 				<li class="nav-item">
-					<a href="#setting" data-target="#setting" data-toggle="tab" class="nav-link">Settings</a>
+					<a href="{{url::to('/friend-request')}}" class="nav-link ">Friend request ({{$count2}})</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{url::to('/edit')}}" class="nav-link">
+					<i class="fas fa-edit"></i>
+					Edit</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{url::to('/settings')}}" class="nav-link">
+					<i class="fa fa-cog fa-fw"></i>
+					Settings</a>
 				</li>
 			</ul>
 		   <?php 
 		   
 			$post = DB::table('posts')
 			   ->where('member_id',Session::get('lcheck'))
+			   ->orderBy('date', 'desc')
 			   ->get();
 		    ?>
 
@@ -130,251 +174,123 @@
 
 
 			   <div class="tab-pane active" id="timeline">
+
+			   
+					<div class="row">
+						<div class="col-md-12">
+						<h6 class="col-md">Create post</h6>
+						<div class="col-md-8 ">
+							<form action="{{url('/save-post')}}" method="POST" enctype="multipart/form-data">
+								@csrf
+							<div class="control-group">
+									<input type="text" class="form-control mb-2 mt-5" name="title" placeholder="Enter title" style="border-radius:5px">
+									<div class="controls mb-3">
+										<textarea class="form-control " name="s_post" required=" " placeholder="Write post "  rows="3" style="border-radius:5px"></textarea>
+									</div>
+									<!-- <input type="file" class="form-control-file mb-2 mt-5" name="image" placeholder="Enter title"> -->
+									<div class="file-field">
+										<div class="btn btn-light btn-sm float-left">
+										<input type="file" class="form-control-file" name="image">
+										</div>
+									</div>
+								</div>
+
+								<button type="submit" class="btn-lg btn-outline-secondary float-right mb-3">
+											Add post
+								</button>
+							</form>
+						</div>
+						
+						</div>  
+					</div>
 				  <div class="row">
-					<div class="col-md-12">
+					<div class="col-sm-12">
 					@foreach($post as $p)
-					    <div class="col-md-8">
-						<h4 class="m-y-2" style="padding:10px;">{{$p->title}}</h4>
+					<?php
+
+						$startDate = Carbon::createFromFormat('Y-m-d H:i:s',$p->date);
+						$endDate = Carbon::createFromFormat('Y-m-d H:i:s',date('Y-m-d H:i:s'));
+
+						$days = $startDate->diffInDays($endDate);
+						$hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
+						$minutes = $startDate->copy()->addDays($days)->addHours($hours)->diffInMinutes($endDate);
+					?>
+				    <h6 class="col-md" >{{$p->title}}</h6>
+					    
+						@if($days > 0)
+						<div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span><strong>{{$days}}</strong> day ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+                            ?>
+                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+                        </div>
+                        @elseif($days == 0 && $hours > 0)
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span><strong> {{$hours}}</strong> hr <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+                            ?>
+                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+                        </div>
+                        @else
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span> <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+								 $numOflike = DB::table('likes')
+                                 ->where('post_id',$p->id)
+                                 ->count();    
+                            ?>
+                            <a href="#">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+                        </div>
+                        @endif
+					     <div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-12  post-header-line text-sm-right"> 
+									<a href="{{url::to('/edit-post',$p->id)}}"class="btn btn-link">
+									<i class="fas fa-edit"></i>
+									Edit</a> |
+									<a href="{{url::to('/delete-post',$p->id)}}"class="btn btn-link text-danger">
+									<i class="fas fa-remove"></i>
+									Delete</a>
+								</div>
+							</div>
+						
+						@if($p->post_image)
 						<img src="{{$p->post_image}}" style="width:200px;height:200px;" class="mx-auto img-fluid img-circle image-responsive"
 				           alt="post">
-						</div>
-					    <div class="col-md-12">
+						@endif   
+					</div>
+					
+					
+					<div class="col-md-12">
 					      
-					      <p class="mt-2">
+					      <p class="mt-2 text-justify">
 						    {{$p->description}}
 						  </p>
-                        </div>
+						  <a class="btn btn-read-more" href="{{URL::to('/read-more',$p->id)}}">show details</a></p>
+                    </div>
+					<hr>
 					@endforeach	
 					</div>
 				   </div>
 				</div>
-				<div class="tab-pane" id="profile">
-
-					<div class="row">
-					    <div class="col-md-12">
-						<h4 class="m-y-2 text-center" style="margin-top:30px;">{{$pro->member_name}}</h4>
-						</div>
-						<div class="col-md-6">
-							<h6>Designation</h6>
-							<p>
-								{{$pro->designation}}
-							</p>
-							<h6>Hobbies</h6>
-							<p>
-								{{$pro->member_hobby}}
-							</p>
-					
-						
-							<h6>Skills</h6>
-							<p>
-								{{$pro->member_skill}}
-							</p>
-							<hr>
-
-						</div>
-						<div class="col-md-12">
-							<h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>About</h4>
-							<table class="table table-hover table-striped">
-								<tbody>
-									<tr>
-										<td>
-											<strong>Member id: </strong>{{$pro->code}}
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<strong>Department: </strong> {{$pro->department}}
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<strong>Email: </strong>{{$pro->email_address}}
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<strong>Present Organization: </strong>{{$pro->present_organization}}
-										</td>
-
-									</tr>
-									<tr>
-										<td>
-											<strong>Present Address: </strong>{{$pro->present_address}}
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<strong>Nationl ID: </strong>{{$pro->nid}}
-										</td>
-
-									</tr>
-									<tr>
-										<td>
-											<strong>Blood group: </strong>{{$pro->blood_group}}
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<!--/row-->
-				</div>
-				<div class="tab-pane" id="edit">
-				  <div class="row">
-					    <div class="col-md-12">
-					<h4 class="m-y-2" style="padding:10px;">Edit Profile</h4>
-					
-					 <form role="form" action="{{url('/update-member')}}" method="post" enctype="multipart/form-data">
-						{{csrf_field()}}
-					<div class="row">
-					  <div class="col-md-6">	
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Name</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="name" value="{{$pro->member_name}}">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Email</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="email" name="email" value="{{$pro->email_address}}">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Present Organization</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="p_o"
-									value="{{$pro->present_organization}}">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Designation</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="designation"
-									value="{{$pro->designation}}">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Department</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="department" value="{{$pro->department}}">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Present Address</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="p_a" value="{{$pro->present_address}}"
-									placeholder="">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Contact number</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="contact_number"
-									value="{{$pro->contact_number}}" placeholder="">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Blood group</label>
-							<div class="col-lg-9">
-								<select id="user_time_zone" class="form-control" name="b_g" size="0">
-									<option value="A+">A+</option>
-									<option value="A+">A-</option>
-									<option value="A+">O+</option>
-									<option value="A+">O-</option>
-									<option value="A+">AB+</option>
-									<option value="A+">AB-</option>
-									<option value="A+">B+</option>
-									<option value="A+">B-</option>
-								</select>
-							</div>
-						</div>
-						</div>
-						<div class="col-md-6">
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Hobby</label>
-							<div class="col-lg-9">
-								<textarea class="form-control" name="member_hobby" required="" rows="3">
-							{{$pro->member_hobby}}
-							</textarea>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Skill</label>
-							<div class="col-lg-9">
-								<textarea class="form-control" name="member_skill" required="" rows="3">
-							{{$pro->member_skill}}
-							</textarea>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">National ID</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="text" name="nid" value="{{$pro->nid}}">
-							</div>
-						</div>
-
-
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Image</label>
-							<div class="col-lg-9">
-								<input class="form-control-file" type="file" name="image">
-								<span>[Image should be 2Mb or less]</span>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Cover image</label>
-							<div class="col-lg-9">
-								<input class="form-control-file" type="file" name="cover_image">
-								<span>[Image should be 2Mb or less]</span>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label"></label>
-							<div class="col-lg-9">
-								<input type="reset" class="btn btn-secondary" value="Cancel">
-								<input type="submit" class="btn btn-primary" value="Save Changes">
-							</div>
-						</div>
-						</div>
-						</div>		
-					</form>
-					  </div>
-					</div>
-				</div>
-
-				<div class="tab-pane" id="setting">
-				  <div class="row">
-					    <div class="col-md-12">
-					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
-					<form role="form" action="{{url('/change-password')}}" method="post">
-						{{csrf_field()}}
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Old Password</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="password" name="old_password" required>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">New Password</label>
-							<div class="col-lg-9">
-								<input class="form-control" type="password" name="password" required>
-							</div>
-						</div>
-
-						<button class="btn btn-success btn-lg float-right" type="submit">Change Password</button>
-
-					</form>
-					 </div>
-					</div>
-				</div>
+				
+				
 
 			</div>
 		</div>

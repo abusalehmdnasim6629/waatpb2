@@ -24,52 +24,68 @@
                         <li><a href="#">works</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms and Conditions</a></li>
-                        <li>
-
+                        
+                        <!-- <li>
+                        <form action="{{url('/search')}}" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" name="search"
-                                    id="search_content" placeholder="Search member">
+                                <input type="text" name="search"  placeholder="Search member">
                                 <div class="input-group-append">
-                                    <span class="input-group-text" id="search"> &nbsp;&nbsp;&nbsp; <i
-                                            class="fa fa-search"></i> &nbsp;&nbsp;&nbsp; </span>
+                                <button type="submit" class="btn btn-primary mt-2" id="search">
+                                    <i class="fa fa-search"></i>
+                                    search
+                                </button>
                                 </div>
                             </div>
-                            <ul class="list-group" id="show-suggest">
-
-                            </ul>
-
+                       
+                        </form>
+                        </li> -->
+                        <li>
+                        <form action="{{url('/search')}}" method="post" enctype="multipart/form-data">
+                          {{csrf_field()}}
+                           <div class="input-group">
+                        
+                                <input type="text" class="form-control" style="height:40px;" placeholder="Search member" id="demo" name="search">
+                                <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary " id="search">
+                                    <i class="fa fa-search"></i>
+                                    
+                                </button>
+        
+                            </div>
+                            </div>
+                        </form>
                         </li>
                         <!-- data-toggle="modal" data-target="#mymodal" 
                          data-toggle="modal" data-target="#mymodal"-->
                     </ul>
                 </div>
+                <?php
+                   $result = DB::table('posts')
+                           ->join('tbl_member','posts.member_id','=','tbl_member.member_id')
+                           ->select('posts.*','tbl_member.member_name')
+                           ->orderBy('date', 'desc')
+                           ->limit(2)
+                           ->get();
+                ?>
                 <div class="footer-widget-box">
                     <h4 class="foo-widget-title">Recent Post</h4>
                     <div class="recent-post">
+                       @foreach($result as $r)
                         <div class="re-post-single">
                             <div class="re-post-img">
-                                <img src="assets/img/footer/blog-thumb-1.png" alt="thumb">
+                               @if($r->post_image)
+                            <img src="{{asset($r->post_image)}}" alt="thumb" width="80" height="70">
+                               @endif 
                             </div>
                             <div class="re-post-desc">
                                 <a href="single.html">
-                                    <h6>Windows talking</h6>
+                                    <h6>{{$r->title}}</h6>
                                 </a>
-                                <p>By:athuor <span>14/12/2019</span></p>
+                                <p>By:{{$r->member_name}} <span>{{$r->date}}</span></p>
                             </div>
                         </div>
-                        <div class="re-post-single">
-                            <a href="single.html">
-                                <div class="re-post-img">
-                                    <img src="assets/img/footer/blog-thumb-2.png" alt="thumb">
-                                </div>
-                                <div class="re-post-desc">
-                                    <a href="single.html">
-                                        <h6>perhaps expense</h6>
-                                    </a>
-                                    <p>By:athuor <span>18/12/2019</span></p>
-                                </div>
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="footer-widget-box contact-us">

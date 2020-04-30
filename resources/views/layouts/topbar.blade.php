@@ -8,8 +8,8 @@
                         <!-- <p  class="logo-display"><b>WAATPB</b></p>
 						    <p class="logo-scrolled"><b>WAATPB</b></p> -->
 
-                        <img src="assets/img/logo/white-logo.png" class="logo-display" alt="thumb">
-                        <img src="assets/img/logo/logo.png" class="logo-scrolled" alt="thumb">
+                        <img src="{{asset('assets/img/logo/white-logo.png')}}" class="logo-display" alt="thumb">
+                        <img src="{{asset('assets/img/logo/logo.png')}}" class="logo-scrolled" alt="thumb">
                     </a>
                     <button class="navbar-toggler toggler-spring"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse justify-content-sm-end">

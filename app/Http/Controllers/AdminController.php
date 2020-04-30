@@ -12,6 +12,7 @@ use App\User;
 use App\Mail\SendMail;
 use Hash;
 use Mail;
+use Carbon\Carbon;
 use Session;
 
 session_start();
@@ -856,16 +857,14 @@ class AdminController extends Controller
         return $res->member_name;
     }
 
-    public function memberSuggest($value)
-    {
-        $res = DB::table('tbl_member')
-            ->select('*')
-            ->where('member_name', 'LIKE', '%' . $value . '%')
-            ->orWhere('member_id', 'LIKE', '%' . $value . '%')
-            ->limit(10, 'DESC')
-            ->get();
+    public function blog(){
+      $result =  DB::table('posts')
+           ->join('tbl_member','posts.member_id','=','tbl_member.member_id')    
+           ->select('posts.*','tbl_member.*')
+           ->orderBy('date', 'desc')
+           ->get();
 
-        return $res;
+        return $result;
     }
 
     public function memberIdividual($id)
@@ -873,7 +872,7 @@ class AdminController extends Controller
         $result = DB::table('tbl_member')->select('member_id', 'code', 'member_name', 'email_address', 'contact_number', 'nid', 'present_organization', 'blood_group', 'department', 'designation', 'present_address', 'image', 'member_skill', 'member_hobby', 'status')->where('member_id', $id)->first();
         return response()->json($result);
     }
-
+   
     public function blog()
     {
         $result =  DB::table('posts')
@@ -916,7 +915,20 @@ class AdminController extends Controller
                 Alert::success('Successful', 'post added successfully');
                 return Redirect::to('/blog');
             }
+<<<<<<< HEAD
         } else {
+=======
+        }else{
+            $post['post_image'] = "";
+            DB::table('posts')->insert($post);
+            Alert::success('Successful', 'post added successfully');
+            return Redirect()->back();
+
+        }
+
+
+      }   else{
+>>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
 
 
             Alert::warning('Fail', 'please login first');
@@ -937,12 +949,17 @@ class AdminController extends Controller
             DB::table('comments')->insert($cm);
 
             Alert::success('Successful', 'Comment added successfully');
+<<<<<<< HEAD
             return Redirect::to('/blog');
         } else {
+=======
+            return Redirect()->back();
+        }else{
+>>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
 
 
             Alert::warning('Fail', 'please login first');
-            return Redirect::to('/blog');
+            return Redirect()->back();
         }
     }
 
@@ -950,6 +967,7 @@ class AdminController extends Controller
     {
 
 
+<<<<<<< HEAD
         $m_id =  Session::get('lcheck');
         $like = array();
 
@@ -963,6 +981,20 @@ class AdminController extends Controller
             Alert::warning('Fail', 'You have to login');
             return Redirect::to('/blog');
         }
+=======
+          $like['post_id'] = $p_id;
+          $like['member_id'] = $m_id;
+          $like['date'] = date('Y-m-d');
+         if($m_id){
+          DB::table('likes')->insert($like);
+          return Redirect()->back();
+         }else{
+            Alert::warning('Fail', 'You have to login');
+            return Redirect()->back();
+
+         }
+          
+>>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
     }
     public function unlike($p_id)
     {
@@ -972,11 +1004,23 @@ class AdminController extends Controller
 
 
         DB::table('likes')
+<<<<<<< HEAD
             ->where('member_id', $m_id)
             ->where('post_id', $p_id)
             ->delete();
         return Redirect::to('/blog');
     }
+=======
+          ->where('member_id',$m_id)
+          ->where('post_id',$p_id)
+          ->delete();
+        return Redirect()->back();
+        
+        
+  }
+
+  public function edit_member($member_id){
+>>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
 
     public function edit_member($member_id)
     {
@@ -1097,6 +1141,26 @@ class AdminController extends Controller
            ->delete();
         Alert::success('Successful', 'category deleted successfully');
         return Redirect::to('/all-category');   
+    }
+
+    public function read_more($p_id){
+
+           $result = DB::table('posts')
+               ->join('tbl_member','posts.member_id','=','tbl_member.member_id')
+               ->where('posts.id',$p_id)
+               ->select('posts.*','tbl_member.member_name')
+               ->first();
+
+            return view('read_more')->with('r',$result);
+
+    }
+
+    public function delete_comment($id){
+         
+        DB::table('comments')
+           ->where('id',$id)
+           ->delete();
+        return redirect()->back();   
     }
 
 }
