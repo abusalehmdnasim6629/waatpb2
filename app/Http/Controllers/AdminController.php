@@ -437,8 +437,8 @@ class AdminController extends Controller
     {
 
         $result = DB::table('tbl_gallary')
-            ->join('gallary_category','tbl_gallary.category_id','=','gallary_category.id')
-            ->select('tbl_gallary.*','gallary_category.category')
+            ->join('gallary_category', 'tbl_gallary.category_id', '=', 'gallary_category.id')
+            ->select('tbl_gallary.*', 'gallary_category.category')
             ->get();
 
         return view('admin.all_image')->with('result', $result);
@@ -606,7 +606,7 @@ class AdminController extends Controller
         $event = array();
         $event['image_title'] = $request->i_title;
         $event['category_id'] = $request->category_id;
-        
+
         if ($request->hasfile('image')) {
 
             $image = $request->file('image');
@@ -857,27 +857,15 @@ class AdminController extends Controller
         return $res->member_name;
     }
 
-    public function blog(){
-      $result =  DB::table('posts')
-           ->join('tbl_member','posts.member_id','=','tbl_member.member_id')    
-           ->select('posts.*','tbl_member.*')
-           ->orderBy('date', 'desc')
-           ->get();
-
-        return $result;
-    }
-
-    public function memberIdividual($id)
-    {
-        $result = DB::table('tbl_member')->select('member_id', 'code', 'member_name', 'email_address', 'contact_number', 'nid', 'present_organization', 'blood_group', 'department', 'designation', 'present_address', 'image', 'member_skill', 'member_hobby', 'status')->where('member_id', $id)->first();
-        return response()->json($result);
-    }
-   
     public function blog()
     {
+
+
+
         $result =  DB::table('posts')
             ->join('tbl_member', 'posts.member_id', '=', 'tbl_member.member_id')
             ->select('posts.*', 'tbl_member.*')
+            ->orderBy('date', 'desc')
             ->get();
 
         return view('blog')->with('result', $result);
@@ -890,7 +878,7 @@ class AdminController extends Controller
             $post = array();
             $post['title'] = $request->title;
             $post['description'] = $request->s_post;
-            $post['date'] = date('Y-m-d');
+            $post['date'] = date('Y-m-d H:i:s');
             $post['member_id'] = $member_id;
             if ($request->hasfile('image')) {
 
@@ -907,7 +895,7 @@ class AdminController extends Controller
                     $post['post_image'] = $image_url;
                     DB::table('posts')->insert($post);
                     Alert::success('Successful', 'post added successfully');
-                    return Redirect::to('/blog');
+                    return Redirect()->back();
                 }
             } else {
                 $post['post_image'] = "";
@@ -915,20 +903,7 @@ class AdminController extends Controller
                 Alert::success('Successful', 'post added successfully');
                 return Redirect()->back();
             }
-<<<<<<< HEAD
         } else {
-=======
-        }else{
-            $post['post_image'] = "";
-            DB::table('posts')->insert($post);
-            Alert::success('Successful', 'post added successfully');
-            return Redirect()->back();
-
-        }
-
-
-      }   else{
->>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
 
 
             Alert::warning('Fail', 'please login first');
@@ -949,13 +924,8 @@ class AdminController extends Controller
             DB::table('comments')->insert($cm);
 
             Alert::success('Successful', 'Comment added successfully');
-<<<<<<< HEAD
-            return Redirect::to('/blog');
-        } else {
-=======
             return Redirect()->back();
-        }else{
->>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
+        } else {
 
 
             Alert::warning('Fail', 'please login first');
@@ -967,7 +937,6 @@ class AdminController extends Controller
     {
 
 
-<<<<<<< HEAD
         $m_id =  Session::get('lcheck');
         $like = array();
 
@@ -976,25 +945,11 @@ class AdminController extends Controller
         $like['date'] = date('Y-m-d');
         if ($m_id) {
             DB::table('likes')->insert($like);
-            return Redirect::to('/blog');
+            return Redirect()->back();
         } else {
             Alert::warning('Fail', 'You have to login');
-            return Redirect::to('/blog');
-        }
-=======
-          $like['post_id'] = $p_id;
-          $like['member_id'] = $m_id;
-          $like['date'] = date('Y-m-d');
-         if($m_id){
-          DB::table('likes')->insert($like);
-          return Redirect()->back();
-         }else{
-            Alert::warning('Fail', 'You have to login');
             return Redirect()->back();
-
-         }
-          
->>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
+        }
     }
     public function unlike($p_id)
     {
@@ -1004,23 +959,11 @@ class AdminController extends Controller
 
 
         DB::table('likes')
-<<<<<<< HEAD
             ->where('member_id', $m_id)
             ->where('post_id', $p_id)
             ->delete();
-        return Redirect::to('/blog');
-    }
-=======
-          ->where('member_id',$m_id)
-          ->where('post_id',$p_id)
-          ->delete();
         return Redirect()->back();
-        
-        
-  }
-
-  public function edit_member($member_id){
->>>>>>> 364d2b15386a21f0c5382f083e7e472736fa1288
+    }
 
     public function edit_member($member_id)
     {
@@ -1084,23 +1027,23 @@ class AdminController extends Controller
 
 
 
-    public function add_category(){
+    public function add_category()
+    {
 
 
         return view('admin.add_g_category');
     }
 
-    public function save_category(Request $request){
-            
+    public function save_category(Request $request)
+    {
+
         $category = array();
 
         $category['category'] = $request->category;
         DB::table('gallary_category')
-           ->insert($category);
+            ->insert($category);
         Alert::success('Successful', 'category added successfully');
-        return Redirect::to('/add-category');   
-
-
+        return Redirect::to('/add-category');
     }
     public function all_category()
     {
@@ -1114,53 +1057,53 @@ class AdminController extends Controller
     {
 
         $result =  DB::table('gallary_category')
-            ->where('id',$id)
+            ->where('id', $id)
             ->first();
 
         return view('admin.edit_category')->with('result', $result);
     }
 
-    public function update_category(Request $request,$id){
-            
+    public function update_category(Request $request, $id)
+    {
+
         $category = array();
 
         $category['category'] = $request->category;
         DB::table('gallary_category')
-           ->where('id',$id)
-           ->update($category);
+            ->where('id', $id)
+            ->update($category);
         Alert::success('Successful', 'category updateded successfully');
-        return Redirect::to('/all-category');   
-
-
+        return Redirect::to('/all-category');
     }
 
-    public function delete_category($id){
+    public function delete_category($id)
+    {
 
         DB::table('gallary_category')
-           ->where('id',$id)
-           ->delete();
+            ->where('id', $id)
+            ->delete();
         Alert::success('Successful', 'category deleted successfully');
-        return Redirect::to('/all-category');   
+        return Redirect::to('/all-category');
     }
 
-    public function read_more($p_id){
+    public function read_more($p_id)
+    {
 
-           $result = DB::table('posts')
-               ->join('tbl_member','posts.member_id','=','tbl_member.member_id')
-               ->where('posts.id',$p_id)
-               ->select('posts.*','tbl_member.member_name')
-               ->first();
+        $result = DB::table('posts')
+            ->join('tbl_member', 'posts.member_id', '=', 'tbl_member.member_id')
+            ->where('posts.id', $p_id)
+            ->select('posts.*', 'tbl_member.member_name')
+            ->first();
 
-            return view('read_more')->with('r',$result);
-
+        return view('read_more')->with('r', $result);
     }
 
-    public function delete_comment($id){
-         
+    public function delete_comment($id)
+    {
+
         DB::table('comments')
-           ->where('id',$id)
-           ->delete();
-        return redirect()->back();   
+            ->where('id', $id)
+            ->delete();
+        return redirect()->back();
     }
-
 }
