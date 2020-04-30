@@ -279,4 +279,43 @@
 
 		<!-- end gallary -->
 </main>
+<?php 
+       $res = DB::table('tbl_advertisement')
+              ->inRandomOrder()
+              ->limit(1)
+              ->get();
+    
+    ?>
+     <!-- <div class="d-block fixed-bottom  text-right"> -->
+     <div class="display-inline fixed-bottom text-white text-right" id="ad">
+            <button type="button" class="close" id="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                           @foreach($res as $r)
+                           <a href="#" class="d-inline mb-4 h-100">
+								<img class="img-fluid img-thumbnail" style="width:200px;height:200px;"
+									src="{{URL::to($r->advertisement_image)}}" alt="image">
+							</a>
+                            @endforeach
+     </div>
+
+	 
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+        
+	  $(document).ready(function(){
+
+					$("#close").click(function(){
+	    	        $("#ad").hide();
+					});
+
+			});
+        
+    </script>
