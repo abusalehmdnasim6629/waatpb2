@@ -892,7 +892,7 @@ class AdminController extends Controller
                 $post['post_image'] = $image_url;
                 DB::table('posts')->insert($post);
                 Alert::success('Successful', 'post added successfully');
-                return Redirect::to('/blog');
+                return Redirect()->back();
             }
         }else{
             $post['post_image'] = "";

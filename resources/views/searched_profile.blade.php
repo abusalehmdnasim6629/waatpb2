@@ -89,10 +89,10 @@
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
 		    
 			@if($pro->cover_image)
-		    <img src="{{asset($pro->cover_image)}}" style="width:100%;height:100%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+		    <img src="{{asset($pro->cover_image)}}" style="width:100%;height:300px;;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	        @else
-			<img src="https://via.placeholder.com/150" style="width:100%;height:100%;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+			<img src="https://via.placeholder.com/150" style="width:100%;height:300px;;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 			@endif	
 			<img src="{{asset($pro->image)}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "

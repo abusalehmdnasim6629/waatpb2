@@ -208,7 +208,7 @@ a:hover { text-decoration:none; }
                     <div class="row post-content">
                         <div class="col-md-12 mx-auto">
                             <p class="text-justify">
-                            {{$r->description}}
+                            {{substr($r->description, 0,  350)}}
                             </p>
                             <p>
                                 <a class="btn btn-read-more" href="{{URL::to('/read-more',$r->id)}}">Read more</a></p>
