@@ -280,7 +280,7 @@
 					<div class="col-md-12">
 					      
 					      <p class="mt-2 text-justify">
-						    {{$p->description}}
+						    {{ substr($p->description, 0,  425)}}
 						  </p>
 						  <a class="btn btn-read-more" href="{{URL::to('/read-more',$p->id)}}">show details</a></p>
                     </div>
