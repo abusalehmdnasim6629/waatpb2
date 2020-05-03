@@ -74,32 +74,16 @@
      
 if($result != null){
      ?>
-<ul class="breadcrumb">
-	<li>
-		<i class="icon-home"></i>
-		<a href="{{URL::to('/career')}}">Career</a>
-		<i class="icon-angle-right"></i>
-	</li>
 
-</ul>
 
 <div class="row-fluid sortable" style="padding:20px;">
-	<div class="box span12">
-		<div class="box-header" data-original-title>
+	<div class="col-sm-10 mx-auto">
 			<h2><i class="halflings-icon user"></i><span class="break"></span>Jobs</h2>
-			<div class="box-icon">
-				<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-				<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-				<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-			</div>
-		</div>
-
-		<div class="box-content">
-			<table class="table table-striped table-bordered bootstrap-datatable datatable">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>Job id</th>
-						<th>Employee name</th>
+						<th>Employers Name</th>
 						<th>Department</th>
 						<th>Position</th>
 						<th>Vacancies</th>
@@ -138,7 +122,8 @@ if($result != null){
 				<?php } ?>
 
 			</table>
-		</div>
+			
+		
 	</div>
 	<!--/span-->
 

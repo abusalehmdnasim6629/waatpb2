@@ -3,6 +3,12 @@
 @section('content')
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
+<link href='https://fonts.googleapis.com/css?family=Alegreya SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+
 <style>
 body
 {
@@ -82,7 +88,14 @@ a:hover { text-decoration:none; }
 							<input type="file" class="form-control-file" name="image">
 						</div>
 					</div>
-				</div>
+				</div><br>
+                <div class="form-check">
+										 
+											<input type="checkbox" class="form-check-inline" name="status" value="1"> 
+											<label for="">Publish in blog section</label>
+										
+										
+									</div>
 
 				<button type="submit" class="btn-lg btn-outline-secondary float-right mb-2">
 					Add post
@@ -123,20 +136,20 @@ a:hover { text-decoration:none; }
                <div class="row">
                 <div class="col-md-8 post mx-auto bg-white my-2" style="border-radius:5px">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-10 mx-auto">
                             <h4>
-                                <strong><a href="#" class="post-title" >{{$r->title}}</a></strong>
+                                <strong><a href="#" class="post-title text-dark" style="font-family: 'Alegreya SC';" >{{$r->title}}</a></strong>
                             </h4>
                         </div>
                     </div>
                     <div class="row">
                         @if($days > 0)
                         <div class="col-md-10 mx-auto post-header-line">
-                            <span class="glyphicon glyphicon-user"></span>By 
+                            <span class="glyphicon glyphicon-user" style="font-family: 'Alegreya Sans SC';"></span>By 
                             @if(Session::get('lcheck') == $r->member_id)
-                            <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> you</b></a>
+                            <a href="{{URL::to('/get-member/'.$r->member_id)}}" style="font-family: 'Sofia';"><b> you</b></a>
                             @else
-                            <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> {{ $r->member_name}}</b></a> 
+                            <a href="{{URL::to('/get-member/'.$r->member_id)}}" style="font-family: 'Sofia';"><b> {{ $r->member_name}}</b></a> 
                             @endif
                             | <span class="glyphicon glyphicon-calendar">
                               <span class="glyphicon glyphicon-comment"></span> | 
@@ -149,15 +162,15 @@ a:hover { text-decoration:none; }
                                  ->where('post_id',$r->id)
                                  ->count();    
                             ?>
-                            <a href="#">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> | <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> | <span>{{$days}} day ago</span>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark" ></i> Likes</a> | <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> | <span style="font-family: 'Alegreya Sans SC';">{{$days}} day ago</span>
                         </div>
                         @elseif($days == 0 && $hours > 0)
                         <div class="col-md-10 mx-auto post-header-line">
-                            <span class="glyphicon glyphicon-user"></span>By 
+                            <span class="glyphicon glyphicon-user" style="font-family: 'Alegreya Sans SC';"></span>By 
                             @if(Session::get('lcheck') == $r->member_id)
-                            <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> you</b></a>
+                            <a href="{{URL::to('/get-member/'.$r->member_id)}}" style="font-family: 'Sofia';"><b> you</b></a>
                             @else
-                            <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> {{ $r->member_name}}</b></a> 
+                            <a href="{{URL::to('/get-member/'.$r->member_id)}}" style="font-family: 'Sofia';"><b> {{ $r->member_name}}</b></a> 
                             @endif 
                             
                             | <span class="glyphicon glyphicon-calendar">
@@ -171,16 +184,16 @@ a:hover { text-decoration:none; }
                                  ->where('post_id',$r->id)
                                  ->count();    
                             ?>
-                            <a href="#">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
-                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> | <span>{{$hours}} hr {{$minutes}} min ago</span>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> | <span style="font-family: 'Alegreya Sans SC';">{{$hours}} hr {{$minutes}} min ago</span>
                         </div>
                         @else
                         <div class="col-md-10 mx-auto post-header-line">
-                            <span class="glyphicon glyphicon-user"></span>By 
+                            <span class="glyphicon glyphicon-user" style="font-family: 'Alegreya Sans SC';"></span>By 
                             @if(Session::get('lcheck') == $r->member_id)
-                            <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> you</b></a>
+                            <a href="{{URL::to('/get-member/'.$r->member_id)}}" style="font-family: 'Sofia';"><b> you</b></a>
                             @else
-                            <a href="{{URL::to('/get-member/'.$r->member_id)}}"><b> {{ $r->member_name}}</b></a> 
+                            <a href="{{URL::to('/get-member/'.$r->member_id)}}" style="font-family: 'Sofia';"><b> {{ $r->member_name}}</b></a> 
                             @endif 
                             
                             | <span class="glyphicon glyphicon-calendar">
@@ -193,8 +206,8 @@ a:hover { text-decoration:none; }
                                  ->where('post_id',$r->id)
                                  ->count();    
                             ?>
-                            <a href="#">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
-                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> | <span> {{$minutes}} min ago</span>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> | <span style="font-family: 'Alegreya Sans SC';"> {{$minutes}} min ago</span>
                         </div>
                         @endif
                     </div>
@@ -206,12 +219,12 @@ a:hover { text-decoration:none; }
                         </div>
                     </div>
                     <div class="row post-content">
-                        <div class="col-md-12 mx-auto">
-                            <p class="text-justify">
+                        <div class="col-md-10 mx-auto">
+                            <p class="text-justify" style="font-family: 'Advent Pro';">
                             {{substr($r->description, 0,  350)}}
                             </p>
                             <p>
-                                <a class="btn btn-read-more" href="{{URL::to('/read-more',$r->id)}}">Read more</a></p>
+                                <a class="btn-lg btn-secondary" href="{{URL::to('/read-more',$r->id)}}">Read more</a></p>
                                 <?php  $p_id = $r->id;
                                         $m_id = Session::get('lcheck');
                                     $lk =   DB::table('likes')->where('post_id',$p_id)

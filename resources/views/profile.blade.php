@@ -3,6 +3,10 @@
 @section('content')
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+<link href='https://fonts.googleapis.com/css?family=Alegreya SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
 <div class="site-breadcrumb-title" style="height:100px;" >
 	<!-- <h2>Profile</h2>
 	<div class="main-breadcrumb">
@@ -94,11 +98,11 @@
 	<div class="row pd-2">
 		<div class="col-sm-8 mx-auto " style="margin-top:2%;">  
 		    
-			@if($pro->cover_image)
+			@if($pro->cover_image != null)
 		    <img src="{{$pro->cover_image}}" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 	        @else
-			<img src="https://via.placeholder.com/150" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
+			<img src="{{asset('https://via.placeholder.com/150')}}" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 			@endif	
 			<img src="{{$pro->image}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
@@ -178,7 +182,7 @@
 			   
 					<div class="row">
 						<div class="col-md-12">
-						<h6 class="col-md">Create post</h6>
+						<h4 class="col-sm" style="font-family: 'Alegreya Sans SC';" >Create post</h4>
 						<div class="col-md-8 ">
 							<form action="{{url('/save-post')}}" method="POST" enctype="multipart/form-data">
 								@csrf
@@ -192,8 +196,14 @@
 										<div class="btn btn-light btn-sm float-left">
 										<input type="file" class="form-control-file" name="image">
 										</div>
+									</div><br>
+									<div class="form-check">
+										 
+											<input type="checkbox" class="form-check-inline" name="status" value="1"> 
+											<label for="">Publish in blog section</label>
+										
+										</div>
 									</div>
-								</div>
 
 								<button type="submit" class="btn-lg btn-outline-secondary float-right mb-3">
 											Add post
@@ -203,6 +213,8 @@
 						
 						</div>  
 					</div>
+					<br>
+					<hr>
 				  <div class="row">
 					<div class="col-sm-12">
 					@foreach($post as $p)
@@ -215,36 +227,13 @@
 						$hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
 						$minutes = $startDate->copy()->addDays($days)->addHours($hours)->diffInMinutes($endDate);
 					?>
-				    <h6 class="col-md" >{{$p->title}}</h6>
+				    <h5 class="col-sm" style="font-family: 'Alegreya Sans SC';">{{$p->title}}</h5>
 					    
 						@if($days > 0)
 						<div class="col-sm-12  post-header-line text-sm-left">
                             <span class="glyphicon glyphicon-calendar">
-                            <span><strong>{{$days}}</strong> day ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
-                            <?php 
-                             
-                             $numOfcomment = DB::table('comments')
-                                 ->where('post_id',$p->id)
-                                 ->count();
-                            ?>
-                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
-                        </div>
-                        @elseif($days == 0 && $hours > 0)
-                        <div class="col-sm-12  post-header-line text-sm-left">
-                            <span class="glyphicon glyphicon-calendar">
-                            <span><strong> {{$hours}}</strong> hr <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
-                            <?php 
-                             
-                             $numOfcomment = DB::table('comments')
-                                 ->where('post_id',$p->id)
-                                 ->count();
-                            ?>
-                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
-                        </div>
-                        @else
-                        <div class="col-sm-12  post-header-line text-sm-left">
-                            <span class="glyphicon glyphicon-calendar">
-                            <span> <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <span style="font-family: 'Alegreya Sans SC';"><strong>{{$days}}</strong> day ago</span>
+							<b>|</b><span class="glyphicon glyphicon-comment"></span> 
                             <?php 
                              
                              $numOfcomment = DB::table('comments')
@@ -254,8 +243,58 @@
                                  ->where('post_id',$p->id)
                                  ->count();    
                             ?>
-                            <a href="#">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
-                            <a href="#">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							<b>|</b>
+							@if($p->status == 1)
+							 <span style="font-family: 'Alegreya Sans SC';"><strong>Published</strong></span>
+							@else
+							<a href="{{url::to('/publish-post',$p->id)}}" class="btn btn-sm btn-info">Publish</a>
+							@endif
+                        </div>
+                        @elseif($days == 0 && $hours > 0)
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"><strong> {{$hours}}</strong> hr <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+							 $numOfcomment = DB::table('comments')
+							 ->where('post_id',$p->id)
+							 ->count();
+							 $numOflike = DB::table('likes')
+							 ->where('post_id',$p->id)
+							 ->count();    
+						   ?>
+						<a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+						<a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							<b>|</b>
+							@if($p->status == 1)
+							 <span style="font-family: 'Alegreya Sans SC';"><strong>Published</strong></span>
+							@else
+							<a href="{{url::to('/publish-post',$p->id)}}" class="btn btn-sm btn-info">Publish</a>
+							@endif
+                        </div>
+                        @else
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"> <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+								 $numOflike = DB::table('likes')
+                                 ->where('post_id',$p->id)
+                                 ->count();    
+                            ?>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							<b>|</b>
+							@if($p->status == 1)
+							 <span style="font-family: 'Alegreya Sans SC';"><strong>Published</strong></span>
+							@else
+							<a href="{{url::to('/publish-post',$p->id)}}" class="btn btn-sm btn-info">Publish</a>
+							@endif
                         </div>
                         @endif
 					     <div class="col-sm-12">
@@ -279,10 +318,11 @@
 					
 					<div class="col-md-12">
 					      
-					      <p class="mt-2 text-justify">
+					      <p class="mt-2 text-justify" style="font-family: 'Advent Pro';">
 						    {{ substr($p->description, 0,  425)}}
 						  </p>
-						  <a class="btn btn-read-more" href="{{URL::to('/read-more',$p->id)}}">show details</a></p>
+						  <a class="btn-lg btn-secondary" href="{{URL::to('/read-more',$p->id)}}">show details</a></p>
+						
                     </div>
 					<hr>
 					@endforeach	

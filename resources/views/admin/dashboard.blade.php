@@ -72,15 +72,7 @@
 				</div>
 				
 				<div class="app-header-right">
-				<form action="{{url('/search-member')}}" method="POST" enctype="multipart/form-data">
-				          	@csrf
 				
-						
-							<input type="email" class="search-input" name="email" placeholder="Search by email">
-							<button type="submit"><span>Search</span></button>
-							
-						
-				</form>
 					<div class="header-btn-lg pr-0">
 						<div class="widget-content p-0">
 							<div class="widget-content-wrapper">
@@ -377,6 +369,25 @@
 									</li>
 
 								</ul>
+								
+							</li>
+							<li>
+								<a href="#">
+									<i class="metismenu-icon fa fa-book"></i>
+									Blog
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-blog')}}">
+											<i class="metismenu-icon"></i>
+											All Blog
+										</a>
+									</li>
+									
+
+								</ul>
+								
 							</li>
 							</li>
 						</ul>

@@ -1,13 +1,14 @@
 @extends('layouts.webview')
 
 @section('content')
+<link href='https://fonts.googleapis.com/css?family=Alegreya SC' rel='stylesheet'>
 <div class="site-breadcrumb-title" style="background: url(assets/img/breadcrumb/breadcrumb.png)">
-	<h2>History</h2>
+	<h2  style="font-family: 'Alegreya SC';">History</h2>
 	<div class="main-breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb-menu clearfix">
 				<li><a href="{{URL::to('/')}}">Home</a></li>
-				<li class="active"><a href="{{URL::to('/full-history')}}">History</a></li>
+				<li class="active"><a href="{{URL::to('/full-history')}}"  style="font-family: 'Alegreya SC';">History</a></li>
 			</ul>
 		</div>
 	</div>
@@ -67,16 +68,16 @@
 	<!-- End hero -->
 
 </main>
-<div>
+<div class="container">
 	<?php 
       $history = DB::table('tbl_history')
        ->first()
     
     ?>
-	<h5 style="padding:2%;margin-bottom:.5%;" class="text-center">Full history</h5>
-	<p style="padding:2%;">{{$history->first_paragraph}}</p>
-	<p style="padding:2%;">{{$history->middle_paragraph}}</p>
-	<p style="padding:2%;">{{$history->last_paragraph}}</p>
+	<h5 style="padding:2%;margin-bottom:.5%; font-family: 'Alegreya SC';" class="text-center">Full history</h5>
+	<p class="text-justify" >{{$history->first_paragraph}}</p>
+	<p class="text-justify" >{{$history->middle_paragraph}}</p>
+	<p class="text-justify" >{{$history->last_paragraph}}</p>
 
 
 </div>

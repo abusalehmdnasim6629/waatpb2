@@ -105,7 +105,7 @@
 							<div class="form-group">
 								<label class="control-label" for="email">Present Address</label>
 								<input type="text" class="form-control txt" name="p_a" id="txtPresentAddress"
-									required="">
+									required="" >
 							</div>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 								<label class="control-label" for="email">Password</label>
 								<input type="password" class="form-control txt" name="pass" id="txtPassword"
 									required="">
-								<span>[Password must in 6 character]</span>
+								<span id="demo"></span>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-4 col-lg-4">
@@ -138,7 +138,7 @@
 					<div class="row">
 						<div class="col-sm-offset-2 col-sm-8" style="padding-top:20px;">
 							<button type="submit" id="btnSave" class="btn btn-primary"
-								style="height:30px;font-size:1.5rem;">Submit</button>
+								style="height:30px;font-size:1.5rem;" >Submit</button>
 							<button type="reset" id="btnClear" class="btn btn-info"
 								style="height:30px;font-size:1.5rem;">Clear</button>
 						</div>
@@ -148,4 +148,32 @@
 		</div>
 	</form>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script >
+
+    $(document).ready(function(){
+
+		$("#txtPassword").keyup(function(){
+
+              var pass = $('#txtPassword').val();
+			 
+			  if(pass.length < 8 && pass.search(^[0-9]) == -1)
+			  {
+				console.log(pass);
+				 $('#demo').html('short');
+				 return "8";
+			  }
+			  
+               
+		})
+
+
+	});   
+
+
+
+</script>
 @endsection

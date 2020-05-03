@@ -248,6 +248,14 @@ Route::get('/unlike/{p_id}','AdminController@unlike');
 Route::get('/unlike/{p_id}','AdminController@unlike');
 Route::get('/read-more/{p_id}','AdminController@read_more');
 Route::get('/delete-comment/{id}','AdminController@delete_comment');
+Route::get('/all-blog', 'AdminController@AllBlog')->middleware('admin');
+Route::get('/delete-blog/{id}', 'AdminController@DeleteBlog')->middleware('admin');
+Route::get('/publish-post/{id}', 'AdminController@PublishPost');
+Route::get('/blog-detail/{id}', 'AdminController@BlogDetail');
+
+
+
+
 
 
 

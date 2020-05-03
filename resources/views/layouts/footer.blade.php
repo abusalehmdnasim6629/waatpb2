@@ -134,7 +134,7 @@
                 <a href="#" class="fa fa-youtube youtube"></a>
             </div>
             <div class="copyright text-center">
-                <p>All rights reserved by Rapples.Copyright © 2020.</p>
+                <p>All rights reserved by WAATPB.Copyright © 2020.</p>
             </div>
         </div>
     </div>

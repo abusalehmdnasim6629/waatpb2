@@ -865,6 +865,7 @@ class AdminController extends Controller
         $result =  DB::table('posts')
             ->join('tbl_member', 'posts.member_id', '=', 'tbl_member.member_id')
             ->select('posts.*', 'tbl_member.*')
+            ->where('posts.status',1)
             ->orderBy('date', 'desc')
             ->get();
 
@@ -880,6 +881,11 @@ class AdminController extends Controller
             $post['description'] = $request->s_post;
             $post['date'] = date('Y-m-d H:i:s');
             $post['member_id'] = $member_id;
+            if($request->status){
+            $post['status'] = $request->status;
+            }else{
+                $post['status'] = 0;
+            }
             if ($request->hasfile('image')) {
 
                 $image = $request->file('image');
@@ -1105,5 +1111,58 @@ class AdminController extends Controller
             ->where('id', $id)
             ->delete();
         return redirect()->back();
+    }
+
+    public function AllBlog(){
+
+        $result =  DB::table('posts')
+             ->join('tbl_member','posts.member_id','=','tbl_member.member_id')
+             ->select('posts.*','tbl_member.member_name')
+             ->get();
+        
+        return view('admin.all_blog')->with('result',$result);     
+
+    }
+
+    public function DeleteBlog($id){
+        
+        DB::table('posts')
+          ->where('id',$id)
+          ->delete();
+        
+        DB::table('likes')
+          ->where('post_id',$id)
+          ->delete();
+        
+        DB::table('comments')
+          ->where('post_id',$id)
+          ->delete();
+        Alert::success('Successful', 'Blog deleted successfully');
+        return Redirect::to('all-blog');
+
+
+
+    }
+
+    public function PublishPost($id){
+        $post['status'] = 1;
+      DB::table('posts')
+       ->where('id',$id)
+       ->update($post);
+    Alert::success('Successful', 'your post has been published');
+       return Redirect()->back();
+
+
+    }
+    public function BlogDetail($id)
+    {
+
+        $result = DB::table('posts')
+            ->join('tbl_member', 'posts.member_id', '=', 'tbl_member.member_id')
+            ->where('posts.id', $id)
+            ->select('posts.*', 'tbl_member.member_name')
+            ->first();
+
+        return view('admin.blog_detail')->with('r', $result);
     }
 }

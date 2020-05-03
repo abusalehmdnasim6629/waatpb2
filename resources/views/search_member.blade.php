@@ -138,10 +138,10 @@
 											cancel request
 										</a>
 									@elseif($con_check2 || $con_check4)
-									   <h6 class="mx-auto"><i class="fas fa-user"></i></h6>
+									   <h6 class="mx-auto my-2"><i class="fas fa-user"></i></h6>
 										<a class="btn btn-danger" href="{{url::to('/unfriend-request/'.$mem)}}">
 										<i class="fas fa-user-slash"></i>
-											
+											unfriend
 										</a>	
 								    @else	
 									    <a class="btn btn-primary  pd-2" href="{{url::to('/send-request/'.$mem)}}">
