@@ -110,7 +110,7 @@
 
     <!-- End Footer-->
     <!-- start popup -->
-    <div class="port-popus">
+    <!-- <div class="port-popus">
         <div id="port-popup" class="port-popup">
             <div class="port-content">
                 <h2>Login Here</h2>
@@ -132,8 +132,47 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- end popup -->
+
+    <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login here</h5>
+        <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="{{url('/login-check')}}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field()}}
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" name="email" class="form-control" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" name="password" class="form-control" required="">
+                        </div>
+
+                        
+                        <a href="{{URL::to('/forgot-password')}}" class="btn btn-link">Forgot password?</a>
+                        
+                    </fieldset>
+
+               
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" >Reset</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
     
     
 

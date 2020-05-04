@@ -69,7 +69,9 @@ class ContentController extends Controller
 
 
 
-
+   $video =  DB::table('videos')
+                  
+                  ->first();
 
 
     return view('welcome')
@@ -85,7 +87,8 @@ class ContentController extends Controller
             ->with('research', $research)
             ->with('blood', $blood)
             ->with('training', $training)
-            ->with('database', $database);
+            ->with('database', $database)
+            ->with('video', $video);
 
     $login_check =  Session::get('lcheck');
     $e_id =  Session::get('e_id');
@@ -325,7 +328,7 @@ class ContentController extends Controller
   {
 
     $member = DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->first();
-    
+    if($request->password == $request->cpassword){
     if (Hash::check($request->old_password, $member->password)) {
       DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->update(['password' => bcrypt($request->password),'pass_text' => $request->password]);
       Alert::success('Success', 'Password changed successfuly!');
@@ -334,6 +337,10 @@ class ContentController extends Controller
       Alert::error('Fail', 'Old password not matched!');
       return redirect()->back();
     }
+  }else {
+    Alert::error('Fail', 'New password not matched!');
+    return redirect()->back();
+  }
   }
   public function show_profile(){
 
@@ -473,14 +480,24 @@ public function declien_request($id){
      ->where('member_id',$member_id)
      ->select('tbl_member.*')
      ->first();
-
+   
+  
  $pr = DB::table('posts')
      ->where('member_id',$member_id)
      ->select('posts.*')
-     ->get();   
+     ->orderBy('date','desc')
+     ->get(); 
+     
+  $prr = DB::table('posts')
+     ->where('member_id',$member_id)
+     ->where('status',1)
+     ->select('posts.*')
+     ->orderBy('date','desc')
+     ->get(); 
  //return $pr;
  return view('search_member')->with('pro',$pro)
-                             ->with('pr',$pr);
+                             ->with('pr',$pr)
+                             ->with('prr',$prr);
  }else{
    return Redirect::to('/profile');
  }

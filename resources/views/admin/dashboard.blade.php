@@ -330,6 +330,28 @@
 							</li>
 							<li>
 								<a href="#">
+									<i class="metismenu-icon fa fa-youtube"></i>
+									Video
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-video')}}">
+											<i class="metismenu-icon"></i>
+											All video
+										</a>
+									</li>
+									<li>
+										<a href="{{URL::to('/add-video')}}">
+											<i class="metismenu-icon"></i>
+											Add video
+										</a>
+									</li>
+
+								</ul>
+							</li>
+							<li>
+								<a href="#">
 									<i class="metismenu-icon fa fa-gavel"></i>
 									Services
 									<i class="fa fa-angle-down caret-left"></i>
@@ -389,7 +411,8 @@
 								</ul>
 								
 							</li>
-							</li>
+							
+							
 						</ul>
 					</div>
 				</div>

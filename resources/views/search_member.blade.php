@@ -3,6 +3,10 @@
 @section('content')
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+<link href='https://fonts.googleapis.com/css?family=Alegreya SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
 <div class="site-breadcrumb-title" style="height:100px;" >
 	<!-- <h2>Profile</h2>
 	<div class="main-breadcrumb">
@@ -176,23 +180,75 @@
 
 			<div class="tab-content p-b-3 mt-5">
 
-
+			@if($con_check2 || $con_check4)
 			   <div class="tab-pane active" id="timeline">
 				  <div class="row">
 					<div class="col-sm-12">
 					@foreach($pr as $p)
-				    <h4 class="m-y-2 " style="padding:10px;">{{$p->title}}</h4>
-					    <div class="col-sm-12  post-header-line text-sm-left">
+					<?php
+
+						$startDate = Carbon::createFromFormat('Y-m-d H:i:s',$p->date);
+						$endDate = Carbon::createFromFormat('Y-m-d H:i:s',date('Y-m-d H:i:s'));
+
+						$days = $startDate->diffInDays($endDate);
+						$hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
+						$minutes = $startDate->copy()->addDays($days)->addHours($hours)->diffInMinutes($endDate);
+					?>
+				    <h4 class="col-sm " style="font-family: 'Alegreya Sans SC';" >{{$p->title}}</h4>
+					@if($days > 0)
+						<div class="col-sm-12  post-header-line text-sm-left">
                             <span class="glyphicon glyphicon-calendar">
-                            </span>{{$p->date}} | <span class="glyphicon glyphicon-comment"></span> 
+                            <span style="font-family: 'Alegreya Sans SC';"><strong>{{$days}}</strong> day ago</span>
+							<b>|</b><span class="glyphicon glyphicon-comment"></span> 
                             <?php 
                              
                              $numOfcomment = DB::table('comments')
                                  ->where('post_id',$p->id)
                                  ->count();
+								 $numOflike = DB::table('likes')
+                                 ->where('post_id',$p->id)
+                                 ->count();    
                             ?>
-                            <a href="#">{{$numOfcomment}} Comments</a> 
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							
                         </div>
+                        @elseif($days == 0 && $hours > 0)
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"><strong> {{$hours}}</strong> hr <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+							 $numOfcomment = DB::table('comments')
+							 ->where('post_id',$p->id)
+							 ->count();
+							 $numOflike = DB::table('likes')
+							 ->where('post_id',$p->id)
+							 ->count();    
+						   ?>
+						<a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+						<a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							
+                        </div>
+                        @else
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"> <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+								 $numOflike = DB::table('likes')
+                                 ->where('post_id',$p->id)
+                                 ->count();    
+                            ?>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							<b>|</b>
+							
+                        </div>
+                        @endif
 					     <div class="col-sm-12">
 							
 						
@@ -205,7 +261,7 @@
 					
 					<div class="col-md-12">
 					      
-					      <p class="mt-2 text-justify">
+					      <p class="mt-2 text-justify" style="font-family: 'Advent Pro';">
 						    {{$p->description}}
 						  </p>
                     </div>
@@ -215,8 +271,98 @@
 				   </div>
 				</div>
 				
-				
+				@else
+				<div class="tab-pane active" id="timeline">
+				  <div class="row">
+					<div class="col-sm-12">
+					@foreach($prr as $p)
+					<?php
 
+						$startDate = Carbon::createFromFormat('Y-m-d H:i:s',$p->date);
+						$endDate = Carbon::createFromFormat('Y-m-d H:i:s',date('Y-m-d H:i:s'));
+
+						$days = $startDate->diffInDays($endDate);
+						$hours = $startDate->copy()->addDays($days)->diffInHours($endDate);
+						$minutes = $startDate->copy()->addDays($days)->addHours($hours)->diffInMinutes($endDate);
+					?>
+				   <h4 class="col-sm " style="font-family: 'Alegreya Sans SC';" >{{$p->title}}</h4>
+					@if($days > 0)
+						<div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"><strong>{{$days}}</strong> day ago</span>
+							<b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+								 $numOflike = DB::table('likes')
+                                 ->where('post_id',$p->id)
+                                 ->count();    
+                            ?>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							
+                        </div>
+                        @elseif($days == 0 && $hours > 0)
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"><strong> {{$hours}}</strong> hr <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+							 $numOfcomment = DB::table('comments')
+							 ->where('post_id',$p->id)
+							 ->count();
+							 $numOflike = DB::table('likes')
+							 ->where('post_id',$p->id)
+							 ->count();    
+						   ?>
+						<a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+						<a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							
+                        </div>
+                        @else
+                        <div class="col-sm-12  post-header-line text-sm-left">
+                            <span class="glyphicon glyphicon-calendar">
+                            <span style="font-family: 'Alegreya Sans SC';"> <strong>{{$minutes}}</strong> min ago</span> <b>|</b><span class="glyphicon glyphicon-comment"></span> 
+                            <?php 
+                             
+                             $numOfcomment = DB::table('comments')
+                                 ->where('post_id',$p->id)
+                                 ->count();
+								 $numOflike = DB::table('likes')
+                                 ->where('post_id',$p->id)
+                                 ->count();    
+                            ?>
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOflike}} <i class="fa fa-thumbs-up text-dark"></i> Likes</a> |
+                            <a href="#" style="font-family: 'Alegreya Sans SC';">{{$numOfcomment}} <i class="fas fa-comments"></i> Comments</a> 
+							<b>|</b>
+							
+                        </div>
+                        @endif
+					     <div class="col-sm-12">
+							
+						
+						@if($p->post_image)
+						<img src="{{asset($p->post_image)}}" style="width:200px;height:200px;" class="mx-auto img-fluid img-circle image-responsive"
+				           alt="post">
+						@endif   
+					</div>
+					
+					
+					<div class="col-md-12">
+					      
+					      <p class="mt-2 text-justify" style="font-family: 'Advent Pro';">
+						    {{$p->description}}
+						  </p>
+                    </div>
+					
+					@endforeach	
+					</div>
+				   </div>
+				</div>
+				@endif
+                 
 			</div>
 		</div>
 		</div>
