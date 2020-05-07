@@ -1165,4 +1165,92 @@ class AdminController extends Controller
 
         return view('admin.blog_detail')->with('r', $result);
     }
+    public function AddVideo(){
+
+        return view('admin.add_video');
+    }
+    public function SaveVideo(Request $request){
+
+      $count = DB::table('videos')
+         ->count();  
+
+      if($count<1){   
+      $video = array();
+    //  $link =   $request->link;
+      $video['title'] = $request->v_title;
+
+    //   $id = preg_replace("#.'youtube\.com/watch\?v=#", "", $link);
+    //   echo $id;
+
+      $url=$request->link;;
+      $video['video_link'] = $url;
+      parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
+
+      $video['video_id'] = $my_array_of_vars['v']; 
+      DB::table('videos')
+        ->insert($video);
+        Alert::success('Successful', 'Added successfully');
+        return redirect()->back();
+    }
+    else{
+
+        Alert::warning('fail', 'Already added one video link, please delete it first');
+        return redirect()->back();
+    }
+
+    }
+
+    public function ShowVideo(){
+
+       $ct = DB::table('videos')
+             ->select('videos.*')
+             ->get();
+        
+             return view('admin.all_video')->with('ct',$ct);    
+    }
+    public function EditVideo($id){
+         
+       $result= DB::table('videos')
+           ->where('id',$id)
+           ->first();
+        return view('admin.edit_video')->with('result',$result);
+    }
+
+    public function UpdateVideo(Request $request , $id){
+
+        $count = DB::table('videos')
+           ->count();  
+  
+       
+        $video = array();
+      //  $link =   $request->link;
+        $video['title'] = $request->v_title;
+  
+      //   $id = preg_replace("#.'youtube\.com/watch\?v=#", "", $link);
+      //   echo $id;
+  
+        $url=$request->link;;
+        $video['video_link'] = $url;
+        parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
+  
+        $video['video_id'] = $my_array_of_vars['v']; 
+        DB::table('videos')
+          ->where('id',$id)
+          ->update($video);
+          Alert::success('Successful', 'Upadated successfully');
+          return redirect::to('all-video');
+   
+      
+  
+      }
+
+      public function DeleteVideo($id){
+
+        DB::table('videos')
+        ->where('id',$id)
+        ->delete();
+        Alert::success('Successful', 'deleted successfully');
+        return redirect::to('all-video');
+      }
+
 }

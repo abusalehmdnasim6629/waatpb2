@@ -67,7 +67,7 @@
                                     Logout</a></li>
 
                             <?php }else{ ?>
-                            <li class="nav-item mr-2"><a class="nav-link" href="#port-popup">Login</a></li>
+                            <li class="nav-item mr-2"><a class="nav-link" data-toggle="modal" data-target="#exampleModal">Login</a></li>
                             <li class="nav-item mr-2"><a class="nav-link smooth-menu"
                                     href="{{URL::to('/member-registration')}}">Member</a></li>
                             <?php } ?>

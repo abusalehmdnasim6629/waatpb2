@@ -120,10 +120,12 @@
 
 	<!-- Start Service
 		============================================= -->
-	<div id="service" class="service-area bg de-padding">
+	<!-- <div id="service" class="service-area bg de-padding">
 		<div class="container">
-			<div class="row">
-				<div class="col-xl-8 offset-xl-2">
+		<div class="row">
+		 <div class="col-md-12">
+		    <div class="col-md-6">
+			<div class="col-xl-8 offset-xl-2">
 					<div class="site-title">
 						<h2>Services</h2>
 						<p>Our Memeber Facilated With</p>
@@ -154,8 +156,67 @@
 				<div class="single-service pearl">
 					<i class="fas fa-database"></i>
 					<h3>{{$database->service_title}}</h3>
+			
+				</div>
+	
 				</div>
 			</div>
+			
+		</div>
+
+		</div>
+	</div> -->
+
+	<div class="container" >
+		<div class="row">
+		 
+		 <div class="col-md-6 text-center">
+		    <div class="site-title">
+						<h2>Services</h2>
+						<p>Our Memeber Facilated With</p>
+			</div>
+		    <div class="service-wrapper grid-3">
+				<div class="single-service pink" style="background-color:#f5f5f5;">
+					<i class="fas fa-archive"></i>
+					<h3>{{$welfare->service_title}}</h3>
+				</div>
+				<div class="single-service orange" style="background-color:#f5f5f5;">
+					<i class="fas fa-clipboard-list"></i>
+					<h3>{{$training->service_title}}</h3>
+				</div>
+				<div class="single-service pink grn"  style="background-color:#f5f5f5;">
+					<i class="fas fa-briefcase"></i>
+					<h3>{{$job->service_title}}</h3>
+				</div>
+				<div class="single-service orange"  style="background-color:#f5f5f5;">
+					<i class="fas fa-flask"></i>
+					<h3>{{$research->service_title}}</h3>
+				</div>
+				<div class="single-service orange"  style="background-color:#f5f5f5;">
+					<i class="fas fa-burn"></i>
+					<h3>{{$blood->service_title}}</h3>
+				</div>
+				<div class="single-service pearl"  style="background-color:#f5f5f5;">
+					<i class="fas fa-database"></i>
+					<h3>{{$database->service_title}}</h3>
+			
+				</div>
+			</div>
+		 
+		 </div>
+		 <div class="col-md-6 text-center">
+		 
+		 <div class="site-title">
+						<h2>Video</h2>
+						<p></p>
+		 </div>
+		 <!-- <iframe width="100%" height="450" src="https://www.youtube.com/embed/'.$video->video_id.'">
+         </iframe> -->
+		  
+		 <iframe  width="100%" height="450" src="https://www.youtube.com/embed/{{$video->video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<!-- <iframe width="100%" height="450" src="https://www.youtube.com/embed/cRCOVzkGVJM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+		 </div>
+
 		</div>
 	</div>
 	<!-- End Service -->

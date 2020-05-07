@@ -64,6 +64,7 @@
                    $result = DB::table('posts')
                            ->join('tbl_member','posts.member_id','=','tbl_member.member_id')
                            ->select('posts.*','tbl_member.member_name')
+                           ->where('posts.status',1)
                            ->orderBy('date', 'desc')
                            ->limit(2)
                            ->get();

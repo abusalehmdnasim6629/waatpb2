@@ -254,6 +254,15 @@ Route::get('/publish-post/{id}', 'AdminController@PublishPost');
 Route::get('/blog-detail/{id}', 'AdminController@BlogDetail');
 
 
+//video
+Route::get('/add-video', 'AdminController@AddVideo')->middleware('admin');
+Route::get('/all-video', 'AdminController@ShowVideo')->middleware('admin');
+Route::post('/save-video', 'AdminController@SaveVideo')->middleware('admin');
+Route::get('/edit-video/{id}', 'AdminController@EditVideo')->middleware('admin');
+Route::post('/update-video/{id}', 'AdminController@UpdateVideo')->middleware('admin');
+Route::get('/delete-video/{id}', 'AdminController@DeleteVideo')->middleware('admin');
+
+
 
 
 

@@ -190,6 +190,12 @@
 								<input class="form-control" type="password" name="password" required>
 							</div>
 						</div>
+						<div class="form-group row">
+							<label class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
+							<div class="col-lg-9">
+								<input class="form-control" type="password" name="cpassword" required>
+							</div>
+						</div>
 
 						<button class="btn btn-success btn-lg float-right mb-5" type="submit">Change Password</button>
 
