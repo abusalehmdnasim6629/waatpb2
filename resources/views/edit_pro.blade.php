@@ -3,6 +3,7 @@
 @section('content')
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 <div class="site-breadcrumb-title" style="height:100px;" >
 	<!-- <h2>Profile</h2>
 	<div class="main-breadcrumb">
@@ -100,13 +101,24 @@
 			<img src="https://via.placeholder.com/150" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 			@endif	
-			<img src="{{$pro->image}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+			<img src="{{$pro->image}}" style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
 				alt="avatar">
 			
-		 
+		
+		    <a href="{{url::to('/up-cover')}}" class="btn btn-sm btn-outline-secondary position-absolute" style="z-index-1;Left:40%;">Change cover photo</a>
 			
 		</div>
 	</div>
+	<div class="row">
+	
+	 <div class="col-sm-8 mx-auto">
+	    <a href="{{url::to('/up')}}" class="btn btn-sm btn-primary">Change profile image</a>
+	 
+	 </div>
+	</div>
+      
+     
+
 	<?php 
 		   
            
@@ -269,22 +281,7 @@
 						</div>
 
 
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Image</label>
-							<div class="col-lg-9">
-								<input class="form-control-file" type="file" name="image">
-								<span>[Image should be 2Mb or less]</span>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-lg-3 col-form-label form-control-label">Cover image</label>
-							<div class="col-lg-9">
-								<input class="form-control-file" type="file" name="cover_image">
-								<span>[Image should be 2Mb or less]</span>
-							</div>
-						</div>
+					
 
 						<div class="form-group row">
 							<label class="col-lg-3 col-form-label form-control-label"></label>
@@ -311,4 +308,8 @@
 	<!-- placehold.it/150 -->
 </div>
 <hr>
+
+
+
 @endsection
+

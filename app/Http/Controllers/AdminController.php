@@ -1252,5 +1252,129 @@ class AdminController extends Controller
         Alert::success('Successful', 'deleted successfully');
         return redirect::to('all-video');
       }
+      public function up(){
+      
+       return view('up');
 
+
+    }
+    public function upload(Request $request){
+      
+        if(isset($_POST['image']))
+        {
+         $data = $_POST['image'];
+        
+         $image_array_1 = explode(";", $data);
+        
+         $image_array_2 = explode(",", $image_array_1[1]);
+        
+         $data = base64_decode($image_array_2[1]);
+         
+         $imageName = time() . '.png';
+        
+         file_put_contents($imageName, $data);
+         
+         
+         echo '<img src="'.$imageName.'"class="img-thumbnail" />';
+         Session::put('imn',$imageName);
+        }
+         
+        
+        // if ($request->uploaded_image) {
+
+        //     $image = $request->uploaded_image;
+            
+        //     $image_name = Str::random(20);
+        //     $ext = strtolower($image->getClientOriginalExtension());
+        //     $image_full_name = $image_name . '.' . $ext;
+        //     $upload_path = public_path() . '/image/';
+        //     $image_url = 'image/' . $image_full_name;
+        //     $success = $image->move($upload_path, $image_full_name);
+    
+        //     if ($success) {
+        //       $data['uploaded_image'] = $image_url;
+        //       return $image_url;
+        //     }
+        //     else{
+        //         return $request->uploaded_image;
+        //     }
+        //  image/cI5xWkbxuKfR6Hwo7I73.jpg } 
+     //  
+        
+
+       
+ 
+     }
+     public function uploadd(Request $request){
+            $uploaded_image = array();
+            $validator = Validator::make($request->all(), [
+                'upload_image' => 'image|mimes:jpeg,png|max:2000',
+                
+        
+        
+              ]);
+        
+              if ($validator->fails()) {
+                $errors = $validator->errors();
+                return redirect()
+                  ->back()
+                  ->withErrors($validator);
+              }
+            $uploaded_image['image'] = Session::get('imn');
+                DB::table('tbl_member')
+                  ->where('member_id',Session::get('lcheck'))
+                  ->update($uploaded_image);
+                return Redirect::to('/profile');
+           
+        
+
+     }
+     public function upCover(){
+      
+        return view('upCover');
+ 
+ 
+     }
+     public function uploadCover(Request $request){
+        $uploaded_image = array();
+        $validator = Validator::make($request->all(), [
+            'upload_image' => 'image|mimes:jpeg,png|max:2000',
+            
+    
+    
+          ]);
+    
+          if ($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()
+              ->back()
+              ->withErrors($validator);
+          }
+          
+
+          if ($request->hasfile('upload_image')) {
+
+            $image = $request->file('upload_image');
+
+            $image_name = Str::random(20);
+            $ext = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name . '.' . $ext;
+            $upload_path = public_path() . '/image/';
+            $image_url = 'image/' . $image_full_name;
+            $success = $image->move($upload_path, $image_full_name);
+
+            if ($success) {
+                $uploaded_image['cover_image'] = $image_url;
+                DB::table('tbl_member')
+                ->where('member_id',Session::get('lcheck'))
+                ->update($uploaded_image);
+                Alert::success('Successful', 'Image updated successfully');
+                return Redirect::to('/profile');
+            }
+        }
+
+       
+    
+
+         }
 }

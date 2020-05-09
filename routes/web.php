@@ -261,6 +261,15 @@ Route::post('/save-video', 'AdminController@SaveVideo')->middleware('admin');
 Route::get('/edit-video/{id}', 'AdminController@EditVideo')->middleware('admin');
 Route::post('/update-video/{id}', 'AdminController@UpdateVideo')->middleware('admin');
 Route::get('/delete-video/{id}', 'AdminController@DeleteVideo')->middleware('admin');
+Route::get('/up', 'AdminController@up');
+Route::post('/upload', 'AdminController@upload')->name('upload');
+Route::post('/uploadd', 'AdminController@uploadd');
+Route::get('/up-cover', 'AdminController@upCover');
+Route::post('/cover-upload', 'AdminController@uploadCover');
+
+
+
+
 
 
 

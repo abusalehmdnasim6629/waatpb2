@@ -172,7 +172,7 @@
 		 
 		 <div class="col-md-6 text-center">
 		    <div class="site-title">
-						<h2>Services</h2>
+			            <h2 class="col-md my-5">Services</h2>
 						<p>Our Memeber Facilated With</p>
 			</div>
 		    <div class="service-wrapper grid-3">
@@ -207,13 +207,13 @@
 		 <div class="col-md-6 text-center">
 		 
 		 <div class="site-title">
-						<h2>Video</h2>
+						<h2 class="col-md my-5"></h2>
 						<p></p>
 		 </div>
 		 <!-- <iframe width="100%" height="450" src="https://www.youtube.com/embed/'.$video->video_id.'">
          </iframe> -->
 		  
-		 <iframe  width="100%" height="450" src="https://www.youtube.com/embed/{{$video->video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		 <iframe  width="100%" height="450" src="https://www.youtube.com/embed/{{$video->video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-top:25px"></iframe>
 			<!-- <iframe width="100%" height="450" src="https://www.youtube.com/embed/cRCOVzkGVJM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 		 </div>
 
@@ -306,24 +306,27 @@
                 
 				<div class="row">
 				   @foreach($g_category as $gc)
-				   <div class="mx-2 col-md text-center bg-white border" style="border-color: transparent; ">
+				   <div class="col-md  " >
 				        <h4 class="mt-5">{{$gc->category}}</h4> 
 						<?php 
 						   $imageByCategory = DB::table('tbl_gallary')
 							  ->where('category_id',$gc->id)
-							  ->limit(6)
 							  ->get();
 						
 						?>
 						<div class="row">
+						
+						<div class="col-md text-center">
+						<marquee behavior="alternate" direction="up" onmouseover="this.stop();" onmouseout="this.start();" scrolldelay="0" height="500">
 						@foreach($imageByCategory as $ibc)
-						<div class="col-md-6">
-							<a href="{{URL::to($ibc->image)}}" class="d-block mb-4 h-100">
-								<img class="img-fluid img-thumbnail" style="width:200px;height:200px;"
+							<a href="{{URL::to($ibc->image)}}" class=" mb-4 h-100 " id="marquee" >
+								<img class="img-fluid img-thumbnail mx-auto" style="width:200px;height:200px;"
 									src="{{URL::to($ibc->image)}}" alt="image">
 							</a>
-					   </div>
-					   @endforeach
+							@endforeach
+						</marquee>
+					    </div>
+						
 					   </div>
 					   
 				   </div>
@@ -339,6 +342,9 @@
 		</div>
 
 		<!-- end gallary -->
+
+		
+
 </main>
 <?php 
        $res = DB::table('tbl_advertisement')
@@ -376,6 +382,10 @@
 					$("#close").click(function(){
 	    	        $("#ad").hide();
 					});
+
+
+
+				
 
 			});
         
