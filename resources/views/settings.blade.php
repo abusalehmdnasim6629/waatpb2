@@ -3,6 +3,8 @@
 @section('content')
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+<link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Dhurjati' rel='stylesheet'>
 <div class="site-breadcrumb-title" style="height:100px;" >
 	<!-- <h2>Profile</h2>
 	<div class="main-breadcrumb">
@@ -181,6 +183,16 @@
 				  <div class="row">
 					    <div class="col-md-12">
 					<h4 class="m-y-2" style="padding:10px;">Change Password</h4>
+					
+					<ul class="mb-5">
+						<li class="text-danger" style="font-family: 'Dhurjati';">Password contains:</li>
+						<li class="text-success" style="font-family: 'Damion';">minimum 6 character *</li>
+						<li class="text-success" style="font-family: 'Damion';">atleast one uppercase letter *</li>
+						<li class="text-success" style="font-family: 'Damion';">atleast one lowercase letter *</li>
+						<li class="text-success" style="font-family: 'Damion';">atleast one digit *</li>
+						<li class="text-success" style="font-family: 'Damion';">aleast one special character [ $ % ^ & ] *</li>
+					</ul>
+		            
 					<form role="form" action="{{url('/change-password')}}" method="post" >
 						{{csrf_field()}}
 						<div class="form-group row">

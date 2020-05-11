@@ -270,6 +270,8 @@ Route::post('/cover-upload', 'AdminController@uploadCover');
 
 
 
+//bazar
+Route::get('/bazar', 'BazarController@bazar');
 
 
 

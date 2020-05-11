@@ -189,8 +189,7 @@
 					
 					 <form role="form" action="{{url('/update-member')}}" method="post" enctype="multipart/form-data">
 						{{csrf_field()}}
-					<div class="row">
-					  <div class="col-md-6 ">	
+					
 						<div class="form-group row mt-2">
 							<label class="col-lg-3 col-form-label form-control-label">Name</label>
 							<div class="col-lg-9">
@@ -243,6 +242,7 @@
 							<label class="col-lg-3 col-form-label form-control-label">Blood group</label>
 							<div class="col-lg-9">
 								<select id="user_time_zone" class="form-control" name="b_g" size="0">
+									<option value="select">Select</option>
 									<option value="A+">A+</option>
 									<option value="A+">A-</option>
 									<option value="A+">O+</option>
@@ -254,8 +254,8 @@
 								</select>
 							</div>
 						</div>
-						</div>
-						<div class="col-md-6 " >
+					
+						
 						<div class="form-group row mt-2">
 							<label class="col-lg-3 col-form-label form-control-label">Hobby</label>
 							<div class="col-lg-9">
@@ -290,8 +290,7 @@
 								<input type="submit" class="btn btn-primary" value="Save Changes">
 							</div>
 						</div>
-						</div>
-						</div>		
+								
 					</form>
 					  </div>
 					</div>

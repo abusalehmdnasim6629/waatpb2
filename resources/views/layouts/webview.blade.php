@@ -202,7 +202,7 @@
     <script src=" {{asset('assets/js/filter.js')}}"></script>
     <script src=" {{asset('assets/js/main.js')}}"></script>
     <script src=" {{asset('assets/js/jquery.countdown.js')}}"></script>
-
+    
     <script>
         $(function() {
         			var endDate = $('.event-countdown').data('date');

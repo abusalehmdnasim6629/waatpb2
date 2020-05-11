@@ -169,7 +169,7 @@
 					<div class="col-sm-12">
 					@foreach($req as $p)
 				       <div class="row">
-                          <div class="col-sm-4">
+                          <div class="col-sm-3">
                             <img src="{{URL::to($p->image)}}" alt="" style="width:80px;height:70px;padding:10px;">
                           </div>
                           <div class="col-sm-3 text-center">
@@ -177,7 +177,7 @@
                             <h6 class="font-weight-normal">{{$p->designation}}</h6>
                             <small>{{$p->present_organization}}</small>
                           </div>
-                          <div class="col-sm-5">
+                          <div class="col-sm-4">
                                
 								<a class="btn btn-primary btn-sm pd-2" href="{{url::to('unfriend-request/'.$p->member_id)}}">
 									Remove

@@ -193,19 +193,19 @@ class ContentController extends Controller
     //     return Redirect::to('/profile');
     //   }
     // } else {
-      $validator = Validator::make($request->all(), [
-        'image' => 'image|mimes:jpeg,png|max:2000',
-        'cover_image' => 'image|mimes:jpeg,png|max:2000',
+      // $validator = Validator::make($request->all(), [
+      //   'image' => 'image|mimes:jpeg,png|max:2000',
+      //   'cover_image' => 'image|mimes:jpeg,png|max:2000',
 
 
-      ]);
+      // ]);
 
-      if ($validator->fails()) {
-        $errors = $validator->errors();
-        return redirect()
-          ->back()
-          ->withErrors($validator);
-      }
+      // if ($validator->fails()) {
+      //   $errors = $validator->errors();
+      //   return redirect()
+      //     ->back()
+      //     ->withErrors($validator);
+      // }
 
       $mid = Session::get('lcheck');
       $data = array();
@@ -221,7 +221,9 @@ class ContentController extends Controller
 
       $data['contact_number'] = $request->contact_number;
       $data['present_organization'] = $request->p_o;
+      if($request->b_g != 'select'){
       $data['blood_group'] = $request->b_g;
+      }
       $data['member_skill'] = $request->member_skill;
       $data['member_hobby'] = $request->member_hobby;
 
@@ -329,6 +331,9 @@ class ContentController extends Controller
 
     $member = DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->first();
     if($request->password == $request->cpassword){
+      $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$%^&]).*$/";
+
+    if(preg_match($regex,$request->cpassword)){  
     if (Hash::check($request->old_password, $member->password)) {
       DB::table('tbl_member')->where('member_id', Session::get('lcheck'))->update(['password' => bcrypt($request->password),'pass_text' => $request->password]);
       Alert::success('Success', 'Password changed successfuly!');
@@ -338,10 +343,14 @@ class ContentController extends Controller
       return redirect()->back();
     }
   }else {
+    Alert::error('Fail', 'Please follow the given notice for password');
+    return redirect()->back();
+  }
+  }else {
     Alert::error('Fail', 'New password not matched!');
     return redirect()->back();
   }
-  }
+}
   public function show_profile(){
 
     return view('show_profile');

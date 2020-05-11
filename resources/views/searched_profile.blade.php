@@ -95,7 +95,7 @@
 			<img src="https://via.placeholder.com/150" style="width:100%;height:300px;;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 			@endif	
-			<img src="{{asset($pro->image)}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+			<img src="{{asset($pro->image)}}" style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
 				alt="avatar">
 			
 		 
@@ -143,6 +143,9 @@
                                 @else
 								    @if($con_check || $con_check3)
 									    <h6>Request sent</h6>
+										<a class="btn btn-danger  pd-2" href="{{url::to('/cancel-request/'.$mem)}}">
+											cancel request
+										</a>
 									@elseif($con_check2 || $con_check4)
 									    <h6 class="mx-auto my-2"><i class="fas fa-user"></i></h6>
 										<a class="btn btn-danger" href="{{url::to('/unfriend-request/'.$mem)}}">
