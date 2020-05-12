@@ -167,7 +167,8 @@
 			   <div class="tab-pane active" id="friendrequest">
 				  <div class="row">
 					<div class="col-sm-12">
-					@foreach($req as $p)
+					@if($req3 > 0 || $req4 > 0)
+					  @foreach($req as $p)
 				       <div class="row">
                           <div class="col-sm-3">
                             <img src="{{URL::to($p->image)}}" alt="" style="width:80px;height:70px;padding:10px;">
@@ -211,7 +212,10 @@
                           </div>
                        </div>
 					   <hr>
-					 @endforeach	
+					 @endforeach
+					@else
+					  <p>No friends</p> 	
+					@endif  
 					</div>
 				   </div>
 				</div>

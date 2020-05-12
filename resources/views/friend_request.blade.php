@@ -171,7 +171,7 @@
 				  <div class="row">
 				   
 					<div class="col-sm-12">
-					
+					 @if($req2 > 0)
 						@foreach($req as $p)
 						<div class="row my-3">
 							<div class="col-sm-3">
@@ -196,7 +196,9 @@
 						
 						</div>
 						@endforeach	
-						  
+					 @else
+					   <p>No friend request</p>	
+					 @endif	  
 					</div>
 					
 				   </div>

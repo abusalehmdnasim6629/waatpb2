@@ -7,7 +7,7 @@
 		<a href="/all-history">History</a>
 		<i class="fa fa-angle-right"></i>
 	</li>
-	<li><a href="#">Edit</a></li>
+	<li><a href="#" class="text-secondary">Edit</a></li>
 </ul>
 
 <div class="row-fluid sortable">

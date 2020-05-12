@@ -6,11 +6,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <ul class="breadcrumb">
-	<li>
+   <li>
 		<i class="icon-home"></i>
-		<a href="{{URL::to('/')}}">Home</a>
-		<i class="icon-angle-right"></i>
+		<a href="{{URL::to('/all-blog')}}">All blog</a>
+		<i class="fa fa-angle-right"></i>
 	</li>
+	<li><a class="text-secondary" href="#">Blog detail</a></li>
 	
 </ul>
 <div class="container">

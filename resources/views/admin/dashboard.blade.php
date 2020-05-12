@@ -125,6 +125,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="app-main">
 			<div class="app-sidebar sidebar-shadow">
 				<div class="app-header__logo">
@@ -159,8 +160,8 @@
 						</button>
 					</span>
 				</div>
-				<div class="scrollbar-sidebar">
-					<div class="app-sidebar__inner">
+				<div class="scrollbar-sidebar overflow-auto" >
+					<div class="app-sidebar__inner"  >
 						<ul class="vertical-nav-menu">
 
 							<li>
@@ -184,6 +185,7 @@
 									</li>
 								</ul>
 							</li>
+							
 							<li>
 								<a href="#">
 									<i class="metismenu-icon fa fa-history"></i>

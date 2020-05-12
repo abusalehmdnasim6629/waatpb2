@@ -55,7 +55,8 @@ class AdminController extends Controller
         $result = DB::table('tbl_member')
             ->select('tbl_member.*')
             ->where('status', 1)
-            ->paginate(20);
+            ->orderBy('code')
+            ->paginate(100);
 
         return view('admin.all_member')->with('result', $result);
     }
@@ -716,10 +717,12 @@ class AdminController extends Controller
         $email = $request->email;
         $result = DB::table('tbl_member')
             ->where('email_address', 'like', '%' . $email . '%')
-            ->first();
+            ->orWhere('member_name', 'like', '%' . $email . '%')
+            ->orWhere('code', 'like', '%' . $email . '%')
+            ->get();
         // return $result->email_address;
         if ($result) {
-
+            
             return view('admin.member_search')->with('result', $result);
         } else {
 
@@ -997,7 +1000,9 @@ class AdminController extends Controller
         $member['code'] = $request->code;
         $member['present_organization'] = $request->p_o;
         $member['present_address'] = $request->p_a;
+        if($request->b_g != 'select'){
         $member['blood_group'] = $request->b_g;
+        }
         $member['department'] = $request->department;
         $member['designation'] = $request->designation;
         $member['member_skill'] = $request->skill;

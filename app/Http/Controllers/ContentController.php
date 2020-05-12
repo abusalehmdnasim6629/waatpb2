@@ -70,7 +70,6 @@ class ContentController extends Controller
 
 
    $video =  DB::table('videos')
-                  
                   ->first();
 
 
@@ -427,8 +426,14 @@ public function friend_request(){
          ->where('s_member_id',Session::get('lcheck'))
          ->where('connections.status',0)
          ->select('connections.*','tbl_member.*')
-			   ->get();
-  return view('friend_request')->with('req',$req);
+         ->get();
+$req2 = DB::table('connections')
+         ->join('tbl_member','connections.f_member_id','=','tbl_member.member_id')
+         ->where('s_member_id',Session::get('lcheck'))
+         ->where('connections.status',0)
+         ->select('connections.*','tbl_member.*')
+			   ->count();      
+  return view('friend_request')->with('req',$req)->with('req2',$req2);
 }
 
 public function friends(){
@@ -439,6 +444,14 @@ public function friends(){
          ->where('connections.status',1)
          ->select('connections.*','tbl_member.*')
          ->get();
+
+$req3 = DB::table('connections')
+         ->join('tbl_member','connections.f_member_id','=','tbl_member.member_id')
+         ->where('s_member_id',Session::get('lcheck'))
+         //->orwhere('f_member_id',Session::get('lcheck'))
+         ->where('connections.status',1)
+         ->select('connections.*','tbl_member.*')
+         ->count();       
          
 $req2 = DB::table('connections')
          ->join('tbl_member','connections.s_member_id','=','tbl_member.member_id')
@@ -446,8 +459,16 @@ $req2 = DB::table('connections')
          //->orwhere('f_member_id',Session::get('lcheck'))
          ->where('connections.status',1)
          ->select('connections.*','tbl_member.*')
-			   ->get();       
-  return view('friends')->with('req',$req)->with('req2',$req2);
+         ->get();  
+         
+$req4 = DB::table('connections')
+         ->join('tbl_member','connections.s_member_id','=','tbl_member.member_id')
+         ->where('f_member_id',Session::get('lcheck'))
+         //->orwhere('f_member_id',Session::get('lcheck'))
+         ->where('connections.status',1)
+         ->select('connections.*','tbl_member.*')
+			   ->count();         
+  return view('friends')->with('req',$req)->with('req2',$req2)->with('req3',$req3)->with('req4',$req4);
 }
 public function accept_request($id){
   $accept_req =array();

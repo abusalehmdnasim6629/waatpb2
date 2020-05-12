@@ -210,11 +210,12 @@
 						<h2 class="col-md my-5"></h2>
 						<p></p>
 		 </div>
-		 <!-- <iframe width="100%" height="450" src="https://www.youtube.com/embed/'.$video->video_id.'">
-         </iframe> -->
-		  
-		 <iframe  width="100%" height="450" src="https://www.youtube.com/embed/{{$video->video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-top:25px"></iframe>
-			<!-- <iframe width="100%" height="450" src="https://www.youtube.com/embed/cRCOVzkGVJM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+		  @if($video == null )
+		      
+		  @else
+		    <iframe  width="100%" height="450" src="https://www.youtube.com/embed/{{$video->video_id}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin-top:25px"></iframe>
+	      @endif
 		 </div>
 
 		</div>

@@ -79,7 +79,7 @@ if($result != null){
 <div class="row-fluid sortable" style="padding:20px;">
 	<div class="col-sm-10 mx-auto">
 			<h2><i class="halflings-icon user"></i><span class="break"></span>Jobs</h2>
-			<table class="table table-striped">
+			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Job id</th>

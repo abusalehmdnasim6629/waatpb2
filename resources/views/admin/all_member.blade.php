@@ -15,7 +15,7 @@
 							
 							<div class="input-group">
                         
-                                <input type="email" class="form-control" style="height:40px;"placeholder="Search by email" name="email">
+                                <input type="text" class="form-control" style="height:40px;"placeholder="Search member" name="email">
                                 <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary " id="search">
                                     <i class="fa fa-search"></i>
@@ -99,7 +99,7 @@
 				@endforeach
 
 			</table>
-			{{$result->links()}}
+	{{$result->links()}}
 		</div>
 	</div>
 	<!--/span-->

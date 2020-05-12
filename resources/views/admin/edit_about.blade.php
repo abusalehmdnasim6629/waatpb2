@@ -4,15 +4,12 @@
 @include('sweetalert::alert')
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 <ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index.html">Home / </a>
-					<i class="icon-angle-right"></i> 
-				</li>
-				<li>
-					<i class="icon-edit"></i>
-					<a href="#">Edit about</a>
-				</li>
+<li>
+		<i class="icon-home"></i>
+		<a href="{{URL::to('/all-about')}}">All about</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li><a class="text-secondary" href="#">Edit</a></li>
 </ul>
 			
 			

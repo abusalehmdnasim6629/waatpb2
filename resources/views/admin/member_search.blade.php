@@ -14,7 +14,7 @@
 							
 							<div class="input-group">
                         
-                                <input type="email" class="form-control" style="height:40px;"placeholder="Search by email" name="email">
+                                <input type="text" class="form-control" style="height:40px;"placeholder="Search member" name="email">
                                 <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary " id="search">
                                     <i class="fa fa-search"></i>
@@ -59,6 +59,7 @@
 
 			
 				<tbody>
+				  @foreach( $result as $result)
 					<tr>
 						<td class="text-center">{{$i}}</td>
 						<td class="text-center">{{ $result->code}}</td>
@@ -79,12 +80,13 @@
 							</a>
 						</td>
 					</tr>
-
-				</tbody>
-
-				@php
+					@php
 				$i++;
 				@endphp
+                  @endforeach
+				</tbody>
+
+				
 				
 
 			</table>
