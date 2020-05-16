@@ -105,13 +105,13 @@
 			@endif
 				<!-- <img src="{{$pro->image}}" style="height:50%;width:25%;z-index-1;Left:4%;bottom:0;border-color:transparent;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
 				alt="avatar"> -->
-			    <img src="{{$pro->image}}"style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
-				alt="avatar">	
-			<!-- <?php
-				$s = Session::get('imn');
-				Session::put('imnn',$s);
-				
-			?> -->
+			@if($pro->image != null)
+			<img src="{{$pro->image}}" style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+				alt="avatar">
+			@else
+			<img src="{{asset('1589365930.png')}}" style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+				alt="avatar">
+			@endif	
 		 
 			
 		</div>

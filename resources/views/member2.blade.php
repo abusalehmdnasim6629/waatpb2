@@ -126,14 +126,14 @@
 
 							</div>
 						</div>
-						<div class="col-sm-12 col-md-4 col-lg-4">
+						<!-- <div class="col-sm-12 col-md-4 col-lg-4">
 							<div class="form-group">
 								<label class="control-label" for="email">Upload image</label>
 								<input type="file" name="image">
 								<span>[Image should be 2Mb or less]</span>
 
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="row">
 						<div class="col-sm-offset-2 col-sm-8" style="padding-top:20px;">

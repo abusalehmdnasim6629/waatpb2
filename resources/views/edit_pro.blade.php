@@ -101,8 +101,13 @@
 			<img src="https://via.placeholder.com/150" style="width:100%;height:300px;border-top-left-radius:10px;border-top-right-radius:10px;"  class="position-relative"
 				alt="avatar">
 			@endif	
+			@if($pro->image != null)
 			<img src="{{$pro->image}}" style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
 				alt="avatar">
+			@else
+			<img src="{{asset('1589365930.png')}}" style="z-index-1;Left:4%;bottom:0;border:3px solid white;" class=" img-fluid img-responsive w-10  rounded-circle position-absolute "
+				alt="avatar">
+			@endif	
 			
 		
 		    <a href="{{url::to('/up-cover')}}" class="btn btn-sm btn-outline-secondary position-absolute" style="z-index-1;Left:40%;">Change cover photo</a>

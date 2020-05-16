@@ -116,19 +116,19 @@ class MemberController extends Controller
 
 
                 // if ($request->hasfile('image')) {
-                if ($request->hasfile('image')) {
-                    $image = $request->file('image');
+                // if ($request->hasfile('image')) {
+                //     $image = $request->file('image');
 
-                    $image_name = Str::random(20);
-                    $ext = strtolower($image->getClientOriginalExtension());
-                    $image_full_name = $image_name . '.' . $ext;
-                    $upload_path = public_path() . '/image/';
-                    $image_url = 'image/' . $image_full_name;
-                    $success = $image->move($upload_path, $image_full_name);
-                    $data['image'] = $image_url;
-                }
+                //     $image_name = Str::random(20);
+                //     $ext = strtolower($image->getClientOriginalExtension());
+                //     $image_full_name = $image_name . '.' . $ext;
+                //     $upload_path = public_path() . '/image/';
+                //     $image_url = 'image/' . $image_full_name;
+                //     $success = $image->move($upload_path, $image_full_name);
+                //     $data['image'] = $image_url;
+                // }
                 // if ($success) {
-
+                $data['image'] ='';
                 DB::table('tbl_member')->insert($data);
 
                 $l_check = DB::table('tbl_member')

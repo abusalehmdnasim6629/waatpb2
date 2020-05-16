@@ -57,6 +57,8 @@
 				</thead>
 				@php
 				$i = 1;
+
+				$a= array();
 				@endphp
 
 				@foreach($result as $ct)
@@ -82,9 +84,15 @@
 							<a class="btn btn-info btn-sm" href="{{URL::to('/member-info/'.$ct->member_id)}}">
 								<i class="fa fa-eye white eye"></i>
 							</a>
-							<a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
+							<!-- <a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
 								<i class="fa fa-trash white trash"></i>
-							</a>
+							</a> -->
+							
+							{{ $ct->member_id }}
+							<input type="hidden" name="" id="hi" value="{{ $ct->member_id }}">
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" id="open">
+							 <i class="fa fa-trash white trash"></i>
+							</button>
 							<a class="btn btn-info btn-sm"  href="{{URL::to('/member-edit/'.$ct->member_id)}}">
 									<i class="fa fa-edit white edit"></i>
 							</a>
@@ -103,7 +111,62 @@
 		</div>
 	</div>
 	<!--/span-->
+	
 
 </div>
 <!--/row-->
+
+
+
 @endsection
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete conformation</h5>
+        <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Are you sure you want to delete this?
+               
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal" aria-label="Close" >No, cancel</button>
+        <button  class="btn btn-danger" >Yes,delete</button>
+
+        <!-- <a class="btn btn-danger btn-sm" href="{{URL::to('/delete-member/'.$ct->member_id)}}">
+								<i class="fa fa-trash white trash"></i>
+							</a> -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+ $(document).ready(function(){
+
+// jQuery methods go here...
+
+
+   $(#open).on('click',function(){
+       
+             
+            var a = $('#id').val();
+            console.log(a);
+       
+    });
+
+});
+
+</script>
