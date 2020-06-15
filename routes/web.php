@@ -273,6 +273,46 @@ Route::post('/cover-upload', 'AdminController@uploadCover');
 //bazar
 Route::get('/bazar', 'BazarController@bazar');
 
+//mango
+Route::get('/mango-order', 'BazarController@mango');
+Route::get('/order','BazarController@order');
+Route::get('/price','BazarController@price');
+
+
+//order
+Route::get('/all-order','AdminController@all_order');
+Route::get('/order-detail/{id}','AdminController@order_detail');
+Route::get('/delete-order/{id}', 'AdminController@delete_order')->middleware('admin');
+
+
+
+//city
+Route::get('/add-city', 'AdminController@add_city')->middleware('admin');
+Route::post('/save-city', 'AdminController@save_city')->middleware('admin');
+Route::get('/all-city', 'AdminController@all_city')->middleware('admin');
+Route::get('/delete-city/{id}', 'AdminController@delete_city')->middleware('admin');
+
+
+
+//delivary cost
+Route::get('/add-cost', 'AdminController@add_cost')->middleware('admin');
+Route::post('/save-cost', 'AdminController@save_cost')->middleware('admin');
+Route::get('/all-cost', 'AdminController@all_cost')->middleware('admin');
+Route::get('/edit-cost/{id}', 'AdminController@edit_cost')->middleware('admin');
+Route::post('/update-cost/{id}', 'AdminController@update_cost')->middleware('admin');
+
+
+Route::get('/edit-status/{id}', 'AdminController@edit_status')->middleware('admin');
+Route::post('/update-status/{id}', 'AdminController@update_status')->middleware('admin');
+Route::get('/payment-detail/{id}', 'AdminController@payment_detail')->middleware('admin');
+
+
+
+
+
+
+
+
 
 
 

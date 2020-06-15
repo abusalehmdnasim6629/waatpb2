@@ -413,8 +413,59 @@
 								</ul>
 								
 							</li>
-							
-							
+							<li>
+								<a href="{{URL::to('/all-order')}}">
+									<i class="metismenu-icon fa fa-book"></i>
+											Order
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="metismenu-icon fa fa-gavel"></i>
+									Delivary cost
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-cost')}}">
+											<i class="metismenu-icon"></i>
+											Show Cost
+										</a>
+									</li>
+									<li>
+										<a href="{{URL::to('/add-cost')}}">
+											<i class="metismenu-icon"></i>
+											Add csot
+										</a>
+									</li>
+
+								</ul>
+								
+							</li>
+
+							<li>
+								<a href="#">
+									<i class="metismenu-icon fa fa-gavel"></i>
+									Delivary City
+									<i class="fa fa-angle-down caret-left"></i>
+								</a>
+								<ul>
+									<li>
+										<a href="{{URL::to('/all-city')}}">
+											<i class="metismenu-icon"></i>
+											All city
+										</a>
+									</li>
+									<li>
+										<a href="{{URL::to('/add-city')}}">
+											<i class="metismenu-icon"></i>
+											Add city
+										</a>
+									</li>
+
+								</ul>
+								
+							</li>
 						</ul>
 					</div>
 				</div>

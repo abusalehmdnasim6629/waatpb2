@@ -1383,4 +1383,139 @@ class AdminController extends Controller
     
 
          }
+     
+         public function all_order(){
+
+           $result = DB::table('order')
+               ->paginate(50);
+            
+           return view('admin.order')->with('result',$result);    
+         }
+
+        public function order_detail($id){
+            $result = DB::table('order')
+                    ->where('id',$id)
+                    ->first();
+            return view('admin.order_detail')->with('result',$result);    
+        }
+
+
+     public function add_city(){
+         return view('admin.add_delivary_city');
+     }
+
+     public function save_city(Request $request){
+         $city['city'] = $request->city;
+         DB::table('delivarycity')
+            ->insert($city);
+            Alert::success('Successful', 'City add successfully');
+        return redirect()->back();
+    }
+
+    public function add_cost(){
+        return view('admin.add_delivary_cost');
+    }
+
+    public function save_cost(Request $request){
+        $count = DB::table('delivarycost')
+          ->count();
+        if($count < 1){ 
+        $cost['cost'] = $request->cost;
+        DB::table('delivarycost')
+           ->insert($cost);
+           Alert::success('Successful', 'Cost add successfully');
+           return redirect()->back();
+       }else{
+        Alert::warning('Unsuccessful', 'Already added');
+        return redirect()->back();
+       }
+     }
+     
+
+     public function all_city(){
+
+       $result = DB::table('delivarycity')
+           ->get();
+        return view('admin.all_city')->with('result',$result);
+    }
+
+    public function all_cost(){
+
+        $result = DB::table('delivarycost')
+            ->get();
+         return view('admin.show_delivary_cost')->with('result',$result);
+     }
+
+
+     public function delete_city($id)
+     {
+ 
+         DB::table('delivarycity')
+             ->where('id', $id)
+             ->delete();
+ 
+         Alert::success('Successful', 'deleted successfully');
+         return redirect()->back();
+     }
+     public function delete_order($id)
+     {
+ 
+         DB::table('order')
+             ->where('order_id', $id)
+             ->delete();
+        DB::table('payment')
+             ->where('order_id', $id)
+             ->delete();
+         Alert::success('Successful', 'deleted successfully');
+         return redirect()->back();
+     }
+
+     public function edit_cost($id)
+    {
+
+        $result =  DB::table('delivarycost')
+            ->where('id', $id)
+            ->first();
+
+        return view('admin.edit_cost')->with('result',$result);
+    }
+
+    public function update_cost($id, Request $request)
+    {
+        
+        $cost['cost'] = $request->cost;
+        $result =  DB::table('delivarycost')
+            ->where('id', $id)
+            ->update($cost);
+
+        return Redirect::to('/all-cost');
+    }
+    public function edit_status($id)
+    {
+
+        $result =  DB::table('order')
+            ->where('id', $id)
+            ->first();
+
+        return view('admin.edit_status')->with('result',$result);
+    }
+    public function update_status($id, Request $request)
+    {
+        
+        $status['d_status'] = $request->status;
+        $result =  DB::table('order')
+            ->where('id', $id)
+            ->update($status);
+
+        return Redirect::to('/all-order');
+    }
+    public function payment_detail($id)
+    {
+
+        $result =  DB::table('payment')
+            ->where('order_id', $id)
+            ->first();
+
+        return view('admin.payment_detail')->with('result',$result);
+    }
 }

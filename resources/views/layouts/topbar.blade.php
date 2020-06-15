@@ -21,54 +21,58 @@
                              </a>
                             </li>
                             @if (request()->is('/'))
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu" href="#about">
+                            <li class="nav-item"><a class="nav-link smooth-menu" href="#about">
                             <i class="fa fa-info-circle"></i>
                             About</a></li>
                             @endif
 
                             @if (request()->is('/'))
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu" href="#service">
+                            <li class="nav-item"><a class="nav-link smooth-menu" href="#service">
                             <i class="fa fa-gavel"></i>
                             Services</a></li>
                             @endif
 
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{request()->is('/') ? '#history' : url('full-history')}}">
                                     <i class="fa fa-history"></i>
                                     History</a></li>
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{request()->is('/') ? '#event' : url('view-all-event')}}">
                                     <i class="fa fa-calendar"></i>
                                     Event</a></li>
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu" href="{{url('/career')}}">
+                            <li class="nav-item"><a class="nav-link smooth-menu" href="{{url('/career')}}">
                             <i class="fa fa-university"></i>
                             Career</a>
                             </li>
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{request()->is('/') ? '#gallary' : url('view-all')}}">
                                     <i class="fa fa-image"></i>
                                     Gallery</a></li>
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{URL::to('/blog')}}">
                                     <i class="fa fa-book"></i>
                                     Blog</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-menu" href="{{url('/mango-order')}}">
+                           
+                            Order</a>
+                            </li>        
                             <?php 
 								$lg = Session::get('lcheck');
 								if($lg!=null){								
 								?>
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{URL::to('/profile')}}">
                                     <i class="fa fa-user"></i>
                                     Profile</a></li>
 
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{URL::to('/logout')}}" >
                                     <i class="fa fa-power-off"></i>
                                     Logout</a></li>
 
                             <?php }else{ ?>
-                            <li class="nav-item mr-2"><a class="nav-link" data-toggle="modal" data-target="#exampleModal">Login</a></li>
-                            <li class="nav-item mr-2"><a class="nav-link smooth-menu"
+                            <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#exampleModal">Login</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-menu"
                                     href="{{URL::to('/member-registration')}}">Member</a></li>
                             <?php } ?>
 
