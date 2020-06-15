@@ -22,8 +22,11 @@ class Order extends Migration
             $table->string('type');
             $table->string('measurement');
             $table->string('delivary_charge');
+            $table->string('price_per_unit');
+            $table->string('total_price');
             $table->string('city');
             $table->string('address');
+            $table->string('d_status');
             $table->timestamps();
         });
     }
